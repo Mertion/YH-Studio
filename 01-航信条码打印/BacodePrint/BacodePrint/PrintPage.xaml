@@ -1,0 +1,21 @@
+﻿<Window x:Class="BacodePrint.PrintPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BacodePrint"
+        mc:Ignorable="d"
+        Title="PrintPage" Height="486" Width="1167">
+    <Grid Name="Print" Background="#FF4B6363">
+
+        <Border Name="outside"  ClipToBounds="True" Margin="58,80,60,67">
+            <Image  x:Name="BarcodeImage" 
+                    Height="{Binding Path=ActualHeight,RelativeSource={RelativeSource AncestorType=Border}}"
+                    Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=Border}}"
+                    />
+
+        </Border>
+
+
+    </Grid>
+</Window>

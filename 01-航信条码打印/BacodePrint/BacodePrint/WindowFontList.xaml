@@ -1,0 +1,60 @@
+﻿<Window x:Class="BacodePrint.WindowFontList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BacodePrint"
+        mc:Ignorable="d"
+        Title="WindowFontList" Height="450" Width="800">
+    <Grid>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="7*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="本地字体列表：" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                <TextBlock x:Name="fontCount1"  Grid.Column="1" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                <TextBlock x:Name="fontCount2"  Grid.Column="2" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox Grid.Column="0" x:Name="fontList"  BorderBrush="#d3d3d3" BorderThickness="1" HorizontalContentAlignment="Left"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
+				 SelectionChanged="FontList_SelectionChanged" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}" FontFamily="{Binding Name}" FontSize="14"></Label>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <ListBox Grid.Column="1" x:Name="fontList1"  BorderBrush="#d3d3d3" BorderThickness="1" HorizontalContentAlignment="Left"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}" FontFamily="{Binding Name}" FontSize="14"></Label>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            
+            <StackPanel Orientation="Vertical" Grid.Row="2" VerticalAlignment="Bottom">
+                <TextBlock x:Name="DisplayFontCh" Text="展示字体" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"></TextBlock>
+                <TextBlock x:Name="DisplayFontEn" Text="DisplayFont" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>
