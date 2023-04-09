@@ -5,46 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BacodePrint"
         mc:Ignorable="d"
-        Title="MainWindow" Height="756" Width="1334">
-    <Grid Margin="0,0,-0,-00" Height="739">
-        <Button Content="生成条码" HorizontalAlignment="Left" Height="72" Margin="922,103,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click"/>
-
-        <Button Content="生成二维码" HorizontalAlignment="Left" Height="60" Margin="922,230,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click_1"/>
-
-        <Border Name="outside"  ClipToBounds="True" Background="#FF3A3030" Margin="256,270,480,337">
-            <Image  x:Name="BarcodeImage" Margin="-0,0,0,0"  />
-
-        </Border>
-        <Button Content="打印" Margin="1098,117,100,588" Click="Button_Click_2"/>
-        <Button Content="字体列表" HorizontalAlignment="Left" Margin="1098,233,0,0" VerticalAlignment="Top" Height="44" Width="99" Click="Button_Click_3" FontFamily="STSong"/>
-        <ComboBox Name="FontCombox" HorizontalAlignment="Left" Margin="922,354,0,0" VerticalAlignment="Top" Width="334" Height="60"/>
-
-        <Grid Margin="20,550,400,120">
-            <ItemsControl x:Name="itemCtrl" ItemsSource="{Binding Path=Title2, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" FontSize="20" FontFamily="STSong" Foreground="Teal" >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Margin="5">
-                            <ContentPresenter Content="{Binding}"/>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+        Title="航班信息打印系统" Height="441" Width="1004">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <ToolBarTray>
+                <ToolBar>
+                    <Button x:Name="buttonLoadFile" Margin="0,0,0,0" Content="加载文件" Click="buttonLoadFile_Click"/>
+                    <Separator/>
+                    <Button x:Name="buttonPrintConfig" Margin="0,0,0,0" Content="打印设置" Click="buttonPrintConfig_Click"/>
+                    <Separator/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="宽：" VerticalAlignment="Center"/>
+                    <TextBox x:Name="PrintWidth"  HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="1134" VerticalAlignment="Center" Width="50"/>
+                    <Separator/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="高：" VerticalAlignment="Center"/>
+                    <TextBox x:Name="PrintHeight" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="756" VerticalAlignment="Center" Width="50"/>
+                    <Separator/>
+                    <Button x:Name="buttonAbout" Margin="0,0,0,0" Content="关于" Click="buttonAbout_Click"/>
+                </ToolBar>
+            </ToolBarTray>
         </Grid>
+        
+        <DockPanel Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+            <ScrollViewer HorizontalScrollBarVisibility="Visible">
+                <StackPanel>
+                    <local:UserControlPrint x:Name="Printer" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <Grid Margin="20,650,20,20">
-            <Glyphs
-           UnicodeString       = "Wide load!"
-           Indices             = ",150;,100;,100;,100;,100;,100;,100;,100;,100;"
-           FontUri             = "file://c:/windows/fonts/times.ttf"
-           Fill                = "Black"
-           FontRenderingEmSize = "37"
-></Glyphs>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <ToolBarTray Grid.Row="0">
+                <ToolBar>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" Text="常规字体" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                        <ComboBox Grid.Column="1" x:Name="FontCombox" Width="100" Margin="2,0,5,0"/>
+                        <TextBlock Grid.Column="2" Text="中文大小" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                        <ComboBox Grid.Column="3" x:Name="FontSizeCH" Width="40" Margin="2,0,5,0"/>
+                        <TextBlock Grid.Column="4" Text="数字大小" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                        <ComboBox Grid.Column="5" x:Name="FontSizeNumber" Width="40" Margin="2,0,5,0"/>
+                        <TextBlock Grid.Column="6" Text="字距" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                        <ComboBox Grid.Column="7" x:Name="FontWordSpacing" Width="40" Margin="2,0,5,0"/>
+                        
+                    </Grid>
+                </ToolBar>
+            </ToolBarTray>
+
+            <ToolBarTray Grid.Row="1">
+                <ToolBar>
+
+                </ToolBar>
+            </ToolBarTray>
         </Grid>
-        <Button Content="字体列表窗口" HorizontalAlignment="Left" Margin="1098,298,0,0" VerticalAlignment="Top" Height="36" Width="99" Click="Button_Click_4"/>
     </Grid>
+
 </Window>

@@ -15,31 +15,13 @@ using System.Windows.Shapes;
 namespace BacodePrint
 {
     /// <summary>
-    /// PrintPage.xaml 的交互逻辑
+    /// Window_About.xaml 的交互逻辑
     /// </summary>
-    public partial class PrintPage : Window
+    public partial class Window_About : Window
     {
-        public PrintPage()
+        public Window_About()
         {
             InitializeComponent();
-        }
-
-        public void PrintWindows()
-        {
-            PrintDialog printDialog = new PrintDialog();
-
-            printDialog.PrintVisual(Print, "Test Print");
-        }
-
-        public void SetPrintBarcode(string strCode)
-        {
-            
-
-        }
-
-        public UserControlPrint getPrinter()
-        {
-            return this.Printer;    
         }
     }
 }

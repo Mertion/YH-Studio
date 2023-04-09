@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="BacodePrint.UserControlPrint"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BacodePrint"
+             mc:Ignorable="d" Height="479" Width="1131">
+    <Grid Name="Print">
+        <Border Name="outside" ClipToBounds="True" Background="#FF3A3030">
+            <Canvas Name="canvas1" 
+                 Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=Border}}" 
+                 Height="{Binding Path=ActualHeight,RelativeSource={RelativeSource AncestorType=Border}}" 
+                 ClipToBounds="True" Opacity="0.9" >
+
+                <Canvas.RenderTransform>
+                    <TransformGroup/>
+                </Canvas.RenderTransform>
+
+                <Border Name="outside1"  ClipToBounds="True" Margin="500,89,0,0" Width="200" Height="100" BorderThickness="3,3,3,3" 
+                        BorderBrush="#FFD5DFE5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Image  x:Name="BarcodeImage" Margin="0,-0,-0,0"
+                    Height="{Binding Path=ActualHeight,RelativeSource={RelativeSource AncestorType=Border}}"
+                    Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=Border}}"/>
+                </Border>
+
+                <Border  x:Name="border" Width="0" Height="0" Margin="0" Background="Gray" Canvas.Left="0" Canvas.Top="0"  />
+            </Canvas>
+        </Border>
+
+    </Grid>
+
+</UserControl>

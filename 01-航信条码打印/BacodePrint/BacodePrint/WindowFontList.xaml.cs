@@ -71,6 +71,7 @@ namespace BacodePrint
             catch (Exception ex)
             {
                 families = new System.Drawing.FontFamily[0];
+                ex.ToString();
             }
             foreach (System.Drawing.FontFamily family in families)
             {

@@ -10,36 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BacodePrint
 {
     /// <summary>
-    /// PrintPage.xaml 的交互逻辑
+    /// UserControlPrint.xaml 的交互逻辑
     /// </summary>
-    public partial class PrintPage : Window
+    public partial class UserControlPrint : UserControl
     {
-        public PrintPage()
+        public UserControlPrint()
         {
             InitializeComponent();
         }
 
-        public void PrintWindows()
-        {
-            PrintDialog printDialog = new PrintDialog();
-
-            printDialog.PrintVisual(Print, "Test Print");
-        }
-
         public void SetPrintBarcode(string strCode)
         {
-            
+            BitmapImage tmpImage = ClassBarCode.GenerateBarCodeBitmapImage(strCode);
+            this.BarcodeImage.Source = tmpImage;
 
-        }
-
-        public UserControlPrint getPrinter()
-        {
-            return this.Printer;    
         }
     }
 }
