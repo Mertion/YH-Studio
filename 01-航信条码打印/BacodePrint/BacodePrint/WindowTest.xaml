@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BacodePrint"
+        xmlns:local="clr-namespace:BacodePrint" 
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="WindowTest" Height="756" Width="1334">
 
@@ -43,8 +44,8 @@
             <Button Content="字体列表" HorizontalAlignment="Left" Margin="1098,233,0,0" VerticalAlignment="Top" Height="44" Width="99" Click="Button_Click_3" FontFamily="STSong"/>
             <ComboBox Name="FontCombox" HorizontalAlignment="Left" Margin="922,354,0,0" VerticalAlignment="Top" Width="334" Height="60"/>
 
-            <Grid Margin="20,550,400,120">
-                <ItemsControl x:Name="itemCtrl" ItemsSource="{Binding Path=Title2, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" FontSize="20" FontFamily="STSong" Foreground="Teal" >
+            <Grid Margin="20,550,400,96">
+                <ItemsControl x:Name="itemCtrl" ItemsSource="{Binding Path=Title2, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" FontSize="20" FontFamily="STSong" Foreground="Teal" FontWeight="Bold" Margin="0,0,0,-0" >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
@@ -52,7 +53,9 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Margin="5">
+                            <!--<Border x:Name="BorderSpacing" Margin="5">-->
+                            <!--<Border x:Name="BorderSpacing" Margin="{Binding Path=nBorderSpacing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">-->
+                            <Border Name="BorderSpacing" Margin="5">
                                 <ContentPresenter Content="{Binding}"/>
                             </Border>
                         </DataTemplate>
@@ -71,6 +74,27 @@
                 </Glyphs>
             </Grid>
             <Button Content="字体列表窗口" HorizontalAlignment="Left" Margin="1098,298,0,0" VerticalAlignment="Top" Height="36" Width="99" Click="Button_Click_4"/>
+
+            <Grid  Margin="922,570,245,10">
+                <ItemsControl x:Name="itemCtrlCmd">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding}" Margin="0,0,5,5" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <system:String>Item #1</system:String>
+                    <system:String>Item #2</system:String>
+                    <system:String>Item #3</system:String>
+                    <system:String>Item #4</system:String>
+                    <system:String>Item #5</system:String>
+                </ItemsControl>
+            </Grid>
+            <Button Content="ItemsCMD" HorizontalAlignment="Left" Margin="947,451,0,0" VerticalAlignment="Top" Click="Button_Click_5"/>
         </Grid>
     </DockPanel>
 </Window>

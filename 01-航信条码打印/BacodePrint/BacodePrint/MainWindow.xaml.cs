@@ -51,6 +51,13 @@ namespace BacodePrint
             Window_About tAbout = new Window_About();
             tAbout.ShowDialog();
         }
+
+        private void buttonPrintTest_Click(object sender, RoutedEventArgs e)
+        {
+            WindowTest tTest = new WindowTest();    
+            tTest.ShowDialog(); 
+
+        }
     }
 
 

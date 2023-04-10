@@ -26,6 +26,9 @@ using System.Windows.Media.Imaging;
 //using System.Windows.Navigation;
 
 using FontFamily = System.Windows.Media.FontFamily;
+using System.Drawing.Printing;
+using System.Diagnostics;
+using System.Collections.Generic;
 //using System.Windows.Shell;
 //using static System.Net.Mime.MediaTypeNames;
 
@@ -36,6 +39,7 @@ namespace BacodePrint
     /// </summary>
     public partial class WindowTest : Window
     {
+        
         public WindowTest()
         {
             InitializeComponent();
@@ -46,7 +50,7 @@ namespace BacodePrint
             System.Drawing.Image bmp = GenerateBarCodeBitmap("5381921979 0", ref this.BarcodeImage);
             BitmapImage tmpImage = BitmapToBitmapImage(bmp);
             this.BarcodeImage.Source = tmpImage;
-
+            
         }
 
 
@@ -181,6 +185,12 @@ namespace BacodePrint
         //    }
         //}
 
+        private Thickness margin = new Thickness(5);
+        public Thickness Margin
+        {
+            get { return margin; }
+            set { margin = value; }
+        }
 
         private string title2 = "测试字体间距zjis";
         public string Title2
@@ -217,7 +227,26 @@ namespace BacodePrint
 
             //itemCtrl.Items.Clear();
             itemCtrl.ItemsSource = title2;
+            int x = itemCtrl.ItemBindingGroup.Items.Count;
 
+            Debug.Print(x.ToString());
+
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            List<string> items = new List<string>
+            {
+                "Item #1",
+                "Item #1",
+                "Item #1",
+                "Item #1"
+            };
+            if(itemCtrlCmd.Items.Count>0)
+            {
+                itemCtrlCmd.Items.Clear();
+            }
+            itemCtrlCmd.ItemsSource = items;
         }
 
         //要继承 INotifyPropertyChanged接口

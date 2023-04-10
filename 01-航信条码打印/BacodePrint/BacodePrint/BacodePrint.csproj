@@ -100,6 +100,9 @@
     <Compile Include="UserControlPrint.xaml.cs">
       <DependentUpon>UserControlPrint.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlTextBoxItems.xaml.cs">
+      <DependentUpon>UserControlTextBoxItems.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowFontList.xaml.cs">
       <DependentUpon>WindowFontList.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlPrint.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlTextBoxItems.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

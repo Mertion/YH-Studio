@@ -24,6 +24,9 @@
                 </Border>
 
                 <Border  x:Name="border" Width="0" Height="0" Margin="0" Background="Gray" Canvas.Left="0" Canvas.Top="0"  />
+                <local:UserControlTextBoxItems Canvas.Left="55" Canvas.Top="38" Background="#FFDE8C8C" Width="50" Height="10"/>
+
+
             </Canvas>
         </Border>
 
