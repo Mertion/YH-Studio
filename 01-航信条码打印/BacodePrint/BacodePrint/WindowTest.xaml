@@ -30,7 +30,7 @@
                 <MenuItem x:Name="menuAbout" Header="About"/>
             </MenuItem>
         </Menu>
-        
+
         <Grid>
             <Button Content="生成条码" HorizontalAlignment="Left" Height="72" Margin="922,103,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click"/>
 
@@ -39,7 +39,7 @@
             <Border Name="outside"  ClipToBounds="True" Background="#FF3A3030" Margin="256,270,480,337">
                 <Image  x:Name="BarcodeImage" Margin="-0,0,0,0"  />
             </Border>
-            
+
             <Button Content="打印" Margin="1098,117,100,588" Click="Button_Click_2"/>
             <Button Content="字体列表" HorizontalAlignment="Left" Margin="1098,233,0,0" VerticalAlignment="Top" Height="44" Width="99" Click="Button_Click_3" FontFamily="STSong"/>
             <ComboBox Name="FontCombox" HorizontalAlignment="Left" Margin="922,354,0,0" VerticalAlignment="Top" Width="334" Height="60"/>
@@ -53,9 +53,9 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <!--<Border x:Name="BorderSpacing" Margin="5">-->
+                            <!--<Border Name="BorderSpacing" Margin="5">-->
                             <!--<Border x:Name="BorderSpacing" Margin="{Binding Path=nBorderSpacing, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}">-->
-                            <Border Name="BorderSpacing" Margin="5">
+                            <Border x:Name="BorderSpacingTest"  Margin="5" BorderThickness="2,2,2,2" BorderBrush="#FF925656">
                                 <ContentPresenter Content="{Binding}"/>
                             </Border>
                         </DataTemplate>
@@ -70,7 +70,7 @@
                     FontUri             = "file://c:/windows/fonts/times.ttf"
                     Fill                = "Black"
                     FontRenderingEmSize = "37">
-                    
+
                 </Glyphs>
             </Grid>
             <Button Content="字体列表窗口" HorizontalAlignment="Left" Margin="1098,298,0,0" VerticalAlignment="Top" Height="36" Width="99" Click="Button_Click_4"/>
@@ -94,7 +94,30 @@
                     <system:String>Item #5</system:String>
                 </ItemsControl>
             </Grid>
+
+            <Grid  Margin="622,570,545,10">
+
+                <ItemsControl x:Name="itemCtrlTest"  FontSize="20" FontFamily="STSong" Foreground="Teal" FontWeight="Bold">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+
+                </ItemsControl>
+            </Grid>
+
             <Button Content="ItemsCMD" HorizontalAlignment="Left" Margin="947,451,0,0" VerticalAlignment="Top" Click="Button_Click_5"/>
+
+            <RichTextBox Margin="36,32,1022,558">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text="RichTextBox"/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
         </Grid>
+
     </DockPanel>
 </Window>

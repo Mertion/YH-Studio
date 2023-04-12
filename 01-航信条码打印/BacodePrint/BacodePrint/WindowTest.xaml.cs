@@ -29,6 +29,7 @@ using FontFamily = System.Windows.Media.FontFamily;
 using System.Drawing.Printing;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Windows.Data;
 //using System.Windows.Shell;
 //using static System.Net.Mime.MediaTypeNames;
 
@@ -186,11 +187,11 @@ namespace BacodePrint
         //}
 
         private Thickness margin = new Thickness(5);
-        public Thickness Margin
-        {
-            get { return margin; }
-            set { margin = value; }
-        }
+        //public Thickness Margin
+        //{
+        //    get { return margin; }
+        //    set { margin = value; }
+        //}
 
         private string title2 = "测试字体间距zjis";
         public string Title2
@@ -227,10 +228,41 @@ namespace BacodePrint
 
             //itemCtrl.Items.Clear();
             itemCtrl.ItemsSource = title2;
-            int x = itemCtrl.ItemBindingGroup.Items.Count;
+            //int x = itemCtrl.ItemBindingGroup.Items.Count;
 
-            Debug.Print(x.ToString());
+            //Debug.Print(x.ToString());
+            //BorderSpacingTest;
 
+            //Border border = new Border();
+            //ContentPresenter contentPresenter = new ContentPresenter();
+            //border.Child = contentPresenter;
+
+            //itemCtrl.Margin = margin;
+
+            var contentPresenter = new FrameworkElementFactory(typeof(ContentPresenter));
+            //textBlockFactoryB.SetBinding(TextBlock.TextProperty, new Binding("ValueB"));
+            contentPresenter.SetBinding(ContentPresenter.ContentProperty , new Binding());
+            var border = new FrameworkElementFactory(typeof(Border));
+            border.SetValue(Border.MarginProperty, new Thickness(10));
+            border.AppendChild(contentPresenter);
+
+            var dataTemplate = new DataTemplate
+            {
+                VisualTree = border
+            };
+
+            for(int i = 0;i<10;i++)
+            {
+                Border border1 = new Border();
+                border1.Margin = new Thickness(10); 
+                ContentPresenter contentPresenter1 = new ContentPresenter();
+                contentPresenter1.Content = i.ToString();
+                border1.Child = contentPresenter1;
+
+                itemCtrlTest.Items.Add(border1);
+                
+            }
+            
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
@@ -247,6 +279,11 @@ namespace BacodePrint
                 itemCtrlCmd.Items.Clear();
             }
             itemCtrlCmd.ItemsSource = items;
+            //itemCtrlCmd.ItemTemplate.DataTemplate;
+            Button t = (Button)itemCtrlCmd.Items[0];
+
+           // itemCtrlCmd.ItemTemplate.DataTemplateKey = "Text";
+
         }
 
         //要继承 INotifyPropertyChanged接口
