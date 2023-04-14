@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BacodePrint"
         mc:Ignorable="d"
-        Title="航班信息打印系统" Height="441" Width="1004">
+        Title="行程单 Printer" Height="441" Width="1004" Icon="/YH-Logo.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>

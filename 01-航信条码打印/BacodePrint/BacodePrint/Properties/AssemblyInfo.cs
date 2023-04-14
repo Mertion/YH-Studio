@@ -7,12 +7,12 @@ using System.Windows;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("BacodePrint")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("行程单 Printer")]
+[assembly: AssemblyDescription("20230415.01")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BacodePrint")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyCompany("YH Studio")]
+[assembly: AssemblyProduct("行程单 Printer")]
+[assembly: AssemblyCopyright("Copyright ©  2023 YH Studio")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

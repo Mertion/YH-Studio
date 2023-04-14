@@ -36,7 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>HF-Logo 32 32.ico</ApplicationIcon>
+    <ApplicationIcon>YH-Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BarcodeStandard, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -183,6 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="HF-Logo 32 32.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="YH-Logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BacodePrint"
-             mc:Ignorable="d" Height="479" Width="1131">
+             mc:Ignorable="d" Height="101" Width="240">
     <Grid Name="Print">
         <Border Name="outside" ClipToBounds="True" Background="#FF3A3030">
             <Canvas Name="canvas1" 
@@ -16,7 +16,7 @@
                     <TransformGroup/>
                 </Canvas.RenderTransform>
 
-                <Border Name="outside1"  ClipToBounds="True" Margin="500,89,0,0" Width="200" Height="100" BorderThickness="3,3,3,3" 
+                <Border Name="outside1"  ClipToBounds="True" Margin="150,10,0,0" Width="80" Height="20" BorderThickness="3,3,3,3" 
                         BorderBrush="#FFD5DFE5" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Image  x:Name="BarcodeImage" Margin="0,-0,-0,0"
                     Height="{Binding Path=ActualHeight,RelativeSource={RelativeSource AncestorType=Border}}"
