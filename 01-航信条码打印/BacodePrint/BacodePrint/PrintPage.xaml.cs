@@ -19,6 +19,8 @@ namespace BacodePrint
     /// </summary>
     public partial class PrintPage : Window
     {
+        SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
+
         public PrintPage()
         {
             InitializeComponent();
@@ -37,7 +39,7 @@ namespace BacodePrint
 
         }
 
-        public UserControlPrint getPrinter()
+        public UserControlPrint GetPrinter()
         {
             return this.Printer;    
         }

@@ -134,7 +134,7 @@ namespace BacodePrint
                 //tPrintPage.SetPrintBarcode("5381921979 0");
 
                 string str = "5381921979 " + i.ToString();
-                tPrintPage.getPrinter().SetPrintBarcode(str);
+                tPrintPage.GetPrinter().SetPrintBarcode(str);
                 //tPrintPage.ShowDialog();
 
                 tPrintPage.PrintWindows();
@@ -254,7 +254,7 @@ namespace BacodePrint
             for(int i = 0;i<10;i++)
             {
                 Border border1 = new Border();
-                border1.Margin = new Thickness(10); 
+                border1.Margin = new Thickness(20); 
                 ContentPresenter contentPresenter1 = new ContentPresenter();
                 contentPresenter1.Content = i.ToString();
                 border1.Child = contentPresenter1;

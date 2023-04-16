@@ -31,6 +31,7 @@ namespace BacodePrint
     public partial class MainWindow : Window
     {
 
+        SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
         public MainWindow()
         {
             InitializeComponent();
@@ -57,6 +58,24 @@ namespace BacodePrint
             WindowTest tTest = new WindowTest();    
             tTest.ShowDialog(); 
 
+        }
+
+        private void buttonPrint_Click(object sender, RoutedEventArgs e)
+        {
+            Printer.SetPrintBarcode("5381921979 0");
+
+            PrintPage tPrintPage = new PrintPage();
+            tPrintPage.Width = 1131;
+            tPrintPage.Height = 479;
+            //tPrintPage.SetPrintBarcode("5381921979 0");
+
+            string str = "5381921979 0" ;
+            UserControlPrint userControlPrint = tPrintPage.GetPrinter();
+            //tPrintPage.ShowDialog();
+            userControlPrint.SetPrintBarcode(str);
+            tPrintPage.PrintWindows();
+
+            tPrintPage.Close();
         }
     }
 
