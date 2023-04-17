@@ -25,6 +25,15 @@ namespace BacodePrint
 
         List<UserControlTextBoxItems> listText = new List<UserControlTextBoxItems>();
         const int nListMaxCount = 34;
+
+        private System.Windows.Point startPoint = new System.Windows.Point();
+        //动态调整大小
+        private CanvasAdorner m_CanvasAdorner = null;
+
+        private bool isDown = false;
+        private System.Windows.Shapes.Path originalElement = new System.Windows.Shapes.Path();
+
+
         public UserControlPrint()
         {
             InitializeComponent();
@@ -149,6 +158,88 @@ namespace BacodePrint
             //}
 
           
+
+        }
+
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!canvas1.IsMouseCaptured)
+            {
+                startPoint = e.GetPosition(canvas1);
+                canvas1.CaptureMouse();
+                if ((e.Source) is System.Windows.Shapes.Path path)
+                {
+                    if (canvas1 == e.Source)
+                    {
+                        return;
+                    }
+                    
+                    isDown = true;
+                    originalElement = path;
+                    e.Handled = true;
+
+                    m_CanvasAdorner.SetPosition((int)path.Data.Bounds.Left, (int)path.Data.Bounds.Top, (int)path.Data.Bounds.Width, (int)path.Data.Bounds.Height);
+                    m_CanvasAdorner.SetVisibleState(Visibility.Visible);
+
+                    //SetBindingDataToParameter(m_CanvasAdorner.MPath);
+                    m_CanvasAdorner.MPath = path;
+                    //GetBindingData(path);
+                    //VisibleAreaParameter();
+
+                }
+
+                if ((e.Source) is UserControlTextBoxItems textBox)
+                {
+
+                }
+            }
+        }
+
+        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!canvas1.IsMouseCaptured)
+            {
+            }
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (!canvas1.IsMouseCaptured)
+            {
+            }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var layer = AdornerLayer.GetAdornerLayer(border);
+            m_CanvasAdorner = new CanvasAdorner(border);
+            layer.Add(m_CanvasAdorner);
+            m_CanvasAdorner.SetVisibleState(Visibility.Hidden);
+
+            ReSize();
+        }
+
+        private void ReSize()
+        {
+            //outside.Width = ShowImage.Width;
+            //if (((int)GridShowImage.ActualHeight != 0) && ((int)GridShowImage.ActualWidth != 0))
+            //{
+            //    double nHeight = GridShowImage.ActualWidth * nImageHeight / nImageWidth;
+            //    double nWidth = GridShowImage.ActualHeight * nImageWidth / nImageHeight;
+
+            //    //如果高度小于当前网格高度，说明宽度正确不用调整
+            //    if (nHeight < GridShowImage.ActualHeight)
+            //    {
+            //        outside.Height = nHeight;
+            //        outsideTest.Height = nHeight;
+            //    }
+
+            //    if (nWidth < GridShowImage.ActualWidth)
+            //    {
+            //        outside.Width = nWidth;
+            //        outsideTest.Width = nWidth;
+            //    }
+            //}
 
         }
     }

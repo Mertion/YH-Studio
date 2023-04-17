@@ -97,6 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CanvasAdorner.cs" />
     <Compile Include="IniFile.cs" />
     <Compile Include="SystemGlobalInfo.cs" />
     <Compile Include="UserControlPrint.xaml.cs">
