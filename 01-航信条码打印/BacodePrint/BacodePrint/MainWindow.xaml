@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BacodePrint"
         mc:Ignorable="d"
-        Title="行程单 Printer" Height="441" Width="1004" Icon="/YH-Logo.ico">
+        Title="行程单 Printer" Height="441" Width="1004" Icon="/YH-Logo.ico" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -29,11 +29,34 @@
                 </ToolBar>
             </ToolBarTray>
         </Grid>
-        
-        <DockPanel Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
-            <ScrollViewer HorizontalScrollBarVisibility="Visible">
+
+        <DockPanel Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
                 <StackPanel>
-                    <local:UserControlPrint x:Name="Printer" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Grid x:Name="GridShowArea" Margin="0,0,0,0"
+                          Height="{Binding Path=ActualHeight,RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                          Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
+
+                        <Border Name="outside" 
+                                PreviewMouseDown="outsidewrapper_PreviewMouseDown" 
+                                PreviewMouseMove="outsidewrapper_PreviewMouseMove" 
+                                PreviewMouseUp="outside_PreviewMouseUp"
+                                PreviewMouseWheel="outside_PreviewMouseWheel"
+                                ClipToBounds="True" 
+                                Height="{Binding Path=ActualHeight,RelativeSource={RelativeSource AncestorType=Grid}}"
+                                Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=Grid}}">
+
+                            <Canvas Name="canvas1" ClipToBounds="True" Opacity="1.0" SizeChanged="canvas1_SizeChanged"
+                                    Height="{Binding Path=ActualHeight,RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=Border}}" >
+                                <Canvas.RenderTransform>
+                                    <TransformGroup/>
+                                </Canvas.RenderTransform>
+
+                                <local:UserControlPrint x:Name="Printer"/>
+                            </Canvas>
+                        </Border>
+                    </Grid>
 
                 </StackPanel>
             </ScrollViewer>
@@ -44,7 +67,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
             <ToolBarTray Grid.Row="0">
                 <ToolBar>
                     <Grid>
@@ -64,7 +87,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <TextBlock Grid.Column="0" Text="常规字体" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
                         <ComboBox Grid.Column="1" x:Name="FontCombox" Width="100" Margin="2,0,5,0"/>
                         <TextBlock Grid.Column="2" Text="中文大小" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
@@ -113,9 +136,9 @@
                         <CheckBox Grid.Column="9" x:Name="CheckPrintOrderNumber" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Grid.Column="10" Text="打印条码" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
                         <CheckBox Grid.Column="11" x:Name="CheckPrintBarCode" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        
+
                         <Button Grid.Column="12" x:Name="buttonPrint" Margin="5,0,5,0" Content="打印" Click="buttonPrint_Click" />
-                       
+
                         <Button Grid.Column="13" x:Name="buttonPrintTest" Margin="5,0,5,0" Content="打印测试" Click="buttonPrintTest_Click"/>
                     </Grid>
                 </ToolBar>
