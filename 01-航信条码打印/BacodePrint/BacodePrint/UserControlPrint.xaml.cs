@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -167,30 +168,38 @@ namespace BacodePrint
             {
                 startPoint = e.GetPosition(canvas1);
                 canvas1.CaptureMouse();
-                if ((e.Source) is System.Windows.Shapes.Path path)
-                {
-                    if (canvas1 == e.Source)
-                    {
-                        return;
-                    }
-                    
-                    isDown = true;
-                    originalElement = path;
-                    e.Handled = true;
-
-                    m_CanvasAdorner.SetPosition((int)path.Data.Bounds.Left, (int)path.Data.Bounds.Top, (int)path.Data.Bounds.Width, (int)path.Data.Bounds.Height);
-                    m_CanvasAdorner.SetVisibleState(Visibility.Visible);
-
-                    //SetBindingDataToParameter(m_CanvasAdorner.MPath);
-                    m_CanvasAdorner.MPath = path;
-                    //GetBindingData(path);
-                    //VisibleAreaParameter();
-
-                }
 
                 if ((e.Source) is UserControlTextBoxItems textBox)
                 {
+                    var c = textBox as FrameworkElement;
 
+                    double left = Canvas.GetLeft(c);
+                    double top = Canvas.GetTop(c);
+                    double width = c.Width;
+                    double height = c.Height;
+
+                    System.Windows.Shapes.Path path1 = new System.Windows.Shapes.Path();
+
+                    SolidColorBrush borderColor = new SolidColorBrush();
+                    
+                    path1.Stroke = borderColor;
+                    RectangleGeometry rg = new RectangleGeometry
+                    {
+                        Rect = new Rect(left, top, width, height)
+                    };
+                    path1.Data = rg;
+
+                    isDown = true;
+                    originalElement = path1;
+                    e.Handled = true;
+
+                    m_CanvasAdorner.SetPosition((int)left, (int)top, (int)width, (int)height);
+                    m_CanvasAdorner.SetVisibleState(Visibility.Visible);
+
+                   // SetBindingDataToParameter(m_CanvasAdorner.MPath);
+                    m_CanvasAdorner.MPath = path1;
+                    //GetBindingData(path1);
+                    //VisibleAreaParameter();
                 }
             }
         }

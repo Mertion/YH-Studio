@@ -182,13 +182,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="HF-Logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="HF-Logo 32 32.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="YH-Logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="YH-Logo 512.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

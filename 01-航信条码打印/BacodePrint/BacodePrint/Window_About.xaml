@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BacodePrint"
         mc:Ignorable="d"
-        Title="Window_About" Height="250" Width="500" WindowStartupLocation="CenterScreen">
+        Title="Window_About" Height="200" Width="500" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid Background="#FF333333">
             <Grid.ColumnDefinitions>
@@ -13,15 +13,15 @@
                 <ColumnDefinition Width="256*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0" x:Name="PictureImage" Source="/HF-Logo.ico"/>
+            <Image Grid.Column="0" x:Name="PictureImage" Source="YH-Logo 512.ico"/>
 
             <Grid Grid.Column="1" Grid.Row="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="21*"/>
+                    <RowDefinition Height="30*"/>
                     <RowDefinition Height="26*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="YH 工作室" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,25,0,22"/>
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="航班信息打印系统 1.0" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,30"/>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="YH 工作室" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,35,0,5" Foreground="#FFFBF6F6"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="航班信息打印系统 1.0" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,30" Foreground="#FFFBF6F6"/>
             </Grid>
         </Grid>
     </Grid>
