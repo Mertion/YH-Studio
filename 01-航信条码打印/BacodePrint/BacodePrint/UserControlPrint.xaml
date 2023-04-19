@@ -7,17 +7,23 @@
              mc:Ignorable="d" Height="300" Width="740" Loaded="UserControl_Loaded">
     <Grid Name="Print">
         <Border Name="outside" ClipToBounds="True" Background="#FF3A3030">
-            <Canvas Name="canvas1" 
+            <Canvas Name="canvasCtrl" 
                     Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=Border}}" 
                     Height="{Binding Path=ActualHeight,RelativeSource={RelativeSource AncestorType=Border}}" 
                     ClipToBounds="True" Opacity="0.9" 
                     MouseLeftButtonDown="OnMouseLeftButtonDown"
                     MouseLeftButtonUp="OnMouseLeftButtonUp"
                     MouseMove="OnMouseMove">
-
                 <Canvas.RenderTransform>
                     <TransformGroup/>
                 </Canvas.RenderTransform>
+
+                <Border Name="outside2"  ClipToBounds="True"   BorderThickness="3,3,3,3" 
+                        BorderBrush="#FFD5DFE5" HorizontalAlignment="Left" VerticalAlignment="Top"
+                    
+                            Height="{Binding Path=ActualHeight,RelativeSource={RelativeSource AncestorType=Border}}"
+                            Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=Border}}">
+                </Border>
 
                 <Border Name="outside1"  ClipToBounds="True" Margin="150,10,0,0" Width="80" Height="20" BorderThickness="3,3,3,3" 
                         BorderBrush="#FFD5DFE5" HorizontalAlignment="Left" VerticalAlignment="Top">

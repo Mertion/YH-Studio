@@ -30,11 +30,12 @@ namespace BacodePrint
         private System.Windows.Point startPoint = new System.Windows.Point();
         //动态调整大小
         private CanvasAdorner m_CanvasAdorner = null;
-
+        System.Windows.Point currentPoint = new System.Windows.Point();
         private bool isDown = false;
         private System.Windows.Shapes.Path originalElement = new System.Windows.Shapes.Path();
+        private System.Windows.Shapes.Path movingElement = new System.Windows.Shapes.Path();
 
-
+        private bool isDragging = false;
         public UserControlPrint()
         {
             InitializeComponent();
@@ -82,7 +83,7 @@ namespace BacodePrint
                 c.Height = Convert.ToInt32(str);
                 
                 listText.Add(UserControlTextBoxItems);
-                canvas1.Children.Add(c);
+                canvasCtrl.Children.Add(c);
             }
         }
 
@@ -155,7 +156,7 @@ namespace BacodePrint
 
             //    UserControlTextBoxItems.Visibility = Visibility.Visible;
             //    listText.Add(UserControlTextBoxItems);
-            //    canvas1.Children.Add(c);
+            //    canvasCtrl.Children.Add(c);
             //}
 
           
@@ -164,15 +165,30 @@ namespace BacodePrint
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!canvas1.IsMouseCaptured)
+            if (!canvasCtrl.IsMouseCaptured)
             {
-                startPoint = e.GetPosition(canvas1);
-                canvas1.CaptureMouse();
+                startPoint = e.GetPosition(canvasCtrl);
+                canvasCtrl.CaptureMouse();
+
+                FrameworkElement c = null;
+
+                if (e.Source is System.Windows.Controls.Image tImage)
+                {
+                    c = tImage as FrameworkElement;
+                }
+
+                if (e.Source is System.Windows.Controls.Border tBorder)
+                {
+                    c = tBorder as FrameworkElement;
+                }
 
                 if ((e.Source) is UserControlTextBoxItems textBox)
                 {
-                    var c = textBox as FrameworkElement;
+                    c = textBox as FrameworkElement;
+                }
 
+                if (c != null) 
+                { 
                     double left = Canvas.GetLeft(c);
                     double top = Canvas.GetTop(c);
                     double width = c.Width;
@@ -201,20 +217,44 @@ namespace BacodePrint
                     //GetBindingData(path1);
                     //VisibleAreaParameter();
                 }
+                else
+                {
+                    m_CanvasAdorner.SetVisibleState(Visibility.Hidden);
+                    m_CanvasAdorner.MPath = null;
+                }
             }
         }
 
         private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (!canvas1.IsMouseCaptured)
+            if (isDown)
             {
+                DragFinishing(false);
+                e.Handled = true;
             }
+
+            canvasCtrl.ReleaseMouseCapture();
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (!canvas1.IsMouseCaptured)
+            if (canvasCtrl.IsMouseCaptured)
             {
+                currentPoint = e.GetPosition(canvasCtrl);
+
+                if (isDown)
+                {
+                    if (!isDragging
+                        && (Math.Abs(currentPoint.X - startPoint.X) > SystemParameters.MinimumHorizontalDragDistance)
+                        && (Math.Abs(currentPoint.Y - startPoint.Y) > SystemParameters.MinimumVerticalDragDistance))
+                    { 
+                        DragStarting(); 
+                    }
+                    if (isDragging)
+                    { 
+                        DragMoving(); 
+                    }
+                }
             }
         }
 
@@ -251,5 +291,80 @@ namespace BacodePrint
             //}
 
         }
+
+        private void DragStarting()
+        {
+            isDragging = true;
+            movingElement = new System.Windows.Shapes.Path();
+            movingElement.Data = originalElement.Data;
+            //movingElement.Fill = selectFillColor;
+            //movingElement.Stroke = selectBorderColor;
+            canvasCtrl.Children.Add(movingElement);
+        }
+
+        private void DragMoving()
+        {
+            currentPoint = Mouse.GetPosition(canvasCtrl);
+            TranslateTransform tt = new TranslateTransform();
+            tt.X = currentPoint.X - startPoint.X;
+            tt.Y = currentPoint.Y - startPoint.Y;
+            movingElement.RenderTransform = tt;
+        }
+
+        private void DragFinishing(bool cancel)
+        {
+            Mouse.Capture(null);
+            if (isDragging)
+            {
+                if (!cancel)
+                {
+                    currentPoint = Mouse.GetPosition(canvasCtrl);
+                    TranslateTransform tt0 = new TranslateTransform();
+                    TranslateTransform tt = new TranslateTransform();
+                    tt.X = currentPoint.X - startPoint.X;
+                    tt.Y = currentPoint.Y - startPoint.Y;
+                    Geometry geometry =
+                    (RectangleGeometry)new RectangleGeometry();
+                    string s = originalElement.Data.ToString();
+                    if (s == "System.Windows.Media.EllipseGeometry")
+                        geometry = (EllipseGeometry)originalElement.Data;
+                    else if (s == "System.Windows.Media.RectangleGeometry")
+                        geometry = (RectangleGeometry)originalElement.Data;
+                    else if (s == "System.Windows.Media.CombinedGeometry")
+                        geometry = (CombinedGeometry)originalElement.Data;
+                    if (geometry.Transform.ToString() != "Identity")
+                    {
+                        tt0 = (TranslateTransform)geometry.Transform;
+                        tt.X += tt0.X;
+                        tt.Y += tt0.Y;
+                    }
+                    geometry.Transform = tt;
+
+                    //获得模板区域列表索引
+                    
+
+                    canvasCtrl.Children.Remove(originalElement);
+                    originalElement = new System.Windows.Shapes.Path();
+                    
+
+                    //originalElement.Fill = fillColor;
+                    //originalElement.Fill = arrFillColor[listTemplateArea[nIndex].nType];
+                    //originalElement.Stroke = borderColor;
+                    originalElement.Data = geometry;
+                    canvasCtrl.Children.Add(originalElement);
+                    m_CanvasAdorner.SetPosition((int)originalElement.Data.Bounds.Left
+                        , (int)originalElement.Data.Bounds.Top
+                        , (int)originalElement.Data.Bounds.Width
+                        , (int)originalElement.Data.Bounds.Height);
+                    m_CanvasAdorner.SetVisibleState(Visibility.Visible);
+                    m_CanvasAdorner.MPath = originalElement;
+                }
+                canvasCtrl.Children.Remove(movingElement);
+                movingElement = null;
+            }
+            isDragging = false;
+            isDown = false;
+        }
+
     }
 }
