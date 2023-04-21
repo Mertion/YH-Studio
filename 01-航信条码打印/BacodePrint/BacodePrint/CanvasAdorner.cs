@@ -29,10 +29,11 @@ namespace BacodePrint
         private readonly Thumb _leftbottomThumb;
 
         //布局容器，如果不使用布局容器，则需要给上述8个控件布局，实现和Grid布局定位是一样的，会比较繁琐且意义不大。
-        readonly Grid _grid;
-        readonly UIElement _adornedElement;
+        private readonly Grid _grid;
+        private readonly UIElement _adornedElement;
 
-        public Path MPath { get; set; }
+        public Path mPath { get; set; }
+        public FrameworkElement mFrameworkElement { get; set; }
         //对象可见状态
         public Visibility MVisibility { get; set; }
         public CanvasAdorner(UIElement adornedElement) : base(adornedElement)
@@ -94,7 +95,8 @@ namespace BacodePrint
                 thumb.DragDelta += Thumb_DragDelta;
             }
 
-            MPath = null;
+            mPath = null;
+            mFrameworkElement = null;
         }
         public void SetPosition(int pLeft,int pTop ,int pWidth,int pHeight)
         {
@@ -182,16 +184,16 @@ namespace BacodePrint
             
         }
 
-        private void ChangeMpathSize(double left, double top, double width, double height)
+        public void ChangeMpathSize(double left, double top, double width, double height)
         {
-            if(MPath!=null)
+            if (mPath != null)
             {
                 var c = _adornedElement as FrameworkElement;
 
                 left = Canvas.GetLeft(c);
                 top = Canvas.GetTop(c);
                 width = c.Width;
-                height = c.Height;  
+                height = c.Height;
 
                 //width = width < 0 ? 0 : width;
                 //height = height < 0 ? 0 : height;
@@ -200,9 +202,18 @@ namespace BacodePrint
                 {
                     Rect = new Rect(left, top, width, height)
                 };
-                MPath.Data = rg;
+                mPath.Data = rg;
             }
-            
+
+            if (mFrameworkElement != null)
+            {
+                var c = _adornedElement as FrameworkElement;
+
+                Canvas.SetLeft(mFrameworkElement, Canvas.GetLeft(c));
+                Canvas.SetTop(mFrameworkElement, Canvas.GetTop(c));
+                mFrameworkElement.Width = c.Width;
+                mFrameworkElement.Height = c.Height;
+            }
         }
 
         //thumb的样式

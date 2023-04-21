@@ -165,206 +165,25 @@ namespace BacodePrint
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!canvasCtrl.IsMouseCaptured)
-            {
-                startPoint = e.GetPosition(canvasCtrl);
-                canvasCtrl.CaptureMouse();
-
-                FrameworkElement c = null;
-
-                if (e.Source is System.Windows.Controls.Image tImage)
-                {
-                    c = tImage as FrameworkElement;
-                }
-
-                if (e.Source is System.Windows.Controls.Border tBorder)
-                {
-                    c = tBorder as FrameworkElement;
-                }
-
-                if ((e.Source) is UserControlTextBoxItems textBox)
-                {
-                    c = textBox as FrameworkElement;
-                }
-
-                if (c != null) 
-                { 
-                    double left = Canvas.GetLeft(c);
-                    double top = Canvas.GetTop(c);
-                    double width = c.Width;
-                    double height = c.Height;
-
-                    System.Windows.Shapes.Path path1 = new System.Windows.Shapes.Path();
-
-                    SolidColorBrush borderColor = new SolidColorBrush();
-                    
-                    path1.Stroke = borderColor;
-                    RectangleGeometry rg = new RectangleGeometry
-                    {
-                        Rect = new Rect(left, top, width, height)
-                    };
-                    path1.Data = rg;
-
-                    isDown = true;
-                    originalElement = path1;
-                    e.Handled = true;
-
-                    m_CanvasAdorner.SetPosition((int)left, (int)top, (int)width, (int)height);
-                    m_CanvasAdorner.SetVisibleState(Visibility.Visible);
-
-                   // SetBindingDataToParameter(m_CanvasAdorner.MPath);
-                    m_CanvasAdorner.MPath = path1;
-                    //GetBindingData(path1);
-                    //VisibleAreaParameter();
-                }
-                else
-                {
-                    m_CanvasAdorner.SetVisibleState(Visibility.Hidden);
-                    m_CanvasAdorner.MPath = null;
-                }
-            }
+            
         }
 
         private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (isDown)
-            {
-                DragFinishing(false);
-                e.Handled = true;
-            }
-
-            canvasCtrl.ReleaseMouseCapture();
+            
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (canvasCtrl.IsMouseCaptured)
-            {
-                currentPoint = e.GetPosition(canvasCtrl);
-
-                if (isDown)
-                {
-                    if (!isDragging
-                        && (Math.Abs(currentPoint.X - startPoint.X) > SystemParameters.MinimumHorizontalDragDistance)
-                        && (Math.Abs(currentPoint.Y - startPoint.Y) > SystemParameters.MinimumVerticalDragDistance))
-                    { 
-                        DragStarting(); 
-                    }
-                    if (isDragging)
-                    { 
-                        DragMoving(); 
-                    }
-                }
-            }
+            
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            var layer = AdornerLayer.GetAdornerLayer(border);
-            m_CanvasAdorner = new CanvasAdorner(border);
-            layer.Add(m_CanvasAdorner);
-            m_CanvasAdorner.SetVisibleState(Visibility.Hidden);
-
-            ReSize();
+            
         }
 
-        private void ReSize()
-        {
-            //outside.Width = ShowImage.Width;
-            //if (((int)GridShowImage.ActualHeight != 0) && ((int)GridShowImage.ActualWidth != 0))
-            //{
-            //    double nHeight = GridShowImage.ActualWidth * nImageHeight / nImageWidth;
-            //    double nWidth = GridShowImage.ActualHeight * nImageWidth / nImageHeight;
-
-            //    //如果高度小于当前网格高度，说明宽度正确不用调整
-            //    if (nHeight < GridShowImage.ActualHeight)
-            //    {
-            //        outside.Height = nHeight;
-            //        outsideTest.Height = nHeight;
-            //    }
-
-            //    if (nWidth < GridShowImage.ActualWidth)
-            //    {
-            //        outside.Width = nWidth;
-            //        outsideTest.Width = nWidth;
-            //    }
-            //}
-
-        }
-
-        private void DragStarting()
-        {
-            isDragging = true;
-            movingElement = new System.Windows.Shapes.Path();
-            movingElement.Data = originalElement.Data;
-            //movingElement.Fill = selectFillColor;
-            //movingElement.Stroke = selectBorderColor;
-            canvasCtrl.Children.Add(movingElement);
-        }
-
-        private void DragMoving()
-        {
-            currentPoint = Mouse.GetPosition(canvasCtrl);
-            TranslateTransform tt = new TranslateTransform();
-            tt.X = currentPoint.X - startPoint.X;
-            tt.Y = currentPoint.Y - startPoint.Y;
-            movingElement.RenderTransform = tt;
-        }
-
-        private void DragFinishing(bool cancel)
-        {
-            Mouse.Capture(null);
-            if (isDragging)
-            {
-                if (!cancel)
-                {
-                    currentPoint = Mouse.GetPosition(canvasCtrl);
-                    TranslateTransform tt0 = new TranslateTransform();
-                    TranslateTransform tt = new TranslateTransform();
-                    tt.X = currentPoint.X - startPoint.X;
-                    tt.Y = currentPoint.Y - startPoint.Y;
-                    Geometry geometry =
-                    (RectangleGeometry)new RectangleGeometry();
-                    string s = originalElement.Data.ToString();
-                    if (s == "System.Windows.Media.EllipseGeometry")
-                        geometry = (EllipseGeometry)originalElement.Data;
-                    else if (s == "System.Windows.Media.RectangleGeometry")
-                        geometry = (RectangleGeometry)originalElement.Data;
-                    else if (s == "System.Windows.Media.CombinedGeometry")
-                        geometry = (CombinedGeometry)originalElement.Data;
-                    if (geometry.Transform.ToString() != "Identity")
-                    {
-                        tt0 = (TranslateTransform)geometry.Transform;
-                        tt.X += tt0.X;
-                        tt.Y += tt0.Y;
-                    }
-                    geometry.Transform = tt;
-
-                    //获得模板区域列表索引
-                    
-
-                    canvasCtrl.Children.Remove(originalElement);
-                    originalElement = new System.Windows.Shapes.Path();
-                    
-
-                    //originalElement.Fill = fillColor;
-                    //originalElement.Fill = arrFillColor[listTemplateArea[nIndex].nType];
-                    //originalElement.Stroke = borderColor;
-                    originalElement.Data = geometry;
-                    canvasCtrl.Children.Add(originalElement);
-                    m_CanvasAdorner.SetPosition((int)originalElement.Data.Bounds.Left
-                        , (int)originalElement.Data.Bounds.Top
-                        , (int)originalElement.Data.Bounds.Width
-                        , (int)originalElement.Data.Bounds.Height);
-                    m_CanvasAdorner.SetVisibleState(Visibility.Visible);
-                    m_CanvasAdorner.MPath = originalElement;
-                }
-                canvasCtrl.Children.Remove(movingElement);
-                movingElement = null;
-            }
-            isDragging = false;
-            isDown = false;
-        }
+        
 
     }
 }
