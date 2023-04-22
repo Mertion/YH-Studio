@@ -39,15 +39,23 @@ namespace BacodePrint
             b.LabelFont = font;
 
             var c = p_Image as FrameworkElement;
-            
-            //b.BarWidth = (int)Pa.RenderSize.Width; //自动调整条形码宽度
-            System.Drawing.Image bmp = b.Encode(BarcodeLib.TYPE.CODE39, content, System.Drawing.Color.Black, System.Drawing.Color.White, (int)c.Width, (int)c.Height);
-            //img.Save("Barcode.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+
+            System.Drawing.Image bmp = null;
+            if ((c.Width >20 )&& (c.Height>20 ))
+            {
+                //bmp = b.Encode(BarcodeLib.TYPE.CODE39, content, System.Drawing.Color.Black, System.Drawing.Color.White, (int)c.Width, (int)c.Height);
+                
+                bmp = b.Encode(BarcodeLib.TYPE.CODE39, content, System.Drawing.Color.Black, System.Drawing.Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF), (int)c.Width, (int)c.Height);
+            }
             return BitmapToBitmapImage(bmp);
         }
 
         public static BitmapImage BitmapToBitmapImage(System.Drawing.Image bitmap)
         {
+            if (bitmap == null)
+            {
+                return null;
+            }
             using (MemoryStream stream = new MemoryStream())
             {
                 bitmap.Save(stream, ImageFormat.Bmp);

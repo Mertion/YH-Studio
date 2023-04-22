@@ -22,8 +22,8 @@ namespace BacodePrint
     {
         Template tTemplate = new Template();
         SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
+        TemplateFundation mTemplateFundation = new TemplateFundation();
 
-        
         List<string> mListText = new List<string>();
 
         System.Windows.Point previousPoint;
@@ -42,10 +42,97 @@ namespace BacodePrint
         {
             InitializeComponent();
 
-            TemplateFundation templateFundation = new TemplateFundation();
-            templateFundation.LoadTemplateToCanvas(tTemplate, ref this.canvas1);
-            templateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref tTemplate, ref this.canvas1);
-            templateFundation.SetTemplateData("5381921979 0", mListText, ref tTemplate);
+            int nWidth = 0;
+            int nHeight= 0;
+
+            int nLeft = 0;
+            int nTop = 0;
+
+            string str = "";
+            mListText.Clear();
+
+            str = "印刷序号";
+            mListText.Add(str);
+            str = "姓名";
+            mListText.Add(str);
+            str = "证件号";
+            mListText.Add(str);
+            str = "签注";
+            mListText.Add(str);
+            str = "PNR";
+            mListText.Add(str);
+            str = "起飞航站楼1|";
+            mListText.Add(str);
+            str = "起飞地_自FROM|到达地_至1|至2|";
+            mListText.Add(str);
+            str = "到达航站楼1|";
+            mListText.Add(str);
+            str = "承运人1|";
+            mListText.Add(str);
+            str = "航班号1|航班号2|航班";
+            mListText.Add(str);
+            str = "座位等级1|等级2|等级3|等级4|等级5";
+            mListText.Add(str);
+            str = "日期1|日期2|日期3|日期4|日期5";
+            mListText.Add(str);
+            str = "时间1|时间2|时间3|时间4|时间5";
+            mListText.Add(str);
+            str = "客票级别1|级别2|";
+            mListText.Add(str);
+            str = "客票生效日期1|生效2|";
+            mListText.Add(str);
+            str = "客票截止日期1|截止2|";
+            mListText.Add(str);
+            str = "免费行李1|行李2|行李3|行李4|行李5";
+            mListText.Add(str);
+            str = "票价字母";
+            mListText.Add(str);
+            str = "票价数字";
+            mListText.Add(str);
+            str = "基建字母";
+            mListText.Add(str);
+            str = "基建数字";
+            mListText.Add(str);
+            str = "燃油字母";
+            mListText.Add(str);
+            str = "燃油数字";
+            mListText.Add(str);
+            str = "税费字母";
+            mListText.Add(str);
+            str = "税费数字";
+            mListText.Add(str);
+            str = "合计字母";
+            mListText.Add(str);
+            str = "合计数字";
+            mListText.Add(str);
+            str = "票号";
+            mListText.Add(str);
+            str = "验证码";
+            mListText.Add(str);
+            str = "提示信息";
+            mListText.Add(str);
+            str = "保险费";
+            mListText.Add(str);
+            str = "销售单位代码1|代码2";
+            mListText.Add(str);
+            str = "填开单位";
+            mListText.Add(str);
+            str = "填开日期";
+            mListText.Add(str);
+
+            mTemplateFundation.LoadTemplateToCanvas(tTemplate, ref this.canvas1);
+            mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref tTemplate, ref this.canvas1, ref nWidth, ref nHeight);
+            mTemplateFundation.SetTemplateData("5381921979 0", mListText, ref tTemplate);
+
+            this.canvas1.Width = nWidth;
+            this.canvas1.Height = nHeight;
+            PrintWidth.Text = nWidth.ToString();
+            PrintHeight.Text = nHeight.ToString();
+
+            nLeft = ((int)this.canvasOutSide.Width - nWidth)/2;
+            nTop = ((int)this.canvasOutSide.Height - nHeight)/2;
+            Canvas.SetLeft(this.canvas1, nLeft);
+            Canvas.SetTop(this.canvas1, nTop);
         }
 
         private void buttonAbout_Click(object sender, RoutedEventArgs e)
@@ -383,6 +470,7 @@ namespace BacodePrint
                         movingElementCtrl.Height = (int)originalElement.Data.Bounds.Height;
                     }
 
+                    mTemplateFundation.GenerateBarCode("5381921979 0", ref tTemplate);
                 }
                 canvas1.Children.Remove(movingElement);
                 movingElement = null;
@@ -404,6 +492,20 @@ namespace BacodePrint
         private void canvas1_SizeChanged(object sender, SizeChangedEventArgs e)
         {
 
+        }
+
+        private void buttonSetSize_Click(object sender, RoutedEventArgs e)
+        {
+            var c = canvas1 as FrameworkElement;
+           
+            
+            c.Width = Convert.ToInt32(PrintWidth.Text);
+            c.Height = Convert.ToInt32(PrintHeight.Text);
+
+            int nLeft = (int)(this.canvasOutSide.Width - c.Width) / 2;
+            int nTop = (int)(this.canvasOutSide.Height - c.Height) / 2;
+            Canvas.SetLeft(c, nLeft);
+            Canvas.SetTop(c, nTop);
         }
     }
 }

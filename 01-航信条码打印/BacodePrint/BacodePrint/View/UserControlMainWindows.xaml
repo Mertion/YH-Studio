@@ -25,6 +25,8 @@
                     <TextBlock HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="高：" VerticalAlignment="Center"/>
                     <TextBox x:Name="PrintHeight" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="756" VerticalAlignment="Center" Width="50" TextAlignment="Right"/>
                     <Separator/>
+                    <Button x:Name="buttonSetSize" Margin="0,0,0,0" Content="设置" Click="buttonSetSize_Click" />
+                    <Separator/>
                     <Button x:Name="buttonAbout" Margin="0,0,0,0" Content="关于" Click="buttonAbout_Click"/>
                 </ToolBar>
             </ToolBarTray>
@@ -35,7 +37,7 @@
                 <StackPanel>
                     <Grid x:Name="GridShowArea" Margin="0,0,0,0"
                           Height="{Binding Path=ActualHeight,RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                          Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
+                          Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Background="Black">
 
                         <Border Name="outside" 
                                 PreviewMouseDown="outsidewrapper_PreviewMouseDown" 
@@ -48,21 +50,25 @@
 
                             <Canvas Name="canvasOutSide" ClipToBounds="True" Opacity="1.0"
                                     Height="{Binding Path=ActualHeight,RelativeSource={RelativeSource AncestorType=Border}}"
-                                    Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=Border}}" >
+                                    Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=Border}}" 
+                                    ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                    ScrollViewer.CanContentScroll="False">
                                 <Canvas.RenderTransform>
                                     <TransformGroup/>
                                 </Canvas.RenderTransform>
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                    
+                                    <Canvas Name="canvas1" ClipToBounds="True" Opacity="1.0" SizeChanged="canvas1_SizeChanged"
+                                            Canvas.Left="100" Canvas.Top="100"  Width="600" Height="300"
+                                            MouseLeftButtonDown="OnMouseLeftButtonDown"
+                                            MouseLeftButtonUp="OnMouseLeftButtonUp"
+                                            MouseMove="OnMouseMove" Background="White">
+                                        <Canvas.RenderTransform>
+                                            <TransformGroup/>
+                                        </Canvas.RenderTransform>
 
-                                <Canvas Name="canvas1" ClipToBounds="True" Opacity="1.0" SizeChanged="canvas1_SizeChanged"
-                                    Canvas.Left="0" Canvas.Top="0"  Width="600" Height="300"
-                                    MouseLeftButtonDown="OnMouseLeftButtonDown"
-                                    MouseLeftButtonUp="OnMouseLeftButtonUp"
-                                    MouseMove="OnMouseMove" Background="Black">
-                                    <Canvas.RenderTransform>
-                                        <TransformGroup/>
-                                    </Canvas.RenderTransform>
-
-                                    <!--<Image  x:Name="BarcodeImage1" Margin="0,-0,-0,0" Canvas.Left="355" Canvas.Top="100"  Width="300" Height="50" Opacity="0.5" Source="/YH-Logo 512.ico">
+                                        <!--<Image  x:Name="BarcodeImage1" Margin="0,-0,-0,0" Canvas.Left="355" Canvas.Top="100"  Width="300" Height="50" Opacity="0.5" Source="/YH-Logo 512.ico">
                                     </Image>
 
                                     <Border Name="outside1"  ClipToBounds="True" Canvas.Left="150" Canvas.Top="38"  Width="80" Height="20" BorderThickness="3,3,3,3" 
@@ -72,15 +78,15 @@
                                             Width="{Binding Path=ActualWidth,RelativeSource={RelativeSource AncestorType=Border}}"/>
                                     </Border>-->
 
-                                    <Border  x:Name="border" Width="0" Height="0" Margin="0" Canvas.Left="0" Canvas.Top="0"  >
-                                        <Border.Background>
-                                            <SolidColorBrush Color="Gray" Opacity="0.5"/>
-                                        </Border.Background>
-                                    </Border>
+                                        <Border  x:Name="border" Width="0" Height="0" Margin="0" Canvas.Left="0" Canvas.Top="0"  >
+                                            <Border.Background>
+                                                <SolidColorBrush Color="Gray" Opacity="0.5"/>
+                                            </Border.Background>
+                                        </Border>
 
-                                    
-                                
-                                </Canvas>
+                                    </Canvas>
+
+                                </ScrollViewer>
                                 
                             </Canvas>
                         </Border>

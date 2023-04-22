@@ -50,15 +50,36 @@ namespace BacodePrint
             }
         }
 
+        public void GenerateBarCode(string p_StrBarcode, ref Template p_Template)
+        {
+            p_Template.mImageBarcode.Source = ClassBarCode.GenerateBarCodeBitmap(p_StrBarcode, ref p_Template.mImageBarcode);
+        }
+
         public void SetTemplateData(string p_StrBarcode, List<string> p_strText,ref Template p_Template)
         {
             p_Template.mImageBarcode.Source = ClassBarCode.GenerateBarCodeBitmap(p_StrBarcode, ref p_Template.mImageBarcode);
-           
+
+            int nCount = p_strText.Count < p_Template.listText.Count ? p_strText.Count : p_Template.listText.Count;
+            for(int i = 0;i<nCount;i++)
+            {
+                UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
+                UserControlTextBoxItems.SetString(p_strText[i]);
+            }
         }
         //加载ini文件中的配置信息
-        public void LoadTemplateFromIni(string p_strConfigFilePath, ref Template p_Template,ref Canvas p_Canvas)
+        public void LoadTemplateFromIni(string p_strConfigFilePath, ref Template p_Template,ref Canvas p_Canvas, ref int p_nWidth, ref int p_nHeight)
         {
             IniFile tFilesINI = new IniFile();
+
+            //读取模板长、宽两个数值
+            {
+                string str;
+                str = tFilesINI.INIRead("Size", "Width", p_strConfigFilePath);
+                p_nWidth = Convert.ToInt32(str);
+                str = tFilesINI.INIRead("Size", "Height", p_strConfigFilePath);
+                p_nHeight = Convert.ToInt32(str);
+            }
+
             System.Windows.Controls.Image tImage = p_Template.mImageBarcode;
             {
                 string str;
@@ -115,9 +136,19 @@ namespace BacodePrint
             }
         }
 
-        public void SaveIni(string p_strConfigFilePath, Template p_Template)
+        public void SaveIni(string p_strConfigFilePath, Template p_Template, int p_nWidth, int p_nHeight)
         {
             IniFile tFilesINI = new IniFile();
+
+            //保存模板长、宽两个数值
+            {
+                string str;
+                str = p_nWidth.ToString();
+                tFilesINI.INIWrite("Size", "Width", str, p_strConfigFilePath);
+                //Height;
+                str = p_nHeight.ToString();
+                tFilesINI.INIWrite("Size", "Height", str, p_strConfigFilePath);
+            }
 
             System.Windows.Controls.Image tImage = p_Template.mImageBarcode;
             {
