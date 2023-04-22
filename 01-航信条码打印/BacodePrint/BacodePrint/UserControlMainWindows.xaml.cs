@@ -78,62 +78,83 @@ namespace BacodePrint
 
         private void outsidewrapper_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.MiddleButton == MouseButtonState.Pressed && e.LeftButton == MouseButtonState.Released && e.RightButton == MouseButtonState.Released)
-            {
-                previousPoint = e.GetPosition(outside);
-                isTranslateStart = true;
+            //if (e.MiddleButton == MouseButtonState.Pressed && e.LeftButton == MouseButtonState.Released && e.RightButton == MouseButtonState.Released)
+            //{
+            //    previousPoint = e.GetPosition(outside);
+            //    isTranslateStart = true;
 
-                e.Handled = true;
-            }
+            //    e.Handled = true;
+            //}
 
         }
 
         private void outsidewrapper_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.MiddleButton == MouseButtonState.Pressed && e.LeftButton == MouseButtonState.Released && e.RightButton == MouseButtonState.Released)
-            {
-                if (isTranslateStart)
-                {
-                    System.Windows.Point currentPoint = e.GetPosition(outside);  //不能用 inside，必须用outside
-                    Vector v = currentPoint - previousPoint;
+            //if (e.MiddleButton == MouseButtonState.Pressed && e.LeftButton == MouseButtonState.Released && e.RightButton == MouseButtonState.Released)
+            //{
+            //    if (isTranslateStart)
+            //    {
+            //        System.Windows.Point currentPoint = e.GetPosition(outside);  //不能用 inside，必须用outside
+            //        Vector v = currentPoint - previousPoint;
 
-                    TransformGroup tg = canvasOutSide.RenderTransform as TransformGroup;
-                    //TransformGroup tg = Printer.RenderTransform as TransformGroup;
+            //        TransformGroup tg = canvasOutSide.RenderTransform as TransformGroup;
+            //        //TransformGroup tg = Printer.RenderTransform as TransformGroup;
 
-                    tg.Children.Add(new TranslateTransform(v.X, v.Y));  //centerX和centerY用外部包装元素的坐标，不能用内部被变换的Canvas元素的坐标
-                                                                        //    inside.RenderTransform = tg;
-                    previousPoint = currentPoint;
-                }
+            //        tg.Children.Add(new TranslateTransform(v.X, v.Y));  //centerX和centerY用外部包装元素的坐标，不能用内部被变换的Canvas元素的坐标
+            //                                                            //    inside.RenderTransform = tg;
+            //        previousPoint = currentPoint;
+            //    }
 
-                e.Handled = true;
-            }
+            //    e.Handled = true;
+            //}
         }
 
         private void outside_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (e.MiddleButton == MouseButtonState.Pressed && e.LeftButton == MouseButtonState.Released && e.RightButton == MouseButtonState.Released)
-            {
-                if (isTranslateStart)
-                {
-                    isTranslateStart = false;
-                }
+            //if (e.MiddleButton == MouseButtonState.Pressed && e.LeftButton == MouseButtonState.Released && e.RightButton == MouseButtonState.Released)
+            //{
+            //    if (isTranslateStart)
+            //    {
+            //        isTranslateStart = false;
+            //    }
 
-                e.Handled = true;
-            }
+            //    RefreshPosition();
+            //    e.Handled = true;
+            //}
         }
 
         private void outside_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            System.Windows.Point currentPoint = e.GetPosition(outside);  //不能用 inside，必须用outside
+            //System.Windows.Point currentPoint = e.GetPosition(outside);  //不能用 inside，必须用outside
 
-            TransformGroup tg = canvasOutSide.RenderTransform as TransformGroup;
-            //TransformGroup tg = Printer.RenderTransform as TransformGroup;
+            //TransformGroup tg = canvasOutSide.RenderTransform as TransformGroup;
+            ////TransformGroup tg = Printer.RenderTransform as TransformGroup;
 
-            double s = ((double)e.Delta) / 1000.0 + 1.0;
+            //double s = ((double)e.Delta) / 1000.0 + 1.0;
 
-            //centerX和centerY用外部包装元素的坐标，不能用内部被变换的Canvas元素的坐标
-            tg.Children.Add(new ScaleTransform(s, s, currentPoint.X, currentPoint.Y));
-            e.Handled = true;
+            ////centerX和centerY用外部包装元素的坐标，不能用内部被变换的Canvas元素的坐标
+            //tg.Children.Add(new ScaleTransform(s, s, currentPoint.X, currentPoint.Y));
+
+            //RefreshPosition();
+            //e.Handled = true;
+        }
+
+        void RefreshPosition()
+        {
+            if (movingElementCtrl !=null)
+            {
+                double left = Canvas.GetLeft(movingElementCtrl);
+                double top = Canvas.GetTop(movingElementCtrl);
+                double width = movingElementCtrl.Width;
+                double height = movingElementCtrl.Height;
+
+                RectangleGeometry rg = new RectangleGeometry
+                {
+                    Rect = new Rect(left, top, width, height)
+                };
+                originalElement.Data = rg;
+                m_CanvasAdorner.SetPosition((int)left, (int)top, (int)width, (int)height);
+            }
         }
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -200,6 +221,9 @@ namespace BacodePrint
                     m_CanvasAdorner.SetVisibleState(Visibility.Hidden);
                     m_CanvasAdorner.mPath = null;
                     m_CanvasAdorner.mFrameworkElement = null;
+                    movingElementCtrl = null;
+
+                    canvas1.ReleaseMouseCapture();
                 }
             }
         }
