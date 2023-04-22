@@ -36,7 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>YH-Logo.ico</ApplicationIcon>
+    <ApplicationIcon>ICO\YH-Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BarcodeStandard, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -97,23 +97,24 @@
     <Compile Include="CanvasAdorner.cs" />
     <Compile Include="IniFile.cs" />
     <Compile Include="SystemGlobalInfo.cs" />
-    <Compile Include="UserControlMainWindows.xaml.cs">
+    <Compile Include="Template.cs" />
+    <Compile Include="View\UserControlMainWindows.xaml.cs">
       <DependentUpon>UserControlMainWindows.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControlPrint.xaml.cs">
+    <Compile Include="View\UserControlPrint.xaml.cs">
       <DependentUpon>UserControlPrint.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControlTextBoxItems.xaml.cs">
+    <Compile Include="View\UserControlTextBoxItems.xaml.cs">
       <DependentUpon>UserControlTextBoxItems.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowFontList.xaml.cs">
+    <Compile Include="View\WindowFontList.xaml.cs">
       <DependentUpon>WindowFontList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowTest.xaml.cs">
+    <Compile Include="View\WindowTest.xaml.cs">
       <DependentUpon>WindowTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window_About.xaml.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="View\Window_About.xaml.cs" />
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -122,41 +123,41 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ClassBarCode.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PrintPage.xaml">
+    <Page Include="View\PrintPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControlMainWindows.xaml">
+    <Page Include="View\UserControlMainWindows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControlPrint.xaml">
+    <Page Include="View\UserControlPrint.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControlTextBoxItems.xaml">
+    <Page Include="View\UserControlTextBoxItems.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowFontList.xaml">
+    <Page Include="View\WindowFontList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowTest.xaml">
+    <Page Include="View\WindowTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window_About.xaml">
+    <Page Include="View\Window_About.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PrintPage.xaml.cs">
+    <Compile Include="View\PrintPage.xaml.cs">
       <DependentUpon>PrintPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -185,10 +186,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="YH-Logo.ico" />
+    <Resource Include="ICO\YH-Logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="YH-Logo 512.ico" />
+    <Resource Include="ICO\YH-Logo 512.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

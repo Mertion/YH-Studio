@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BacodePrint"
         mc:Ignorable="d"
-        Title="行程单 Printer" Height="441" Width="1004" Icon="/YH-Logo.ico" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="行程单 Printer" Height="441" Width="1004" Icon="/ICO/YH-Logo.ico" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <local:UserControlMainWindows Margin="0,0,0,0"/>
 

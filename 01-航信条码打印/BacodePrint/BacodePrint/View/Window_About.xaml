@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="256*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0" x:Name="PictureImage" Source="YH-Logo 512.ico"/>
+            <Image Grid.Column="0" x:Name="PictureImage" Source="/ICO/YH-Logo 512.ico"/>
 
             <Grid Grid.Column="1" Grid.Row="0">
                 <Grid.RowDefinitions>
