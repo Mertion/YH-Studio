@@ -20,15 +20,14 @@ namespace BacodePrint
     /// </summary>
     public partial class UserControlMainWindows : UserControl
     {
-        System.Windows.Point previousPoint;
-        bool isTranslateStart = false;
-
+        Template tTemplate = new Template();
         SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
-        IniFile mFilesINI = new IniFile();
 
-        List<UserControlTextBoxItems> listText = new List<UserControlTextBoxItems>();
-        const int nListMaxCount = 34;
+        
+        List<string> mListText = new List<string>();
 
+        System.Windows.Point previousPoint;
+        //bool isTranslateStart = false;
         private System.Windows.Point startPoint = new System.Windows.Point();
         //动态调整大小
         private CanvasAdorner m_CanvasAdorner = null;
@@ -37,12 +36,16 @@ namespace BacodePrint
         private System.Windows.Shapes.Path originalElement = new System.Windows.Shapes.Path();
         private System.Windows.Shapes.Path movingElement = new System.Windows.Shapes.Path();
         FrameworkElement movingElementCtrl = null;
-
         private bool isDragging = false;
 
         public UserControlMainWindows()
         {
             InitializeComponent();
+
+            TemplateFundation templateFundation = new TemplateFundation();
+            templateFundation.LoadTemplateToCanvas(tTemplate, ref this.canvas1);
+            templateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref tTemplate, ref this.canvas1);
+            templateFundation.SetTemplateData("5381921979 0", mListText, ref tTemplate);
         }
 
         private void buttonAbout_Click(object sender, RoutedEventArgs e)
