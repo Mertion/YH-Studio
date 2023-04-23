@@ -153,8 +153,8 @@ namespace BacodePrint
             PrintWidth.Text = nWidth.ToString();
             PrintHeight.Text = nHeight.ToString();
 
-            nLeft = ((int)this.canvasOutSide.Width - nWidth)/2;
-            nTop = ((int)this.canvasOutSide.Height - nHeight)/2;
+            nLeft = ((int)this.DockPanelOutSide.Width - nWidth)/2;
+            nTop = ((int)this.DockPanelOutSide.Height - nHeight)/2;
             Canvas.SetLeft(this.canvas1, nLeft);
             Canvas.SetTop(this.canvas1, nTop);
         }
@@ -551,8 +551,8 @@ namespace BacodePrint
             c.Width = Convert.ToInt32(PrintWidth.Text);
             c.Height = Convert.ToInt32(PrintHeight.Text);
 
-            int nLeft = (int)(this.canvasOutSide.Width - c.Width) / 2;
-            int nTop = (int)(this.canvasOutSide.Height - c.Height) / 2;
+            int nLeft = (int)(this.DockPanelOutSide.RenderSize.Width - c.Width) / 2;
+            int nTop = (int)(this.DockPanelOutSide.RenderSize.Height - c.Height) / 2;
             Canvas.SetLeft(c, nLeft);
             Canvas.SetTop(c, nTop);
         }
