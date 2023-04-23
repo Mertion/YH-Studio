@@ -7,20 +7,23 @@
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="100">
     <Grid>
-        <ItemsControl x:Name="itemCtrl"  FontSize="20" FontFamily="STSong" Foreground="Teal" FontWeight="Bold">
-            <!--<ItemsControl.ItemsPanel>
+        <Border x:Name="BorderOutSide">
+            <ItemsControl x:Name="itemCtrl"  FontSize="20" FontFamily="STSong" Foreground="Teal" FontWeight="Bold">
+                <!--<ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>-->
 
-            <!--自动换行-->
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            
-        </ItemsControl>
+                <!--自动换行-->
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+            </ItemsControl>
+        </Border>
+        
     </Grid>
 </UserControl>

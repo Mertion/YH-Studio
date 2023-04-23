@@ -16,16 +16,7 @@ using System.Windows.Shapes;
 
 namespace BacodePrint
 {
-    /// <summary>
-    /// 字体结构体
-    /// </summary>
-    public class FontItem
-    {
-        /// <summary>
-        /// 字体名称
-        /// </summary>
-        public string Name { get; set; }
-    }
+   
 
     /// <summary>
     /// WindowFontList.xaml 的交互逻辑

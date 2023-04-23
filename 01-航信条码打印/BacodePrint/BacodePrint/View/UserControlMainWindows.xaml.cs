@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +18,24 @@ using System.Windows.Shapes;
 namespace BacodePrint
 {
     /// <summary>
+    /// 字体结构体
+    /// </summary>
+    public class FontItem
+    {
+        /// <summary>
+        /// 字体名称
+        /// </summary>
+        public string Name { get; set; }
+    }
+
+    /// <summary>
     /// UserControlMainWindows.xaml 的交互逻辑
     /// </summary>
     public partial class UserControlMainWindows : UserControl
     {
+        //字体列表
+        private ObservableCollection<FontItem> fontItemList = new ObservableCollection<FontItem>();
+
         Template tTemplate = new Template();
         SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
         TemplateFundation mTemplateFundation = new TemplateFundation();
@@ -41,6 +57,14 @@ namespace BacodePrint
         public UserControlMainWindows()
         {
             InitializeComponent();
+            
+            //更新字体列表
+            GetLocalItem();
+            this.FontCombox.ItemsSource = fontItemList;
+            this.FontCombox.SelectedIndex = 0;
+
+            FontComboxOrderNumber.ItemsSource = fontItemList;
+            FontComboxOrderNumber.SelectedIndex = 0;
 
             int nWidth = 0;
             int nHeight= 0;
@@ -123,7 +147,7 @@ namespace BacodePrint
             mTemplateFundation.LoadTemplateToCanvas(tTemplate, ref this.canvas1);
             mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref tTemplate, ref this.canvas1, ref nWidth, ref nHeight);
             mTemplateFundation.SetTemplateData("5381921979 0", mListText, ref tTemplate);
-
+            mTemplateFundation.SetBorderThickness(ref tTemplate, 2);
             this.canvas1.Width = nWidth;
             this.canvas1.Height = nHeight;
             PrintWidth.Text = nWidth.ToString();
@@ -134,6 +158,31 @@ namespace BacodePrint
             Canvas.SetLeft(this.canvas1, nLeft);
             Canvas.SetTop(this.canvas1, nTop);
         }
+
+        private void GetLocalItem()
+        {
+            System.Drawing.FontFamily[] families = null;
+            try
+            {
+                InstalledFontCollection fontCollection = new InstalledFontCollection();
+                families = fontCollection.Families;
+            }
+            catch (Exception ex)
+            {
+                families = new System.Drawing.FontFamily[0];
+                ex.ToString();
+            }
+            foreach (System.Drawing.FontFamily family in families)
+            {
+                FontItem fontLocalItem = new FontItem();
+                fontLocalItem.Name = family.Name;
+                fontItemList.Add(fontLocalItem);
+            }
+
+
+            
+        }
+
 
         private void buttonAbout_Click(object sender, RoutedEventArgs e)
         {
