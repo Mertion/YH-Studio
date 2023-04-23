@@ -507,5 +507,10 @@ namespace BacodePrint
             Canvas.SetLeft(c, nLeft);
             Canvas.SetTop(c, nTop);
         }
+
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        {
+            mTemplateFundation.SaveIni(mSystemInfo.mstrConfigFilePath, tTemplate, (int)canvas1.Width, (int)canvas1.Height);
+        }
     }
 }
