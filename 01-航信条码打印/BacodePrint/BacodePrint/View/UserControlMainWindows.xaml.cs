@@ -64,6 +64,19 @@ namespace BacodePrint
             FontComboxOrderNumber.ItemsSource = fontItemList;
             ReadFont();
 
+            //初始化字号列表和其它配置信息
+            {
+                for (int i = 0;i<30;i++)
+                {
+                    FontSizeCH.Items.Add(i.ToString());
+                    FontSizeNumber.Items.Add(i.ToString());
+                    FontWordSpacing.Items.Add(i.ToString());
+                    RowWordSpacing.Items.Add(i.ToString());
+                    FontSizeOrderNumber.Items.Add(i.ToString());
+                    FontWordSpacingOrderNumber.Items.Add((i+1).ToString());
+                }
+                ReadConfig();
+            }
             int nWidth = 0;
             int nHeight= 0;
 
@@ -155,6 +168,46 @@ namespace BacodePrint
             nTop = ((int)this.DockPanelOutSide.Height - nHeight)/2;
             Canvas.SetLeft(this.canvas1, nLeft);
             Canvas.SetTop(this.canvas1, nTop);
+        }
+
+        void ReadConfig()
+        {
+            IniFile tFilesINI = new IniFile();
+
+            string str = tFilesINI.INIRead("Config", "FontSizeCH", mSystemInfo.mstrConfigFilePath);
+            FontSizeCH.Text = str;
+
+            str = tFilesINI.INIRead("Config", "FontSizeNumber", mSystemInfo.mstrConfigFilePath);
+            FontSizeNumber.Text = str;
+
+            str = tFilesINI.INIRead("Config", "FontWordSpacing", mSystemInfo.mstrConfigFilePath);
+            FontWordSpacing.Text = str;
+
+            str = tFilesINI.INIRead("Config", "RowWordSpacing", mSystemInfo.mstrConfigFilePath);
+            RowWordSpacing.Text = str;
+
+            str = tFilesINI.INIRead("Config", "FontSizeOrderNumber", mSystemInfo.mstrConfigFilePath);
+            FontSizeOrderNumber.Text = str;
+
+            str = tFilesINI.INIRead("Config", "FontWordSpacingOrderNumber", mSystemInfo.mstrConfigFilePath);
+            FontWordSpacingOrderNumber.Text = str;
+
+            str = tFilesINI.INIRead("Config", "IsFontWeight", mSystemInfo.mstrConfigFilePath);
+            CheckBoldFont.IsChecked = str != "0";
+
+            str = tFilesINI.INIRead("Config", "IsFontWeightNumber", mSystemInfo.mstrConfigFilePath);
+            CheckBoldFontOrderNumber.IsChecked = str != "0";
+
+            str = tFilesINI.INIRead("Config", "PrintNumber", mSystemInfo.mstrConfigFilePath);
+            CheckPrintOrderNumber.IsChecked = str != "0";
+
+            str = tFilesINI.INIRead("Config", "PrintBarcode", mSystemInfo.mstrConfigFilePath);
+            CheckPrintBarCode.IsChecked = str != "0";
+        }
+
+        void SaveConfig()
+        {
+
         }
 
         void ReadFont()
