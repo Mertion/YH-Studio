@@ -42,7 +42,7 @@ namespace BacodePrint
 
         List<string> mListText = new List<string>();
 
-        System.Windows.Point previousPoint;
+        //System.Windows.Point previousPoint;
         //bool isTranslateStart = false;
         private System.Windows.Point startPoint = new System.Windows.Point();
         //动态调整大小
@@ -61,10 +61,8 @@ namespace BacodePrint
             //更新字体列表
             GetLocalItem();
             this.FontCombox.ItemsSource = fontItemList;
-            this.FontCombox.SelectedIndex = 0;
-
             FontComboxOrderNumber.ItemsSource = fontItemList;
-            FontComboxOrderNumber.SelectedIndex = 0;
+            ReadFont();
 
             int nWidth = 0;
             int nHeight= 0;
@@ -159,6 +157,44 @@ namespace BacodePrint
             Canvas.SetTop(this.canvas1, nTop);
         }
 
+        void ReadFont()
+        {
+            IniFile tFilesINI = new IniFile();
+
+            string str = tFilesINI.INIRead("Font", "FontFamily", mSystemInfo.mstrConfigFilePath);
+            FontCombox.SelectedIndex = FindFont(str);
+            FontCombox.FontFamily = new System.Windows.Media.FontFamily(str);
+
+            str = tFilesINI.INIRead("Font", "FontFamilyNumber", mSystemInfo.mstrConfigFilePath);
+            FontComboxOrderNumber.SelectedIndex = FindFont(str);
+            FontComboxOrderNumber.FontFamily = new System.Windows.Media.FontFamily(str);
+        }
+
+        int FindFont(string p_strFontName)
+        {
+            int nNumber = 0;
+            for(int i = 0;i< fontItemList.Count;i++)
+            {
+                if(fontItemList[i].Name == p_strFontName)
+                {
+                    nNumber = i;
+                    break;
+                }
+            }
+
+            return nNumber;
+        }
+
+        void SaveFont()
+        {
+            IniFile tFilesINI = new IniFile();
+
+            FontItem tempItem = this.FontCombox.SelectedItem as FontItem;
+            tFilesINI.INIWrite("Font", "FontFamily", tempItem.Name, mSystemInfo.mstrConfigFilePath);
+
+            tempItem = this.FontComboxOrderNumber.SelectedItem as FontItem;
+            tFilesINI.INIWrite("Font", "FontFamilyNumber", tempItem.Name, mSystemInfo.mstrConfigFilePath);
+        }
         private void GetLocalItem()
         {
             System.Drawing.FontFamily[] families = null;
@@ -560,6 +596,7 @@ namespace BacodePrint
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
             mTemplateFundation.SaveIni(mSystemInfo.mstrConfigFilePath, tTemplate, (int)canvas1.Width, (int)canvas1.Height);
+            SaveFont();
         }
     }
 }

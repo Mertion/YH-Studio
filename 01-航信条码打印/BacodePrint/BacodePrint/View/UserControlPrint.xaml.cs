@@ -23,18 +23,18 @@ namespace BacodePrint
     {
         SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
 
-        List<UserControlTextBoxItems> listText = new List<UserControlTextBoxItems>();
-        const int nListMaxCount = 34;
+        //List<UserControlTextBoxItems> listText = new List<UserControlTextBoxItems>();
+        //const int nListMaxCount = 34;
 
-        private System.Windows.Point startPoint = new System.Windows.Point();
+        //private System.Windows.Point startPoint = new System.Windows.Point();
         //动态调整大小
-        private CanvasAdorner m_CanvasAdorner = null;
-        System.Windows.Point currentPoint = new System.Windows.Point();
-        private bool isDown = false;
-        private System.Windows.Shapes.Path originalElement = new System.Windows.Shapes.Path();
-        private System.Windows.Shapes.Path movingElement = new System.Windows.Shapes.Path();
+        //private CanvasAdorner m_CanvasAdorner = null;
+        //System.Windows.Point currentPoint = new System.Windows.Point();
+        //private bool isDown = false;
+        //private System.Windows.Shapes.Path originalElement = new System.Windows.Shapes.Path();
+        //private System.Windows.Shapes.Path movingElement = new System.Windows.Shapes.Path();
 
-        private bool isDragging = false;
+        //private bool isDragging = false;
         public UserControlPrint()
         {
             InitializeComponent();

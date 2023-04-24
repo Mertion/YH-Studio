@@ -34,8 +34,7 @@ namespace BacodePrint
 
         SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
 
-        System.Windows.Point previousPoint;
-        bool isTranslateStart = false;
+        //bool isTranslateStart = false;
 
         public MainWindow()
         {

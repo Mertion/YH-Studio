@@ -208,11 +208,9 @@ namespace BacodePrint
         {
             for (int i = 0; i < p_Template.listText.Count; i++)
             {
-                string str;
-                string strSetion = "Text" + i.ToString();
                 UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
                 UserControlTextBoxItems.BorderOutSide.BorderThickness = new Thickness(p_nThickness);
-                UserControlTextBoxItems.BorderOutSide.BorderBrush = new SolidColorBrush(Colors.Black);
+                UserControlTextBoxItems.BorderOutSide.BorderBrush = new SolidColorBrush(Colors.Gray);
             }
         }
     }
