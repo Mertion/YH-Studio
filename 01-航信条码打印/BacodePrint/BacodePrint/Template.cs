@@ -105,10 +105,6 @@ namespace BacodePrint
                 UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
                 var c = UserControlTextBoxItems as FrameworkElement;
 
-                //byte nColor = (byte)(i * 3);
-                //Brush brush = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0xff, 0x7f, 0x30, nColor));
-                //UserControlTextBoxItems.Background = brush;
-
                 str = tFilesINI.INIRead(strSetion, "FontFamily", p_strConfigFilePath);
                 UserControlTextBoxItems.FontFamily = new System.Windows.Media.FontFamily(str);
 
@@ -121,6 +117,15 @@ namespace BacodePrint
                 str = tFilesINI.INIRead(strSetion, "ColumnSpacing", p_strConfigFilePath);
                 UserControlTextBoxItems.mnColumnSpacing = Convert.ToInt32(str);
 
+                str = tFilesINI.INIRead(strSetion, "CHFontSize", p_strConfigFilePath);
+                UserControlTextBoxItems.mnCHFontSize = Convert.ToInt32(str);
+
+                str = tFilesINI.INIRead(strSetion, "ENFontSize", p_strConfigFilePath);
+                UserControlTextBoxItems.mnENFontSize = Convert.ToInt32(str);
+
+                str = tFilesINI.INIRead(strSetion, "IsFontWeight", p_strConfigFilePath);
+                UserControlTextBoxItems.mnIsFontWeight = Convert.ToInt32(str);
+
                 str = tFilesINI.INIRead(strSetion, "Left", p_strConfigFilePath);
                 Canvas.SetLeft(c, Convert.ToInt32(str));
 
@@ -132,7 +137,6 @@ namespace BacodePrint
 
                 str = tFilesINI.INIRead(strSetion, "Height", p_strConfigFilePath);
                 c.Height = Convert.ToInt32(str);
-
             }
         }
 
@@ -189,6 +193,15 @@ namespace BacodePrint
                 //列间距
                 str = UserControlTextBoxItems.mnColumnSpacing.ToString();
                 tFilesINI.INIWrite(strSetion, "ColumnSpacing", str, p_strConfigFilePath);
+                //中文字体大小
+                str = UserControlTextBoxItems.mnCHFontSize.ToString();
+                tFilesINI.INIWrite(strSetion, "CHFontSize", str, p_strConfigFilePath);
+                //英文字体大小
+                str = UserControlTextBoxItems.mnENFontSize.ToString();
+                tFilesINI.INIWrite(strSetion, "ENFontSize", str, p_strConfigFilePath);
+                //字体加粗
+                str = UserControlTextBoxItems.mnIsFontWeight.ToString();
+                tFilesINI.INIWrite(strSetion, "IsFontWeight", str, p_strConfigFilePath);
                 //Left
                 str = Canvas.GetLeft(c).ToString();
                 tFilesINI.INIWrite(strSetion, "Left", str, p_strConfigFilePath);

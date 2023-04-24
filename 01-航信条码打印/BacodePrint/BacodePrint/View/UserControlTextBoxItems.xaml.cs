@@ -27,6 +27,9 @@ namespace BacodePrint
         public int mnCHFontSize { get; set; }
         //英文字体大小
         public int mnENFontSize { get; set; }
+        //是否加粗：1-加粗、0-不加粗
+        public int mnIsFontWeight { get;set; }
+
         public UserControlTextBoxItems()
         {
             InitializeComponent();
@@ -35,6 +38,7 @@ namespace BacodePrint
             mnColumnSpacing = 1;
             mnCHFontSize = 12;
             mnENFontSize = 10;
+            mnIsFontWeight = 0;
         }
 
         public ItemsControl GetItem()
@@ -49,11 +53,31 @@ namespace BacodePrint
 
             for (int i = 0; i < itemCtrl.Items.Count; i++) 
             {
-                Border border1 = (Border)itemCtrl.Items[i];
-                border1.Margin = new Thickness(mnColumnSpacing, mnRowSpacing, 0, 0);
+                //Border border1 = (Border)itemCtrl.Items[i];
+                //border1.Margin = new Thickness(mnColumnSpacing, mnRowSpacing, 0, 0);
+
+                TextBlock block1 = (TextBlock)itemCtrl.Items[i];
+                block1.Margin = new Thickness(mnColumnSpacing, mnRowSpacing, 0, 0);
             }
         }
 
+        public void SetFontWeight(int p_nFontWeight)
+        {
+            mnIsFontWeight=p_nFontWeight;
+
+            for (int i = 0; i < itemCtrl.Items.Count; i++)
+            {
+                TextBlock block1 = (TextBlock)itemCtrl.Items[i];
+                if (mnIsFontWeight == 1)
+                {
+                    block1.FontWeight = FontWeights.Bold;
+                }
+                else
+                {
+                    block1.FontWeight = FontWeights.Normal;
+                }
+            }
+        }
         public void SetFontSize(int p_nCHFontSize,int p_nENFontSize)
         {
             mnCHFontSize = p_nCHFontSize;
@@ -61,8 +85,8 @@ namespace BacodePrint
 
             for (int i = 0;i < itemCtrl.Items.Count;i++)
             {
-                Border border1 = (Border)itemCtrl.Items[i];
-                TextBlock block1 = (TextBlock)border1.Child;
+                //Border border1 = (Border)itemCtrl.Items[i];
+                TextBlock block1 = (TextBlock)itemCtrl.Items[i];
 
                 char c= block1.Text[0];
                 if (IsChChar(c))
@@ -93,6 +117,8 @@ namespace BacodePrint
                 TextBlock block1 = new TextBlock();
 
                 block1.Text = p_String[i].ToString();
+
+                //判断当前字符是否是中文
                 if (IsChChar(p_String[i]))
                 {
                     block1.FontSize = mnCHFontSize;
@@ -101,8 +127,17 @@ namespace BacodePrint
                 {
                     block1.FontSize = mnENFontSize;
                 }
-
                 block1.FontFamily = itemCtrl.FontFamily;
+                //是否加粗
+                if (mnIsFontWeight == 1)
+                {
+                    block1.FontWeight = FontWeights.Bold;
+                }
+                else
+                {
+                    block1.FontWeight = FontWeights.Normal;
+                }
+
                 block1.VerticalAlignment = VerticalAlignment.Bottom;
                 itemCtrl.Items.Add(block1);
             }
