@@ -226,6 +226,87 @@ namespace BacodePrint
                 UserControlTextBoxItems.BorderOutSide.BorderBrush = new SolidColorBrush(Colors.Gray);
             }
         }
+
+        public void SetGeneralFont(ref Template p_Template, string p_FontFamilyName)
+        {
+            for (int i = 1; i < p_Template.listText.Count; i++)
+            {
+                UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
+                UserControlTextBoxItems.FontFamily = new System.Windows.Media.FontFamily(p_FontFamilyName);
+                UserControlTextBoxItems.SetFontFamily();
+            }
+        }
+
+        public void SetNumberFont(ref Template p_Template, string p_FontFamilyName)
+        {
+            UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[0];
+            UserControlTextBoxItems.FontFamily = new System.Windows.Media.FontFamily(p_FontFamilyName);
+            UserControlTextBoxItems.SetFontFamily();
+        }
+
+        public void SetGeneralFontSize(ref Template p_Template, int p_nCHSize,int p_nENSize)
+        {
+            for (int i = 1; i < p_Template.listText.Count; i++)
+            {
+                UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
+                UserControlTextBoxItems.mnCHFontSize = p_nCHSize;
+                UserControlTextBoxItems.mnENFontSize = p_nENSize;
+                UserControlTextBoxItems.SetFontSize();
+            }
+        }
+
+        public void SetNumberFontSize(ref Template p_Template, int p_nCHSize, int p_nENSize)
+        {
+            UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[0];
+            UserControlTextBoxItems.mnCHFontSize = p_nCHSize;
+            UserControlTextBoxItems.mnENFontSize = p_nENSize;
+            UserControlTextBoxItems.SetFontSize();
+        }
+
+        public void SetGeneralFontWordSpacing(ref Template p_Template, int p_nWordSpacing)
+        {
+            for (int i = 1; i < p_Template.listText.Count; i++)
+            {
+                UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
+                UserControlTextBoxItems.mnColumnSpacing = p_nWordSpacing;
+                UserControlTextBoxItems.SetSpacing();
+            }
+        }
+
+        public void SetNumberFontWordSpacing(ref Template p_Template, int p_nWordSpacing)
+        {
+            UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[0];
+            UserControlTextBoxItems.mnColumnSpacing = p_nWordSpacing;
+            UserControlTextBoxItems.SetSpacing();
+        }
+
+        public void SetRowWordSpacing(ref Template p_Template, int p_nRowWordSpacing)
+        {
+            for (int i = 0; i < p_Template.listText.Count; i++)
+            {
+                UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
+                UserControlTextBoxItems.mnRowSpacing = p_nRowWordSpacing;
+                UserControlTextBoxItems.SetSpacing();
+            }
+        }
+
+        public void SetGeneralFontWeight(ref Template p_Template, int p_nIsFontWeight)
+        {
+            for (int i = 1; i < p_Template.listText.Count; i++)
+            {
+                UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
+                UserControlTextBoxItems.mnIsFontWeight = p_nIsFontWeight;
+                UserControlTextBoxItems.SetFontWeight(p_nIsFontWeight);
+            }
+        }
+
+        public void SetNumberFontWeight(ref Template p_Template, int p_nIsFontWeight)
+        {
+            UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[0];
+            UserControlTextBoxItems.mnIsFontWeight = p_nIsFontWeight;
+            UserControlTextBoxItems.SetFontWeight(p_nIsFontWeight);
+        }
+
     }
 
 }

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Shell;
 
 namespace BacodePrint
 {
@@ -36,7 +37,7 @@ namespace BacodePrint
         //字体列表
         private ObservableCollection<FontItem> fontItemList = new ObservableCollection<FontItem>();
 
-        Template tTemplate = new Template();
+        Template mTemplate = new Template();
         SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
         TemplateFundation mTemplateFundation = new TemplateFundation();
 
@@ -155,10 +156,10 @@ namespace BacodePrint
             str = "填开日期";
             mListText.Add(str);
 
-            mTemplateFundation.LoadTemplateToCanvas(tTemplate, ref this.canvas1);
-            mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref tTemplate, ref this.canvas1, ref nWidth, ref nHeight);
-            mTemplateFundation.SetTemplateData("5381921979 0", mListText, ref tTemplate);
-            mTemplateFundation.SetBorderThickness(ref tTemplate, 2);
+            mTemplateFundation.LoadTemplateToCanvas(mTemplate, ref this.canvas1);
+            mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvas1, ref nWidth, ref nHeight);
+            mTemplateFundation.SetTemplateData("5381921979 0", mListText, ref mTemplate);
+            mTemplateFundation.SetBorderThickness(ref mTemplate, 2);
             this.canvas1.Width = nWidth;
             this.canvas1.Height = nHeight;
             PrintWidth.Text = nWidth.ToString();
@@ -202,12 +203,55 @@ namespace BacodePrint
             CheckPrintOrderNumber.IsChecked = str != "0";
 
             str = tFilesINI.INIRead("Config", "PrintBarcode", mSystemInfo.mstrConfigFilePath);
-            CheckPrintBarCode.IsChecked = str != "0";
+            CheckPrintBarcode.IsChecked = str != "0";
         }
 
         void SaveConfig()
         {
+            IniFile tFilesINI = new IniFile();
 
+            tFilesINI.INIWrite("Config", "FontSizeCH", FontSizeCH.Text, mSystemInfo.mstrConfigFilePath);
+            tFilesINI.INIWrite("Config", "FontSizeNumber", FontSizeNumber.Text, mSystemInfo.mstrConfigFilePath);
+            tFilesINI.INIWrite("Config", "FontWordSpacing", FontWordSpacing.Text, mSystemInfo.mstrConfigFilePath);
+            tFilesINI.INIWrite("Config", "RowWordSpacing", RowWordSpacing.Text, mSystemInfo.mstrConfigFilePath);
+            tFilesINI.INIWrite("Config", "FontSizeOrderNumber", FontSizeOrderNumber.Text, mSystemInfo.mstrConfigFilePath);
+            tFilesINI.INIWrite("Config", "FontWordSpacingOrderNumber", FontWordSpacingOrderNumber.Text, mSystemInfo.mstrConfigFilePath);
+
+            if ((bool)CheckBoldFont.IsChecked)
+            {
+                tFilesINI.INIWrite("Config", "IsFontWeight", "1", mSystemInfo.mstrConfigFilePath); 
+            }
+            else
+            {
+                tFilesINI.INIWrite("Config", "IsFontWeight", "0", mSystemInfo.mstrConfigFilePath);
+            }
+
+            if ((bool)CheckBoldFontOrderNumber.IsChecked)
+            {
+                tFilesINI.INIWrite("Config", "IsFontWeightNumber", "1", mSystemInfo.mstrConfigFilePath);
+            }
+            else
+            {
+                tFilesINI.INIWrite("Config", "IsFontWeightNumber", "0", mSystemInfo.mstrConfigFilePath);
+            }
+
+            if ((bool)CheckPrintOrderNumber.IsChecked)
+            {
+                tFilesINI.INIWrite("Config", "PrintNumber", "1", mSystemInfo.mstrConfigFilePath);
+            }
+            else
+            {
+                tFilesINI.INIWrite("Config", "PrintNumber", "0", mSystemInfo.mstrConfigFilePath);
+            }
+
+            if ((bool)CheckPrintBarcode.IsChecked)
+            {
+                tFilesINI.INIWrite("Config", "PrintBarcode", "1", mSystemInfo.mstrConfigFilePath);
+            }
+            else
+            {
+                tFilesINI.INIWrite("Config", "PrintBarcode", "0", mSystemInfo.mstrConfigFilePath);
+            }
         }
 
         void ReadFont()
@@ -416,8 +460,6 @@ namespace BacodePrint
                     double width = c.Width;
                     double height = c.Height;
 
-                  
-
                     SolidColorBrush borderColor = new SolidColorBrush();
 
                     originalElement.Stroke = borderColor;
@@ -501,25 +543,7 @@ namespace BacodePrint
 
         private void ReSize()
         {
-            //outside.Width = ShowImage.Width;
-            //if (((int)GridShowImage.ActualHeight != 0) && ((int)GridShowImage.ActualWidth != 0))
-            //{
-            //    double nHeight = GridShowImage.ActualWidth * nImageHeight / nImageWidth;
-            //    double nWidth = GridShowImage.ActualHeight * nImageWidth / nImageHeight;
-
-            //    //如果高度小于当前网格高度，说明宽度正确不用调整
-            //    if (nHeight < GridShowImage.ActualHeight)
-            //    {
-            //        outside.Height = nHeight;
-            //        outsideTest.Height = nHeight;
-            //    }
-
-            //    if (nWidth < GridShowImage.ActualWidth)
-            //    {
-            //        outside.Width = nWidth;
-            //        outsideTest.Width = nWidth;
-            //    }
-            //}
+            
 
         }
 
@@ -608,7 +632,7 @@ namespace BacodePrint
                         movingElementCtrl.Height = (int)originalElement.Data.Bounds.Height;
                     }
 
-                    mTemplateFundation.GenerateBarCode("5381921979 0", ref tTemplate);
+                    mTemplateFundation.GenerateBarCode("5381921979 0", ref mTemplate);
                 }
                 canvas1.Children.Remove(movingElement);
                 movingElement = null;
@@ -635,8 +659,7 @@ namespace BacodePrint
         private void buttonSetSize_Click(object sender, RoutedEventArgs e)
         {
             var c = canvas1 as FrameworkElement;
-           
-            
+
             c.Width = Convert.ToInt32(PrintWidth.Text);
             c.Height = Convert.ToInt32(PrintHeight.Text);
 
@@ -648,8 +671,161 @@ namespace BacodePrint
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            mTemplateFundation.SaveIni(mSystemInfo.mstrConfigFilePath, tTemplate, (int)canvas1.Width, (int)canvas1.Height);
+            mTemplateFundation.SaveIni(mSystemInfo.mstrConfigFilePath, mTemplate, (int)canvas1.Width, (int)canvas1.Height);
             SaveFont();
+            SaveConfig();
+        }
+
+        //设置常规字体
+        private void FontCombox_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            mTemplateFundation.SetGeneralFont(ref mTemplate, FontCombox.Text);
+        }
+        //设置序号字体
+        private void FontComboxOrderNumber_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            mTemplateFundation.SetGeneralFont(ref mTemplate, FontComboxOrderNumber.Text);
+        }
+
+        //设置常规字体大小
+        
+
+        //设置英文字体大小
+        private void FontSizeNumber_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            
+        }
+
+        //设置序号大小
+        private void FontSizeOrderNumber_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            
+        }
+
+        //常规字距
+        private void FontWordSpacing_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            
+        }
+
+        //行距
+        private void RowWordSpacing_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            
+        }
+
+        //序号字距
+        private void FontWordSpacingOrderNumber_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            
+        }
+
+        private void CheckBoldFont_Checked(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void CheckBoldFontOrderNumber_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CheckPrintOrderNumber_Checked(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void CheckPrintBarcode_Checked(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void CheckPrintBarcode_Click(object sender, RoutedEventArgs e)
+        {
+            if ((bool)CheckPrintBarcode.IsChecked)
+            {
+                mTemplate.mImageBarcode.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                mTemplate.mImageBarcode.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void CheckPrintOrderNumber_Click(object sender, RoutedEventArgs e)
+        {
+            if ((bool)CheckPrintOrderNumber.IsChecked)
+            {
+                mTemplate.listText[0].Visibility = Visibility.Visible;
+            }
+            else
+            {
+                mTemplate.listText[0].Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void CheckBoldFontOrderNumber_Click(object sender, RoutedEventArgs e)
+        {
+            int nVal = (bool)CheckBoldFontOrderNumber.IsChecked ? 1 : 0;
+            mTemplateFundation.SetNumberFontWeight(ref mTemplate, nVal);
+        }
+
+        private void CheckBoldFont_Click(object sender, RoutedEventArgs e)
+        {
+            int nVal = (bool)CheckBoldFont.IsChecked ? 1 : 0;
+            mTemplateFundation.SetGeneralFontWeight(ref mTemplate, nVal);
+        }
+
+        //设置常规字体
+        private void FontCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FontItem tempItem = this.FontCombox.SelectedItem as FontItem;
+            mTemplateFundation.SetGeneralFont(ref mTemplate, tempItem.Name);
+        }
+        //设置数字字体
+        private void FontComboxOrderNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FontItem tempItem = this.FontComboxOrderNumber.SelectedItem as FontItem;
+            mTemplateFundation.SetNumberFont(ref mTemplate, tempItem.Name);
+        }
+
+        private void FontSizeOrderNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            mTemplateFundation.SetNumberFontSize(ref mTemplate, Convert.ToInt32(FontSizeOrderNumber.Text), Convert.ToInt32(FontSizeOrderNumber.Text));
+        }
+
+        private void FontWordSpacingOrderNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            mTemplateFundation.SetNumberFontWordSpacing(ref mTemplate, Convert.ToInt32(FontWordSpacingOrderNumber.Text));
+        }
+
+        private void FontSizeCH_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int nFontSizeCH = FontSizeCH.Text == "" ? 0 : Convert.ToInt32(FontSizeCH.Text);
+            int nFontSizeNumber = FontSizeNumber.Text == "" ? 0 : Convert.ToInt32(FontSizeNumber.Text);
+            mTemplateFundation.SetGeneralFontSize(ref mTemplate, nFontSizeCH, nFontSizeNumber);
+        }
+
+        private void FontSizeNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //int nFontSizeCH = 1;
+            //int nFontSizeNumber = 1;
+            //mTemplateFundation.SetGeneralFontSize(ref mTemplate, nFontSizeCH, nFontSizeNumber);
+
+            int nFontSizeCH = FontSizeCH.Text == "" ? 1 : Convert.ToInt32(FontSizeCH.Text);
+            int nFontSizeNumber = FontSizeNumber.Text == "" ? 1 : Convert.ToInt32(FontSizeNumber.Text);
+            mTemplateFundation.SetGeneralFontSize(ref mTemplate, nFontSizeCH, nFontSizeNumber);
+        }
+
+        private void FontWordSpacing_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            mTemplateFundation.SetGeneralFontWordSpacing(ref mTemplate, Convert.ToInt32(FontWordSpacing.Text));
+        }
+
+        private void RowWordSpacing_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            mTemplateFundation.SetRowWordSpacing(ref mTemplate, Convert.ToInt32(RowWordSpacing.Text));
         }
     }
+
 }

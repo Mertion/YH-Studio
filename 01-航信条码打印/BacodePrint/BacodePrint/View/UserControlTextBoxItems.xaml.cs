@@ -30,6 +30,8 @@ namespace BacodePrint
         //是否加粗：1-加粗、0-不加粗
         public int mnIsFontWeight { get;set; }
 
+        string mString = "";
+
         public UserControlTextBoxItems()
         {
             InitializeComponent();
@@ -46,19 +48,21 @@ namespace BacodePrint
             return this.itemCtrl;
         }
 
+        public void SetSpacing()
+        {
+            for (int i = 0; i < itemCtrl.Items.Count; i++)
+            {
+                TextBlock block1 = (TextBlock)itemCtrl.Items[i];
+                block1.Margin = new Thickness(mnColumnSpacing, mnRowSpacing, 0, 0);
+            }
+        }
+
         public void SetSpacing(int p_nRowSpacing,int p_nColumnSpacing)
         {
             mnColumnSpacing = p_nColumnSpacing;
             mnRowSpacing = p_nRowSpacing;
 
-            for (int i = 0; i < itemCtrl.Items.Count; i++) 
-            {
-                //Border border1 = (Border)itemCtrl.Items[i];
-                //border1.Margin = new Thickness(mnColumnSpacing, mnRowSpacing, 0, 0);
-
-                TextBlock block1 = (TextBlock)itemCtrl.Items[i];
-                block1.Margin = new Thickness(mnColumnSpacing, mnRowSpacing, 0, 0);
-            }
+            SetSpacing();
         }
 
         public void SetFontWeight(int p_nFontWeight)
@@ -78,33 +82,50 @@ namespace BacodePrint
                 }
             }
         }
+
+        public void SetFontSize()
+        {
+            SetString();
+            //for (int i = 0; i < itemCtrl.Items.Count; i++)
+            //{
+            //    //Border border1 = (Border)itemCtrl.Items[i];
+            //    TextBlock block1 = (TextBlock)itemCtrl.Items[i];
+
+            //    char c = block1.Text[0];
+            //    if (IsChChar(c))
+            //    {
+            //        block1.FontSize = mnCHFontSize;
+            //    }
+            //    else
+            //    {
+            //        block1.FontSize = mnENFontSize;
+            //    }
+            //}
+        }
+
         public void SetFontSize(int p_nCHFontSize,int p_nENFontSize)
         {
             mnCHFontSize = p_nCHFontSize;
             mnENFontSize = p_nENFontSize;
 
-            for (int i = 0;i < itemCtrl.Items.Count;i++)
-            {
-                //Border border1 = (Border)itemCtrl.Items[i];
-                TextBlock block1 = (TextBlock)itemCtrl.Items[i];
+            SetString();
+            //SetFontSize();
+        }
 
-                char c= block1.Text[0];
-                if (IsChChar(c))
-                {
-                    block1.FontSize = mnCHFontSize;
-                }
-                else
-                {
-                    block1.FontSize = mnENFontSize;
-                }
+        public void SetFontFamily()
+        {
+            for (int i = 0; i < itemCtrl.Items.Count; i++)
+            {
+                TextBlock block1 = (TextBlock)itemCtrl.Items[i];
+                block1.FontFamily = itemCtrl.FontFamily;
             }
         }
 
-        public void SetString(string p_String)
+        public void SetString()
         {
             itemCtrl.Items.Clear();
 
-            for (int i = 0; i < p_String.Length; i++)
+            for (int i = 0; i < mString.Length; i++)
             {
                 //Border border1 = new Border();
                 //border1.Margin = new Thickness(mnColumnSpacing, mnRowSpacing, 0, 0);
@@ -116,10 +137,10 @@ namespace BacodePrint
 
                 TextBlock block1 = new TextBlock();
 
-                block1.Text = p_String[i].ToString();
+                block1.Text = mString[i].ToString();
 
                 //判断当前字符是否是中文
-                if (IsChChar(p_String[i]))
+                if (IsChChar(mString[i]))
                 {
                     block1.FontSize = mnCHFontSize;
                 }
@@ -141,6 +162,11 @@ namespace BacodePrint
                 block1.VerticalAlignment = VerticalAlignment.Bottom;
                 itemCtrl.Items.Add(block1);
             }
+        }
+        public void SetString(string p_String)
+        {
+            mString = p_String;
+            SetString();
         }
 
         bool IsChChar(char p_char)
