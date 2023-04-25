@@ -128,18 +128,18 @@ namespace BacodePrint
         {
             for (int i = 0; i < 10; i++)
             {
-                PrintPage tPrintPage = new PrintPage();
-                tPrintPage.Width = 1131;
-                tPrintPage.Height = 479;
-                //tPrintPage.SetPrintBarcode("5381921979 0");
+                //PrintPage tPrintPage = new PrintPage();
+                //tPrintPage.Width = 1131;
+                //tPrintPage.Height = 479;
+                ////tPrintPage.SetPrintBarcode("5381921979 0");
 
-                string str = "5381921979 " + i.ToString();
-                tPrintPage.GetPrinter().SetPrintBarcode(str);
-                //tPrintPage.ShowDialog();
+                //string str = "5381921979 " + i.ToString();
+                //tPrintPage.GetPrinter().SetPrintBarcode(str);
+                ////tPrintPage.ShowDialog();
 
-                tPrintPage.PrintWindows();
+                //tPrintPage.PrintWindows();
 
-                tPrintPage.Close();
+                //tPrintPage.Close();
             }
         }
 

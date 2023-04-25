@@ -325,9 +325,14 @@ namespace BacodePrint
 
         private void buttonPrintTest_Click(object sender, RoutedEventArgs e)
         {
-            WindowTest tTest = new WindowTest();
-            tTest.ShowDialog();
+            //WindowTest tTest = new WindowTest();
+            //tTest.ShowDialog();
 
+            PrintPage printPage = new PrintPage();
+            printPage.Print("5381921979 0",mListText);
+            //printPage.ShowDialog();
+            printPage.PrintWindows();
+            printPage.Close();
         }
 
         private void buttonPrint_Click(object sender, RoutedEventArgs e)
@@ -342,7 +347,7 @@ namespace BacodePrint
             string str = "5381921979 0";
             UserControlPrint userControlPrint = tPrintPage.GetPrinter();
             //tPrintPage.ShowDialog();
-            userControlPrint.SetPrintBarcode(str);
+            
             tPrintPage.PrintWindows();
 
             tPrintPage.Close();

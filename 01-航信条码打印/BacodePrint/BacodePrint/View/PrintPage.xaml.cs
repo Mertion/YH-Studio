@@ -20,6 +20,8 @@ namespace BacodePrint
     public partial class PrintPage : Window
     {
         SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
+        Template mTemplate = new Template();
+        TemplateFundation mTemplateFundation = new TemplateFundation();
 
         public PrintPage()
         {
@@ -30,18 +32,32 @@ namespace BacodePrint
         {
             PrintDialog printDialog = new PrintDialog();
 
-            printDialog.PrintVisual(Print, "Test Print");
+            printDialog.PrintVisual(GridPrint, "Test Print");
         }
 
-        public void SetPrintBarcode(string strCode)
+        public void Print(string p_strBarcode, List<string> p_ListText)
         {
-            
+            if (p_ListText != null)
+            {
+                int nWidth = 0;
+                int nHeight = 0;
+                mTemplateFundation.LoadTemplateToCanvas(mTemplate, ref this.canvasCtrl);
+                mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvasCtrl, ref nWidth, ref nHeight);
+                mTemplateFundation.SetTemplateData(p_strBarcode, p_ListText, ref mTemplate);
 
+                this.canvasCtrl.Width = nWidth;
+                this.canvasCtrl.Height = nHeight;
+                
+                
+            }
+
+           
         }
 
         public UserControlPrint GetPrinter()
         {
-            return this.Printer;    
+            //return this.Printer;
+            return null;
         }
     }
 }
