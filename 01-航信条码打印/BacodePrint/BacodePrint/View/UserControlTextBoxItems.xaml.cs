@@ -62,7 +62,8 @@ namespace BacodePrint
             mnColumnSpacing = p_nColumnSpacing;
             mnRowSpacing = p_nRowSpacing;
 
-            SetSpacing();
+            //SetSpacing();
+            SetString();
         }
 
         public void SetFontWeight(int p_nFontWeight)
@@ -86,21 +87,6 @@ namespace BacodePrint
         public void SetFontSize()
         {
             SetString();
-            //for (int i = 0; i < itemCtrl.Items.Count; i++)
-            //{
-            //    //Border border1 = (Border)itemCtrl.Items[i];
-            //    TextBlock block1 = (TextBlock)itemCtrl.Items[i];
-
-            //    char c = block1.Text[0];
-            //    if (IsChChar(c))
-            //    {
-            //        block1.FontSize = mnCHFontSize;
-            //    }
-            //    else
-            //    {
-            //        block1.FontSize = mnENFontSize;
-            //    }
-            //}
         }
 
         public void SetFontSize(int p_nCHFontSize,int p_nENFontSize)
@@ -127,17 +113,7 @@ namespace BacodePrint
 
             for (int i = 0; i < mString.Length; i++)
             {
-                //Border border1 = new Border();
-                //border1.Margin = new Thickness(mnColumnSpacing, mnRowSpacing, 0, 0);
-                //ContentPresenter contentPresenter1 = new ContentPresenter();
-                //contentPresenter1.Content = p_String[i];
-                //border1.Child = contentPresenter1;
-                //border1.VerticalAlignment = VerticalAlignment.Bottom;
-                //itemCtrl.Items.Add(border1);
-
                 TextBlock block1 = new TextBlock();
-
-                block1.Text = mString[i].ToString();
 
                 //判断当前字符是否是中文
                 if (IsChChar(mString[i]))
@@ -148,6 +124,7 @@ namespace BacodePrint
                 {
                     block1.FontSize = mnENFontSize;
                 }
+
                 block1.FontFamily = itemCtrl.FontFamily;
                 //是否加粗
                 if (mnIsFontWeight == 1)
@@ -159,7 +136,11 @@ namespace BacodePrint
                     block1.FontWeight = FontWeights.Normal;
                 }
 
+                block1.Margin = new Thickness(mnColumnSpacing, mnRowSpacing, 0, 0);
+                block1.Text = mString[i].ToString();
+
                 block1.VerticalAlignment = VerticalAlignment.Bottom;
+
                 itemCtrl.Items.Add(block1);
             }
         }

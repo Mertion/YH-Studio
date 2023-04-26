@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -54,7 +55,7 @@ namespace BacodePrint
 
                 this.canvasCtrl.Width = nWidth;
                 this.canvasCtrl.Height = nHeight;
-                
+                GridPrint.Margin = new Thickness(500, 300, 0, 0);
                 this.Width = nWidth+100;
                 this.Height = nHeight+100;
             }
@@ -64,6 +65,9 @@ namespace BacodePrint
         {
             if (printDialog.ShowDialog() == true)
             {
+                //横向-Landscape;、纵向-Portrait
+                //printDialog.PrintTicket.PageOrientation = PageOrientation.Landscape;
+                
                 bIsPrinterReady = true;
             }
 

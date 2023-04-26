@@ -270,7 +270,7 @@ namespace BacodePrint
             {
                 UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
                 UserControlTextBoxItems.mnColumnSpacing = p_nWordSpacing;
-                UserControlTextBoxItems.SetSpacing();
+                UserControlTextBoxItems.SetString();
             }
         }
 
@@ -278,7 +278,9 @@ namespace BacodePrint
         {
             UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[0];
             UserControlTextBoxItems.mnColumnSpacing = p_nWordSpacing;
-            UserControlTextBoxItems.SetSpacing();
+            UserControlTextBoxItems.mnRowSpacing = p_nWordSpacing;
+            //UserControlTextBoxItems.SetSpacing();
+            UserControlTextBoxItems.SetString();
         }
 
         public void SetRowWordSpacing(ref Template p_Template, int p_nRowWordSpacing)
@@ -287,7 +289,7 @@ namespace BacodePrint
             {
                 UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
                 UserControlTextBoxItems.mnRowSpacing = p_nRowWordSpacing;
-                UserControlTextBoxItems.SetSpacing();
+                UserControlTextBoxItems.SetString();
             }
         }
 
