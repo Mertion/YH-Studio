@@ -23,6 +23,8 @@ namespace BacodePrint
         Template mTemplate = new Template();
         TemplateFundation mTemplateFundation = new TemplateFundation();
 
+        PrintDialog printDialog = new PrintDialog();
+        bool bIsPrinterReady = false;
         public PrintPage()
         {
             InitializeComponent();
@@ -30,9 +32,14 @@ namespace BacodePrint
 
         public void PrintWindows()
         {
-            PrintDialog printDialog = new PrintDialog();
-
-            printDialog.PrintVisual(GridPrint, "Test Print");
+            if (bIsPrinterReady)
+            {
+                printDialog.PrintVisual(canvasCtrl, "Print");
+            }
+            else
+            {
+                MessageBox.Show("请选择打印机！");
+            }
         }
 
         public void Print(string p_strBarcode, List<string> p_ListText)
@@ -48,10 +55,19 @@ namespace BacodePrint
                 this.canvasCtrl.Width = nWidth;
                 this.canvasCtrl.Height = nHeight;
                 
-                
+                this.Width = nWidth+100;
+                this.Height = nHeight+100;
+            }
+        }
+
+        public bool ShowPrintDialog()
+        {
+            if (printDialog.ShowDialog() == true)
+            {
+                bIsPrinterReady = true;
             }
 
-           
+            return bIsPrinterReady;
         }
 
         public UserControlPrint GetPrinter()

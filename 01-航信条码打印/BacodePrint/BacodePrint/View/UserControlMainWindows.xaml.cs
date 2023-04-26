@@ -34,6 +34,8 @@ namespace BacodePrint
     /// </summary>
     public partial class UserControlMainWindows : UserControl
     {
+        
+
         //字体列表
         private ObservableCollection<FontItem> fontItemList = new ObservableCollection<FontItem>();
 
@@ -328,29 +330,27 @@ namespace BacodePrint
             //WindowTest tTest = new WindowTest();
             //tTest.ShowDialog();
 
+            //打印窗体
             PrintPage printPage = new PrintPage();
-            printPage.Print("5381921979 0",mListText);
-            //printPage.ShowDialog();
-            printPage.PrintWindows();
+
+            printPage.Print("5381921979 0", mListText);
+
+            if (printPage.ShowPrintDialog())
+            {
+
+                printPage.Show();
+                printPage.PrintWindows();
+
+                printPage.Hide();
+            }
+
             printPage.Close();
+
         }
 
         private void buttonPrint_Click(object sender, RoutedEventArgs e)
         {
-            //Printer.SetPrintBarcode("5381921979 0");
-
-            PrintPage tPrintPage = new PrintPage();
-            tPrintPage.Width = 1131;
-            tPrintPage.Height = 479;
-            //tPrintPage.SetPrintBarcode("5381921979 0");
-
-            string str = "5381921979 0";
-            UserControlPrint userControlPrint = tPrintPage.GetPrinter();
-            //tPrintPage.ShowDialog();
-            
-            tPrintPage.PrintWindows();
-
-            tPrintPage.Close();
+           
         }
 
         private void outsidewrapper_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -692,59 +692,6 @@ namespace BacodePrint
             mTemplateFundation.SetGeneralFont(ref mTemplate, FontComboxOrderNumber.Text);
         }
 
-        //设置常规字体大小
-        
-
-        //设置英文字体大小
-        private void FontSizeNumber_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            
-        }
-
-        //设置序号大小
-        private void FontSizeOrderNumber_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            
-        }
-
-        //常规字距
-        private void FontWordSpacing_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            
-        }
-
-        //行距
-        private void RowWordSpacing_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            
-        }
-
-        //序号字距
-        private void FontWordSpacingOrderNumber_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            
-        }
-
-        private void CheckBoldFont_Checked(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void CheckBoldFontOrderNumber_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CheckPrintOrderNumber_Checked(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void CheckPrintBarcode_Checked(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void CheckPrintBarcode_Click(object sender, RoutedEventArgs e)
         {
             if ((bool)CheckPrintBarcode.IsChecked)
@@ -830,6 +777,11 @@ namespace BacodePrint
         private void RowWordSpacing_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             mTemplateFundation.SetRowWordSpacing(ref mTemplate, Convert.ToInt32(RowWordSpacing.Text));
+        }
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 

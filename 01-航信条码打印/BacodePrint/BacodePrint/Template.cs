@@ -40,6 +40,7 @@ namespace BacodePrint
         //加载模板控件到画布
         public void LoadTemplateToCanvas(Template p_Template, ref Canvas p_Canvas)
         {
+            //p_Canvas.Children.Clear();
             System.Windows.Controls.Image tImage = p_Template.mImageBarcode;
             p_Canvas.Children.Add(tImage);
 
