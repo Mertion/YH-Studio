@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BacodePrint.View;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing.Text;
@@ -648,6 +649,8 @@ namespace BacodePrint
 
         private void buttonLoadFile_Click(object sender, RoutedEventArgs e)
         {
+            WindowExcel windowExcel = new WindowExcel();
+            windowExcel.ShowDialog();
 
         }
 
