@@ -18,6 +18,8 @@ using BacodePrint.Fundation;
 using System.Data;
 using System.Windows.Controls.Primitives;
 using System.Diagnostics;
+using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace BacodePrint.View
 {
@@ -25,6 +27,47 @@ namespace BacodePrint.View
     public class Itinerary
     {
         public List<string> CaptionList { get; set; } = new List<string>();
+        public bool bCheck { get; set; } = false;
+        public string Caption_00 { get; set; } = "";
+        public string Caption_01 { get; set; } = "";
+        public string Caption_02 { get; set; } = ""; 
+        public string Caption_03 { get; set; } = "";
+        public string Caption_04 { get; set; } = "";
+        public string Caption_05 { get; set; } = "";
+        public string Caption_06 { get; set; } = "";
+        public string Caption_07 { get; set; } = "";
+        public string Caption_08 { get; set; } = "";
+        public string Caption_09 { get; set; } = "";
+        public string Caption_10 { get; set; } = "";
+        public string Caption_11 { get; set; } = "";
+        public string Caption_12 { get; set; } = "";
+        public string Caption_13 { get; set; } = "";
+        public string Caption_14 { get; set; } = "";
+        public string Caption_15 { get; set; } = "";
+        public string Caption_16 { get; set; } = "";
+        public string Caption_17 { get; set; } = "";
+        public string Caption_18 { get; set; } = "";
+        public string Caption_19 { get; set; } = "";
+        public string Caption_20 { get; set; } = "";
+        public string Caption_21 { get; set; } = "";
+        public string Caption_22 { get; set; } = "";
+        public string Caption_23 { get; set; } = "";
+        public string Caption_24 { get; set; } = "";
+        public string Caption_25 { get; set; } = "";
+        public string Caption_26 { get; set; } = "";
+        public string Caption_27 { get; set; } = "";
+        public string Caption_28 { get; set; } = "";
+        public string Caption_29 { get; set; } = "";
+        public string Caption_30 { get; set; } = "";
+        public string Caption_31 { get; set; } = "";
+        public string Caption_32 { get; set; } = "";
+        public string Caption_33 { get; set; } = "";
+        public string Caption_34 { get; set; } = "";
+        //public string Caption_00 { get; set; } = "";
+        //public string Caption_00 { get; set; } = "";
+        //public string Caption_00 { get; set; } = "";
+        //public string Caption_00 { get; set; } = "";
+        //public string Caption_00 { get; set; } = "";
     }
 
     /// <summary>
@@ -32,16 +75,15 @@ namespace BacodePrint.View
     /// </summary>
     public partial class WindowExcel : Window
     {
-        DataTable dt;
-        List<Itinerary> itineraries = new List<Itinerary>();
+        //行程单列表
+        //List<Itinerary> mItineraries = new List<Itinerary>();
+        ObservableCollection<Itinerary> mItineraries = new ObservableCollection<Itinerary>();
         public WindowExcel()
         {
             InitializeComponent();
 
             ReadDataFromExcel();
         }
-
-        
 
         //读Excel数据
         void ReadDataFromExcel()
@@ -66,9 +108,14 @@ namespace BacodePrint.View
                 //ExcelHelper excelHelper = new ExcelHelper(@"I:\人员信息表.xlsx");
                 ExcelHelper excelHelper = new ExcelHelper(openFileDialog.FileName);
                 //读取数据
-                dt = excelHelper.ExcelToDataTable("MySheet", true);
+                //dt = excelHelper.ExcelToDataTable("MySheet", true);
+                excelHelper.GetExcelData("MySheet", true,ref mItineraries);
 
-                gridItineraryList.ItemsSource = dt.DefaultView;
+                //gridItineraryList.ItemsSource = dt.DefaultView;
+
+                //gridItineraryList.DataContext = mItineraries;
+                gridItineraryList.ItemsSource = mItineraries;
+
                 //foreach (DataRow dr in dt.Rows)
                 //{
                 //    Itinerary itinerary = new Itinerary();
@@ -88,7 +135,7 @@ namespace BacodePrint.View
         void WrtieDataToExcel()
         {
             ExcelHelper excelHelper = new ExcelHelper(@"I:\写入人员信息表.xlsx");
-            excelHelper.DataTableToExcel(dt, "MySheet", true);
+            //excelHelper.DataTableToExcel(dt, "MySheet", true);
         }
 
         private void CheckBox_Click_1(object sender, RoutedEventArgs e)
@@ -114,8 +161,70 @@ namespace BacodePrint.View
 
         }
 
-        
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            if (checkBox != null)
+            {
+                var cntr = gridItineraryList.ItemContainerGenerator.ContainerFromIndex(gridItineraryList.SelectedIndex); //这里是拿到所选中行
+                Itinerary selectItem = (Itinerary)(cntr as DataGridRow).DataContext; //这里是把选中行转换为对象,进而拿到CheckBox中绑定的名字
 
+                foreach (var vItem in mItineraries)
+                {
+
+                    //selectItem.bCheck = false; //这里是拿到MyList类中的isEnable属性 即上面 xmal中 Checkbox中绑定的变量
+
+                    
+                }
+            }
+        }
+
+        bool mbSellectAll = false;
+        private void buttonSelectAll_Click(object sender, RoutedEventArgs e)
+        {
+            if (!mbSellectAll)
+            {
+                foreach (Itinerary item in mItineraries)
+                {
+                    item.bCheck = true;
+                }
+                mbSellectAll = true;
+            }
+            else
+            {
+                foreach (Itinerary item in mItineraries)
+                {
+                    item.bCheck = false;
+                }
+                mbSellectAll = false;
+            }
+
+            gridItineraryList.ItemsSource = null;
+            gridItineraryList.ItemsSource = mItineraries;
+        }
+
+        private void buttonSelectInvert_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Itinerary item in mItineraries)
+            {
+                if (item.bCheck)
+                {
+                    item.bCheck = false;
+                }
+                else
+                {
+                    item.bCheck = true;
+                }
+            }
+
+            gridItineraryList.ItemsSource = null;
+            gridItineraryList.ItemsSource = mItineraries;
+        }
+
+        private void buttonPrint_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 

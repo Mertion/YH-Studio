@@ -5,65 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BacodePrint.View"
         mc:Ignorable="d"
-        Title="WindowExcel" Height="450" Width="800">
+        Title="行程单列表" Height="650" Width="1600" WindowStartupLocation="CenterScreen">
     <Grid>
-        <!--<DataGrid x:Name="gridItineraryList" MaxHeight="300" Height="250" MinHeight="180"  IsReadOnly="False" 
-                          AutoGenerateColumns="False" Background="White" 
-                          CanUserAddRows="False"
-                          CanUserResizeColumns="False" CanUserResizeRows="False" 
-                          SelectionMode="Extended" CanUserReorderColumns="False" 
-                               ScrollViewer.VerticalScrollBarVisibility="Visible"
-                              ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                          AlternationCount="2"  
-                  Margin="5.6,25,7.2,0" VerticalAlignment="Top" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="100"/>
+            <RowDefinition/>
+            <RowDefinition Height ="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="200 "/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="1" Text="行程单列表" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+        
+        <DataGrid Grid.Row="1" x:Name="gridItineraryList"  DataContext="{Binding Path=mItineraries}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
-                <DataGridTemplateColumn  Width="55" Header="序号"  >
+                <!--<DataGridCheckBoxColumn Header=" " Binding="{Binding bCheck}"></DataGridCheckBoxColumn>-->
+
+                <!--这里是具体使用Chekbox-->
+                <DataGridTemplateColumn Header=" " Width="20" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DataGridRow}}, Path=Header}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <CheckBox HorizontalAlignment="Center" Click="CheckBox_Click" IsChecked="{Binding bCheck ,UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="药品ID" Visibility="Collapsed" Binding="{Binding DrugID}" IsReadOnly="True" />
-                <DataGridTextColumn Header="药品名" Binding="{Binding DrugName}" IsReadOnly="True" />
-                <DataGridTextColumn Header="数量" Binding="{Binding count}" Width="50" IsReadOnly="False"/>
-                <DataGridTextColumn Header="单位" Binding="{Binding DrugUnitName}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="零售价" Binding="{Binding RetailPrice}" Width="60" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridTextColumn Header="零售金额" Binding="{Binding RetailMoney}"  IsReadOnly="True"/>
-                <DataGridTextColumn Header="药品编号" Binding="{Binding DrugCode}"  IsReadOnly="True"/>
-                <DataGridTextColumn Header="规格" Binding="{Binding Specification}" IsReadOnly="True" />
-                <DataGridTextColumn Header="库存数" Binding="{Binding InventoryCount}" Width="80" IsReadOnly="True"/>
-                <DataGridTextColumn Header="批号" Binding="{Binding Manufacturers}" Width="80" IsReadOnly="False" />
+
+                <DataGridTextColumn Header="序号" Width="40" Binding="{Binding Caption_00}"></DataGridTextColumn>
+                <DataGridTextColumn Header="印刷序号" Width="100" Binding="{Binding Caption_01}"></DataGridTextColumn>
+                <DataGridTextColumn Header="姓名" Width="80" Binding="{Binding Caption_02}"></DataGridTextColumn>
+                <DataGridTextColumn Header="证件号" Width="100" Binding="{Binding Caption_03}"></DataGridTextColumn>
+                <DataGridTextColumn Header="签注" Width="100" Binding="{Binding Caption_04}"></DataGridTextColumn>
+                <DataGridTextColumn Header="起飞航站楼" Width="100" Binding="{Binding Caption_05}"></DataGridTextColumn>
+                <DataGridTextColumn Header="起飞地" Width="100" Binding="{Binding Caption_06}"></DataGridTextColumn>
+                <DataGridTextColumn Header="到达航站楼" Width="100" Binding="{Binding Caption_07}"></DataGridTextColumn>
+                <DataGridTextColumn Header="承运人" Width="100" Binding="{Binding Caption_08}"></DataGridTextColumn>
+                <DataGridTextColumn Header="航班号1" Width="100" Binding="{Binding Caption_09}"></DataGridTextColumn>
+                <DataGridTextColumn Header="航班号2" Width="100" Binding="{Binding Caption_10}"></DataGridTextColumn>
+                <DataGridTextColumn Header="座位等级" Width="100" Binding="{Binding Caption_11}"></DataGridTextColumn>
+                <DataGridTextColumn Header="日期" Width="100" Binding="{Binding Caption_12}"></DataGridTextColumn>
+                <DataGridTextColumn Header="时间" Width="100" Binding="{Binding Caption_13}"></DataGridTextColumn>
+                <DataGridTextColumn Header="客票级别" Width="100" Binding="{Binding Caption_14}"></DataGridTextColumn>
+                <DataGridTextColumn Header="客票生效日期" Width="100" Binding="{Binding Caption_15}"></DataGridTextColumn>
+                <DataGridTextColumn Header="客票截止日期" Width="100" Binding="{Binding Caption_16}"></DataGridTextColumn>
+                <DataGridTextColumn Header="免费行李" Width="100" Binding="{Binding Caption_17}"></DataGridTextColumn>
+                <DataGridTextColumn Header="票价字母" Width="100" Binding="{Binding Caption_18}"></DataGridTextColumn>
+                <DataGridTextColumn Header="票价数字" Width="100" Binding="{Binding Caption_19}"></DataGridTextColumn>
+                <DataGridTextColumn Header="基建字母" Width="100" Binding="{Binding Caption_20}"></DataGridTextColumn>
+                <DataGridTextColumn Header="基建数字" Width="100" Binding="{Binding Caption_21}"></DataGridTextColumn>
+                <DataGridTextColumn Header="燃油字母" Width="100" Binding="{Binding Caption_22}"></DataGridTextColumn>
+                <DataGridTextColumn Header="燃油数字" Width="100" Binding="{Binding Caption_23}"></DataGridTextColumn>
+                <DataGridTextColumn Header="税费字母" Width="100" Binding="{Binding Caption_24}"></DataGridTextColumn>
+                <DataGridTextColumn Header="税费数字" Width="100" Binding="{Binding Caption_25}"></DataGridTextColumn>
+                <DataGridTextColumn Header="合计字母" Width="100" Binding="{Binding Caption_26}"></DataGridTextColumn>
+                <DataGridTextColumn Header="合计数字" Width="100" Binding="{Binding Caption_27}"></DataGridTextColumn>
+                <DataGridTextColumn Header="票号" Width="100" Binding="{Binding Caption_28}"></DataGridTextColumn>
+                <DataGridTextColumn Header="验证码" Width="100" Binding="{Binding Caption_29}"></DataGridTextColumn>
+                <DataGridTextColumn Header="提示信息" Width="100" Binding="{Binding Caption_30}"></DataGridTextColumn>
+                <DataGridTextColumn Header="保险费" Width="100" Binding="{Binding Caption_31}"></DataGridTextColumn>
+                <DataGridTextColumn Header="销售单位代码" Width="100" Binding="{Binding Caption_32}"></DataGridTextColumn>
+                <DataGridTextColumn Header="填开单位" Width="100" Binding="{Binding Caption_33}"></DataGridTextColumn>
+                <DataGridTextColumn Header="填开日期" Width="100" Binding="{Binding Caption_34}"></DataGridTextColumn>
+
             </DataGrid.Columns>
-        </DataGrid>-->
-        <DataGrid x:Name="gridItineraryList">
-            <DataGrid.Columns>
-                <DataGridCheckBoxColumn>
-                </DataGridCheckBoxColumn>
-
-                <DataGridTextColumn Header="姓名" Width="100" Binding="{Binding CaptionList[0]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="姓名" Width="100" Binding="{Binding CaptionList[1]}"></DataGridTextColumn>
-            </DataGrid.Columns>
-
-            <!--<DataGrid.Columns>
-                <DataGridCheckBoxColumn>
-                    <DataGridCheckBoxColumn.Header>
-                        <CheckBox Click="CheckBox_Click_1"></CheckBox>
-                    </DataGridCheckBoxColumn.Header>
-                </DataGridCheckBoxColumn>
-
-                <DataGridTextColumn Header="姓名" Width="100" Binding="{Binding CaptionList[0]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="姓名" Width="100" Binding="{Binding CaptionList[1]}"></DataGridTextColumn>
-            </DataGrid.Columns>-->
-
-
-            <!--<DataGrid.Columns>
-                <DataGridCheckBoxColumn>
-                    <DataGridCheckBoxColumn.Header>
-                        <CheckBox x:Name="checkAll" Click="CheckBox_Click_1"></CheckBox>
-                    </DataGridCheckBoxColumn.Header>
-                </DataGridCheckBoxColumn>
-            </DataGrid.Columns>-->
         </DataGrid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="buttonSelectAll" Grid.Column="0" Content="全 选" FontSize="24" Width="100" Height="35" Click="buttonSelectAll_Click" />
+            <Button x:Name="buttonSelectInvert" Grid.Column="1" Content="反 选" FontSize="24" Width="100" Height="35" Click="buttonSelectInvert_Click" />
+            <Button x:Name="buttonPrint" Grid.Column="7" Content="打 印" FontSize="24" Width="100" Height="35" Click="buttonPrint_Click" />
+        </Grid>
     </Grid>
 </Window>
