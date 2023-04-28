@@ -163,20 +163,20 @@ namespace BacodePrint.View
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
-            CheckBox checkBox = sender as CheckBox;
-            if (checkBox != null)
-            {
-                var cntr = gridItineraryList.ItemContainerGenerator.ContainerFromIndex(gridItineraryList.SelectedIndex); //这里是拿到所选中行
-                Itinerary selectItem = (Itinerary)(cntr as DataGridRow).DataContext; //这里是把选中行转换为对象,进而拿到CheckBox中绑定的名字
+            //CheckBox checkBox = sender as CheckBox;
+            //if (checkBox != null)
+            //{
+            //    var cntr = gridItineraryList.ItemContainerGenerator.ContainerFromIndex(gridItineraryList.SelectedIndex); //这里是拿到所选中行
+            //    Itinerary selectItem = (Itinerary)(cntr as DataGridRow).DataContext; //这里是把选中行转换为对象,进而拿到CheckBox中绑定的名字
 
-                foreach (var vItem in mItineraries)
-                {
+            //    foreach (var vItem in mItineraries)
+            //    {
 
-                    //selectItem.bCheck = false; //这里是拿到MyList类中的isEnable属性 即上面 xmal中 Checkbox中绑定的变量
+            //        //selectItem.bCheck = false; //这里是拿到MyList类中的isEnable属性 即上面 xmal中 Checkbox中绑定的变量
 
                     
-                }
-            }
+            //    }
+            //}
         }
 
         bool mbSellectAll = false;
