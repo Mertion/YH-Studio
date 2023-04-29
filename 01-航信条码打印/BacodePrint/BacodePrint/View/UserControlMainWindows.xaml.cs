@@ -100,30 +100,139 @@ namespace BacodePrint
             mListText.Add(str);
             str = "PNR";
             mListText.Add(str);
+
             str = "起飞航站楼1|";
             mListText.Add(str);
-            str = "起飞地_自FROM|到达地_至1|至2|";
+            str = "起飞航站楼2|";
+            mListText.Add(str);
+            str = "起飞航站楼3|";
+            mListText.Add(str);
+            str = "起飞航站楼4|";
+            mListText.Add(str);
+            str = "起飞航站楼5|";
+
+            mListText.Add(str);
+            str = "起飞地_自FROM|";
+            mListText.Add(str);
+            str = "到达地_至1|";
+            mListText.Add(str);
+            str = "至2|";
+            mListText.Add(str);
+            str = "至3|";
+            mListText.Add(str);
+            str = "至4|";
+            
             mListText.Add(str);
             str = "到达航站楼1|";
             mListText.Add(str);
+            str = "到达航站楼2|";
+            mListText.Add(str);
+            str = "到达航站楼3|";
+            mListText.Add(str);
+            str = "到达航站楼4|";
+            mListText.Add(str);
+            str = "到达航站楼5|";
+            mListText.Add(str);
+
             str = "承运人1|";
             mListText.Add(str);
-            str = "航班号1|航班号2|航班";
+            str = "承运人2|";
             mListText.Add(str);
-            str = "座位等级1|等级2|等级3|等级4|等级5";
+            str = "承运人3|";
             mListText.Add(str);
-            str = "日期1|日期2|日期3|日期4|日期5";
+            str = "承运人4|";
             mListText.Add(str);
-            str = "时间1|时间2|时间3|时间4|时间5";
+            str = "承运人5|";
             mListText.Add(str);
-            str = "客票级别1|级别2|";
+
+            str = "航班号1|";
             mListText.Add(str);
-            str = "客票生效日期1|生效2|";
+            str = "航班号2|";
             mListText.Add(str);
-            str = "客票截止日期1|截止2|";
+            str = "航班号3|";
             mListText.Add(str);
-            str = "免费行李1|行李2|行李3|行李4|行李5";
+            str = "航班号4|";
             mListText.Add(str);
+            str = "航班号5|";
+            mListText.Add(str);
+
+            str = "座位等级1|";
+            mListText.Add(str);
+            str = "等级2|";
+            mListText.Add(str);
+            str = "等级3|";
+            mListText.Add(str);
+            str = "等级4|";
+            mListText.Add(str);
+            str = "等级5";
+            mListText.Add(str);
+
+            str = "日期1|";
+            mListText.Add(str);
+            str = "日期2|";
+            mListText.Add(str);
+            str = "日期3|";
+            mListText.Add(str);
+            str = "日期4|";
+            mListText.Add(str);
+            str = "日期5";
+            mListText.Add(str);
+
+            str = "时间1|";
+            mListText.Add(str);
+            str = "时间2|";
+            mListText.Add(str);
+            str = "时间3|";
+            mListText.Add(str);
+            str = "时间4|";
+            mListText.Add(str);
+            str = "时间5";
+            mListText.Add(str);
+
+            str = "客票级别1|";
+            mListText.Add(str);
+            str = "客票级别2|";
+            mListText.Add(str);
+            str = "客票级别3|";
+            mListText.Add(str);
+            str = "客票级别4|";
+            mListText.Add(str);
+            str = "客票级别5|";
+            mListText.Add(str);
+
+            str = "客票生效日期1|";
+            mListText.Add(str);
+            str = "生效2|";
+            mListText.Add(str);
+            str = "生效3|";
+            mListText.Add(str);
+            str = "生效4|";
+            mListText.Add(str);
+            str = "生效5|";
+            mListText.Add(str);
+
+            str = "客票截止日期1|";
+            mListText.Add(str);
+            str = "客票截止日期2|";
+            mListText.Add(str);
+            str = "客票截止日期3|";
+            mListText.Add(str);
+            str = "客票截止日期4|";
+            mListText.Add(str);
+            str = "客票截止日期5|";
+            mListText.Add(str);
+
+            str = "免费行李1|";
+            mListText.Add(str);
+            str = "行李2|";
+            mListText.Add(str);
+            str = "行李3|";
+            mListText.Add(str);
+            str = "行李4|";
+            mListText.Add(str);
+            str = "行李5|";
+            mListText.Add(str);
+
             str = "票价字母";
             mListText.Add(str);
             str = "票价数字";
@@ -152,8 +261,11 @@ namespace BacodePrint
             mListText.Add(str);
             str = "保险费";
             mListText.Add(str);
-            str = "销售单位代码1|代码2";
+            str = "销售单位代码1|";
             mListText.Add(str);
+            str = "销售单位代码2|";
+            mListText.Add(str);
+
             str = "填开单位";
             mListText.Add(str);
             str = "填开日期";

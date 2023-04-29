@@ -19,7 +19,7 @@ namespace BacodePrint
     {
 
         public List<UserControlTextBoxItems> listText { get; set; } = new List<UserControlTextBoxItems>();
-        public const int nListMaxCount = 34;
+        public const int nListMaxCount = 83;
 
         public System.Windows.Controls.Image mImageBarcode = null;
 
