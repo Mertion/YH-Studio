@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BacodePrint"
         mc:Ignorable="d"
-        Title="PrintPage" Height="477" Width="1130" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Title="PrintPage" Height="477" Width="1130" WindowStyle="None" WindowStartupLocation="CenterScreen" WindowState="Minimized">
     <Grid Name="GridPrint" Margin="0,0,0,0">
         <Canvas Name="canvasCtrl" >
             <Canvas.RenderTransform>

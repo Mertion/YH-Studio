@@ -29,9 +29,26 @@ namespace BacodePrint
         public PrintPage()
         {
             InitializeComponent();
+
+            initDilog();
         }
 
-        public void PrintWindows()
+        void initDilog()
+        {
+            int nWidth = 0;
+            int nHeight = 0;
+            mTemplateFundation.LoadTemplateToCanvas(mTemplate, ref this.canvasCtrl);
+            mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvasCtrl, ref nWidth, ref nHeight);
+            //mTemplateFundation.SetTemplateData(p_strBarcode, p_ListText, ref mTemplate);
+
+            this.canvasCtrl.Width = nWidth;
+            this.canvasCtrl.Height = nHeight;
+            GridPrint.Margin = new Thickness(500, 300, 0, 0);
+            this.Width = nWidth + 100;
+            this.Height = nHeight + 100;
+        }
+
+        public void Print()
         {
             if (bIsPrinterReady)
             {
@@ -43,21 +60,11 @@ namespace BacodePrint
             }
         }
 
-        public void Print(string p_strBarcode, List<string> p_ListText)
+        public void SetData(string p_strBarcode, List<string> p_ListText)
         {
             if (p_ListText != null)
             {
-                int nWidth = 0;
-                int nHeight = 0;
-                mTemplateFundation.LoadTemplateToCanvas(mTemplate, ref this.canvasCtrl);
-                mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvasCtrl, ref nWidth, ref nHeight);
                 mTemplateFundation.SetTemplateData(p_strBarcode, p_ListText, ref mTemplate);
-
-                this.canvasCtrl.Width = nWidth;
-                this.canvasCtrl.Height = nHeight;
-                GridPrint.Margin = new Thickness(500, 300, 0, 0);
-                this.Width = nWidth+100;
-                this.Height = nHeight+100;
             }
         }
 

@@ -28,41 +28,41 @@ namespace BacodePrint.View
     {
         public List<string> CaptionList { get; set; } = new List<string>();
         public bool bCheck { get; set; } = false;
-        public string Caption_00 { get; set; } = "";
-        public string Caption_01 { get; set; } = "";
-        public string Caption_02 { get; set; } = ""; 
-        public string Caption_03 { get; set; } = "";
-        public string Caption_04 { get; set; } = "";
-        public string Caption_05 { get; set; } = "";
-        public string Caption_06 { get; set; } = "";
-        public string Caption_07 { get; set; } = "";
-        public string Caption_08 { get; set; } = "";
-        public string Caption_09 { get; set; } = "";
-        public string Caption_10 { get; set; } = "";
-        public string Caption_11 { get; set; } = "";
-        public string Caption_12 { get; set; } = "";
-        public string Caption_13 { get; set; } = "";
-        public string Caption_14 { get; set; } = "";
-        public string Caption_15 { get; set; } = "";
-        public string Caption_16 { get; set; } = "";
-        public string Caption_17 { get; set; } = "";
-        public string Caption_18 { get; set; } = "";
-        public string Caption_19 { get; set; } = "";
-        public string Caption_20 { get; set; } = "";
-        public string Caption_21 { get; set; } = "";
-        public string Caption_22 { get; set; } = "";
-        public string Caption_23 { get; set; } = "";
-        public string Caption_24 { get; set; } = "";
-        public string Caption_25 { get; set; } = "";
-        public string Caption_26 { get; set; } = "";
-        public string Caption_27 { get; set; } = "";
-        public string Caption_28 { get; set; } = "";
-        public string Caption_29 { get; set; } = "";
-        public string Caption_30 { get; set; } = "";
-        public string Caption_31 { get; set; } = "";
-        public string Caption_32 { get; set; } = "";
-        public string Caption_33 { get; set; } = "";
-        public string Caption_34 { get; set; } = "";
+        //public string Caption_00 { get; set; } = "";
+        //public string Caption_01 { get; set; } = "";
+        //public string Caption_02 { get; set; } = ""; 
+        //public string Caption_03 { get; set; } = "";
+        //public string Caption_04 { get; set; } = "";
+        //public string Caption_05 { get; set; } = "";
+        //public string Caption_06 { get; set; } = "";
+        //public string Caption_07 { get; set; } = "";
+        //public string Caption_08 { get; set; } = "";
+        //public string Caption_09 { get; set; } = "";
+        //public string Caption_10 { get; set; } = "";
+        //public string Caption_11 { get; set; } = "";
+        //public string Caption_12 { get; set; } = "";
+        //public string Caption_13 { get; set; } = "";
+        //public string Caption_14 { get; set; } = "";
+        //public string Caption_15 { get; set; } = "";
+        //public string Caption_16 { get; set; } = "";
+        //public string Caption_17 { get; set; } = "";
+        //public string Caption_18 { get; set; } = "";
+        //public string Caption_19 { get; set; } = "";
+        //public string Caption_20 { get; set; } = "";
+        //public string Caption_21 { get; set; } = "";
+        //public string Caption_22 { get; set; } = "";
+        //public string Caption_23 { get; set; } = "";
+        //public string Caption_24 { get; set; } = "";
+        //public string Caption_25 { get; set; } = "";
+        //public string Caption_26 { get; set; } = "";
+        //public string Caption_27 { get; set; } = "";
+        //public string Caption_28 { get; set; } = "";
+        //public string Caption_29 { get; set; } = "";
+        //public string Caption_30 { get; set; } = "";
+        //public string Caption_31 { get; set; } = "";
+        //public string Caption_32 { get; set; } = "";
+        //public string Caption_33 { get; set; } = "";
+        //public string Caption_34 { get; set; } = "";
         //public string Caption_00 { get; set; } = "";
         //public string Caption_00 { get; set; } = "";
         //public string Caption_00 { get; set; } = "";
@@ -82,53 +82,32 @@ namespace BacodePrint.View
         {
             InitializeComponent();
 
-            ReadDataFromExcel();
+            //ReadDataFromExcel();
         }
 
         //读Excel数据
-        void ReadDataFromExcel()
+        public int ReadDataFromExcel()
         {
-            //SaveFileDialog saveFileDialog = new SaveFileDialog();
-            //    saveFileDialog.Title = "选择要保存的路径";
-            //    saveFileDialog.Filter = "Excel文件|*.xls|所有文件|*.*";
-            //    saveFileDialog.FileName = string.Empty;
-            //    saveFileDialog.FilterIndex = 1;
-            //    saveFileDialog.RestoreDirectory = true;
-            //    saveFileDialog.DefaultExt = "xls";
-            //    saveFileDialog.CreatePrompt = true;
-
-            //    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-
+            int nRet = 0;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel文件|*.xls|所有文件|*.*";
 
             if((bool)openFileDialog.ShowDialog())
             {
                 openFileDialog.FileName.ToString();
-                //ExcelHelper excelHelper = new ExcelHelper(@"I:\人员信息表.xlsx");
                 ExcelHelper excelHelper = new ExcelHelper(openFileDialog.FileName);
                 //读取数据
-                //dt = excelHelper.ExcelToDataTable("MySheet", true);
-                excelHelper.GetExcelData("MySheet", true,ref mItineraries);
+                excelHelper.GetExcelData("MySheet", true, ref mItineraries);
 
-                //gridItineraryList.ItemsSource = dt.DefaultView;
 
-                //gridItineraryList.DataContext = mItineraries;
                 gridItineraryList.ItemsSource = mItineraries;
-
-                //foreach (DataRow dr in dt.Rows)
-                //{
-                //    Itinerary itinerary = new Itinerary();
-                //    itinerary.CaptionList.Add(dr[0].ToString());
-                //    itinerary.CaptionList.Add(dr[1].ToString());
-
-                //    itineraries.Add(itinerary);
-                //}
-
-                //this.gridItineraryList.ItemsSource = null;
-                //this.gridItineraryList.ItemsSource = itineraries;
+            }
+            else
+            {
+                nRet = 1;
             }
 
+            return nRet;
         }
 
         //写Excel数据
@@ -179,6 +158,7 @@ namespace BacodePrint.View
             //}
         }
 
+        //全选
         bool mbSellectAll = false;
         private void buttonSelectAll_Click(object sender, RoutedEventArgs e)
         {
@@ -203,6 +183,7 @@ namespace BacodePrint.View
             gridItineraryList.ItemsSource = mItineraries;
         }
 
+        //反选
         private void buttonSelectInvert_Click(object sender, RoutedEventArgs e)
         {
             foreach (Itinerary item in mItineraries)
@@ -223,7 +204,25 @@ namespace BacodePrint.View
 
         private void buttonPrint_Click(object sender, RoutedEventArgs e)
         {
+            //打印窗体
+            PrintPage printPage = new PrintPage();
 
+            if (printPage.ShowPrintDialog())
+            {
+                foreach (Itinerary item in mItineraries)
+                {
+                    if (item.bCheck)
+                    {
+                        printPage.Show();
+                        printPage.SetData(item.CaptionList[0], item.CaptionList);
+                        printPage.Print();
+                        //printPage.Hide();
+                    }
+
+                }
+            }
+
+            printPage.Close();
         }
     }
 

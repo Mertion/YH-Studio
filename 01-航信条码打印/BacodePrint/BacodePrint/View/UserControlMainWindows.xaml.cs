@@ -334,15 +334,15 @@ namespace BacodePrint
             //打印窗体
             PrintPage printPage = new PrintPage();
 
-            printPage.Print("5381921979 0", mListText);
+            printPage.SetData("5381921979 0", mListText);
 
             if (printPage.ShowPrintDialog())
             {
 
                 printPage.Show();
-                printPage.PrintWindows();
+                printPage.Print();
 
-                printPage.Hide();
+                //printPage.Hide();
             }
 
             printPage.Close();
@@ -650,6 +650,7 @@ namespace BacodePrint
         private void buttonLoadFile_Click(object sender, RoutedEventArgs e)
         {
             WindowExcel windowExcel = new WindowExcel();
+            windowExcel.ReadDataFromExcel();
             windowExcel.ShowDialog();
 
         }

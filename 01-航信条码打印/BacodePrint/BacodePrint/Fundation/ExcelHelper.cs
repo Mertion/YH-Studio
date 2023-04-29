@@ -37,11 +37,9 @@ namespace BacodePrint.Fundation
         /// <returns>返回的DataTable</returns>
         public void GetExcelData(string sheetName, bool isFirstRowColumn, ref ObservableCollection<Itinerary> p_Itineraries)
         {
-            ISheet sheet = null;
-            int startRow = 0;
-
             try
             {
+                ISheet sheet = null;
                 fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 workbook = WorkbookFactory.Create(fs);
 
@@ -68,6 +66,8 @@ namespace BacodePrint.Fundation
                     //判断数据是否够多
                     if (cellCount >= 34)
                     {
+                        int startRow = 0;
+
                         if (isFirstRowColumn)
                         {
                             startRow = sheet.FirstRowNum + 1;//得到项标题后
@@ -84,41 +84,49 @@ namespace BacodePrint.Fundation
 
                             Itinerary itinerary = new Itinerary();
                             itinerary.bCheck = false;
-                            itinerary.Caption_00 = i.ToString();
-                            itinerary.Caption_01 = row.GetCell(1) != null ? row.GetCell(1).ToString() : "";
-                            itinerary.Caption_02 = row.GetCell(2) != null ? row.GetCell(2).ToString() : "";
-                            itinerary.Caption_03 = row.GetCell(3) != null ? row.GetCell(3).ToString() : "";
-                            itinerary.Caption_04 = row.GetCell(4) != null ? row.GetCell(4).ToString() : "";
-                            itinerary.Caption_05 = row.GetCell(5) != null ? row.GetCell(5).ToString() : "";
-                            itinerary.Caption_06 = row.GetCell(6) != null ? row.GetCell(6).ToString() : "";
-                            itinerary.Caption_07 = row.GetCell(7) != null ? row.GetCell(7).ToString() : "";
-                            itinerary.Caption_08 = row.GetCell(8) != null ? row.GetCell(8).ToString() : "";
-                            itinerary.Caption_09 = row.GetCell(9) != null ? row.GetCell(9).ToString() : "";
-                            itinerary.Caption_10 = row.GetCell(10) != null ? row.GetCell(10).ToString() : "";
-                            itinerary.Caption_11 = row.GetCell(11) != null ? row.GetCell(11).ToString() : "";
-                            itinerary.Caption_12 = row.GetCell(12) != null ? row.GetCell(12).ToString() : "";
-                            itinerary.Caption_13 = row.GetCell(13) != null ? row.GetCell(13).ToString() : "";
-                            itinerary.Caption_14 = row.GetCell(14) != null ? row.GetCell(14).ToString() : "";
-                            itinerary.Caption_15 = row.GetCell(15) != null ? row.GetCell(15).ToString() : "";
-                            itinerary.Caption_16 = row.GetCell(16) != null ? row.GetCell(16).ToString() : "";
-                            itinerary.Caption_17 = row.GetCell(17) != null ? row.GetCell(17).ToString() : "";
-                            itinerary.Caption_18 = row.GetCell(18) != null ? row.GetCell(18).ToString() : "";
-                            itinerary.Caption_19 = row.GetCell(19) != null ? row.GetCell(19).ToString() : "";
-                            itinerary.Caption_20 = row.GetCell(20) != null ? row.GetCell(20).ToString() : "";
-                            itinerary.Caption_21 = row.GetCell(21) != null ? row.GetCell(21).ToString() : "";
-                            itinerary.Caption_22 = row.GetCell(22) != null ? row.GetCell(22).ToString() : "";
-                            itinerary.Caption_23 = row.GetCell(23) != null ? row.GetCell(23).ToString() : "";
-                            itinerary.Caption_24 = row.GetCell(24) != null ? row.GetCell(24).ToString() : "";
-                            itinerary.Caption_25 = row.GetCell(25) != null ? row.GetCell(25).ToString() : "";
-                            itinerary.Caption_26 = row.GetCell(26) != null ? row.GetCell(26).ToString() : "";
-                            itinerary.Caption_27 = row.GetCell(27) != null ? row.GetCell(27).ToString() : "";
-                            itinerary.Caption_28 = row.GetCell(28) != null ? row.GetCell(28).ToString() : "";
-                            itinerary.Caption_29 = row.GetCell(29) != null ? row.GetCell(29).ToString() : "";
-                            itinerary.Caption_30 = row.GetCell(30) != null ? row.GetCell(30).ToString() : "";
-                            itinerary.Caption_31 = row.GetCell(31) != null ? row.GetCell(31).ToString() : "";
-                            itinerary.Caption_32 = row.GetCell(32) != null ? row.GetCell(32).ToString() : "";
-                            itinerary.Caption_33 = row.GetCell(33) != null ? row.GetCell(33).ToString() : "";
-                            itinerary.Caption_34 = row.GetCell(34) != null ? row.GetCell(34).ToString() : "";
+                            //itinerary.Caption_00 = i.ToString();
+                            //itinerary.Caption_01 = row.GetCell(1) != null ? row.GetCell(1).ToString() : "";
+                            //itinerary.Caption_02 = row.GetCell(2) != null ? row.GetCell(2).ToString() : "";
+                            //itinerary.Caption_03 = row.GetCell(3) != null ? row.GetCell(3).ToString() : "";
+                            //itinerary.Caption_04 = row.GetCell(4) != null ? row.GetCell(4).ToString() : "";
+                            //itinerary.Caption_05 = row.GetCell(5) != null ? row.GetCell(5).ToString() : "";
+                            //itinerary.Caption_06 = row.GetCell(6) != null ? row.GetCell(6).ToString() : "";
+                            //itinerary.Caption_07 = row.GetCell(7) != null ? row.GetCell(7).ToString() : "";
+                            //itinerary.Caption_08 = row.GetCell(8) != null ? row.GetCell(8).ToString() : "";
+                            //itinerary.Caption_09 = row.GetCell(9) != null ? row.GetCell(9).ToString() : "";
+                            //itinerary.Caption_10 = row.GetCell(10) != null ? row.GetCell(10).ToString() : "";
+                            //itinerary.Caption_11 = row.GetCell(11) != null ? row.GetCell(11).ToString() : "";
+                            //itinerary.Caption_12 = row.GetCell(12) != null ? row.GetCell(12).ToString() : "";
+                            //itinerary.Caption_13 = row.GetCell(13) != null ? row.GetCell(13).ToString() : "";
+                            //itinerary.Caption_14 = row.GetCell(14) != null ? row.GetCell(14).ToString() : "";
+                            //itinerary.Caption_15 = row.GetCell(15) != null ? row.GetCell(15).ToString() : "";
+                            //itinerary.Caption_16 = row.GetCell(16) != null ? row.GetCell(16).ToString() : "";
+                            //itinerary.Caption_17 = row.GetCell(17) != null ? row.GetCell(17).ToString() : "";
+                            //itinerary.Caption_18 = row.GetCell(18) != null ? row.GetCell(18).ToString() : "";
+                            //itinerary.Caption_19 = row.GetCell(19) != null ? row.GetCell(19).ToString() : "";
+                            //itinerary.Caption_20 = row.GetCell(20) != null ? row.GetCell(20).ToString() : "";
+                            //itinerary.Caption_21 = row.GetCell(21) != null ? row.GetCell(21).ToString() : "";
+                            //itinerary.Caption_22 = row.GetCell(22) != null ? row.GetCell(22).ToString() : "";
+                            //itinerary.Caption_23 = row.GetCell(23) != null ? row.GetCell(23).ToString() : "";
+                            //itinerary.Caption_24 = row.GetCell(24) != null ? row.GetCell(24).ToString() : "";
+                            //itinerary.Caption_25 = row.GetCell(25) != null ? row.GetCell(25).ToString() : "";
+                            //itinerary.Caption_26 = row.GetCell(26) != null ? row.GetCell(26).ToString() : "";
+                            //itinerary.Caption_27 = row.GetCell(27) != null ? row.GetCell(27).ToString() : "";
+                            //itinerary.Caption_28 = row.GetCell(28) != null ? row.GetCell(28).ToString() : "";
+                            //itinerary.Caption_29 = row.GetCell(29) != null ? row.GetCell(29).ToString() : "";
+                            //itinerary.Caption_30 = row.GetCell(30) != null ? row.GetCell(30).ToString() : "";
+                            //itinerary.Caption_31 = row.GetCell(31) != null ? row.GetCell(31).ToString() : "";
+                            //itinerary.Caption_32 = row.GetCell(32) != null ? row.GetCell(32).ToString() : "";
+                            //itinerary.Caption_33 = row.GetCell(33) != null ? row.GetCell(33).ToString() : "";
+                            //itinerary.Caption_34 = row.GetCell(34) != null ? row.GetCell(34).ToString() : "";
+
+                            for (int j = 1; j < 35; j++)
+                            {
+                                string str = row.GetCell(j) != null ? row.GetCell(j).ToString() : "";
+                                itinerary.CaptionList.Add(str);
+                            }
+                            itinerary.CaptionList.Add(i.ToString());
+
                             p_Itineraries.Add(itinerary);
                         }
                     }
