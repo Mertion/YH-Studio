@@ -20,6 +20,7 @@ using System.Windows.Controls.Primitives;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Reflection.Emit;
 
 namespace BacodePrint.View
 {
@@ -214,7 +215,10 @@ namespace BacodePrint.View
                     if (item.bCheck)
                     {
                         printPage.Show();
-                        printPage.SetData(item.CaptionList[0], item.CaptionList);
+
+                        List<string> tListTextPrint = new List<string>();
+                        ExcelListToTemplateList(item.CaptionList, ref tListTextPrint);
+                        printPage.SetData(item.CaptionList[0], tListTextPrint);
                         printPage.Print();
                         //printPage.Hide();
                     }
@@ -223,6 +227,47 @@ namespace BacodePrint.View
             }
 
             printPage.Close();
+        }
+
+        private void ExcelListToTemplateList(List<string> pExcelList, ref List<string> pTemplateList)
+        {
+            const int const_nStep = 5;
+            for(int i = 0; i < 5; i++)
+            {
+                pTemplateList.Add(pExcelList[i]);
+            }
+
+            //起飞航站楼-免费行李
+            for(int i = 6; i < 18; i++)
+            {
+                SplitStringtolist(pExcelList[i], ref pTemplateList, const_nStep);
+            }
+
+            for (int i = 18; i < 32; i++)
+            {
+                pTemplateList.Add(pExcelList[i]);
+            }
+            SplitStringtolist(pExcelList[32], ref pTemplateList, const_nStep);
+            SplitStringtolist(pExcelList[33], ref pTemplateList, const_nStep);
+            pTemplateList.Add(pExcelList[34]);
+            pTemplateList.Add(pExcelList[35]);
+        }
+
+        private void SplitStringtolist(String pStr,ref List<string> pTemplateList,int nStep)
+        {
+            int nCount= 0;
+            string[] words = pStr.Split('|');
+            
+            foreach (var word in words)
+            {
+                pTemplateList.Add((string)word);
+                nCount++;
+            }
+
+            for(int i = nCount; i<nStep;i++)
+            {
+                pTemplateList.Add("");
+            }
         }
     }
 
