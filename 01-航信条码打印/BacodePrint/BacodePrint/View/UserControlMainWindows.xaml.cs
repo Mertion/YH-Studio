@@ -325,6 +325,24 @@ namespace BacodePrint
 
             str = tFilesINI.INIRead("Config", "PrintBarcode", mSystemInfo.mstrConfigFilePath);
             CheckPrintBarcode.IsChecked = str != "0";
+
+            if ((bool)CheckPrintOrderNumber.IsChecked)
+            {
+                mTemplate.listText[0].Visibility = Visibility.Visible;
+            }
+            else
+            {
+                mTemplate.listText[0].Visibility = Visibility.Hidden;
+            }
+
+            if ((bool)CheckPrintBarcode.IsChecked)
+            {
+                mTemplate.mImageBarcode.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                mTemplate.mImageBarcode.Visibility = Visibility.Hidden;
+            }
         }
 
         void SaveConfig()

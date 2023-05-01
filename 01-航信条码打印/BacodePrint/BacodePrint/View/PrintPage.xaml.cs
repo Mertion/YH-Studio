@@ -35,6 +35,8 @@ namespace BacodePrint
 
         void initDilog()
         {
+            IniFile tFilesINI = new IniFile();
+            string str = "";
             int nWidth = 0;
             int nHeight = 0;
             mTemplateFundation.LoadTemplateToCanvas(mTemplate, ref this.canvasCtrl);
@@ -46,6 +48,28 @@ namespace BacodePrint
             GridPrint.Margin = new Thickness(500, 300, 0, 0);
             this.Width = nWidth + 100;
             this.Height = nHeight + 100;
+
+            str = tFilesINI.INIRead("Config", "PrintNumber", mSystemInfo.mstrConfigFilePath);
+
+            if (str != "0")
+            {
+                mTemplate.listText[0].Visibility = Visibility.Visible;
+            }
+            else
+            {
+                mTemplate.listText[0].Visibility = Visibility.Hidden;
+            }
+
+            str = tFilesINI.INIRead("Config", "PrintBarcode", mSystemInfo.mstrConfigFilePath);
+
+            if (str != "0")
+            {
+                mTemplate.mImageBarcode.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                mTemplate.mImageBarcode.Visibility = Visibility.Hidden;
+            }
         }
 
         public void Print()
