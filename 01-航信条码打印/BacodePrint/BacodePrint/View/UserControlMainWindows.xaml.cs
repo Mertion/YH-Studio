@@ -35,7 +35,10 @@ namespace BacodePrint
     /// </summary>
     public partial class UserControlMainWindows : UserControl
     {
-        
+        //页面尺寸
+        const double const_dScale = 4.285714285714286;
+        int mWidth = 1800;
+        int mHeight = 900;
 
         //字体列表
         private ObservableCollection<FontItem> fontItemList = new ObservableCollection<FontItem>();
@@ -275,10 +278,13 @@ namespace BacodePrint
             mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvas1, ref nWidth, ref nHeight);
             mTemplateFundation.SetTemplateData("5381921979 0", mListText, ref mTemplate);
             mTemplateFundation.SetBorderThickness(ref mTemplate, 2);
-            this.canvas1.Width = nWidth;
-            this.canvas1.Height = nHeight;
-            PrintWidth.Text = nWidth.ToString();
-            PrintHeight.Text = nHeight.ToString();
+
+            mWidth = nWidth;
+            mHeight = nHeight;
+            this.canvas1.Width = mWidth;
+            this.canvas1.Height = mHeight;
+            PrintWidth.Text = ((int)(mWidth / const_dScale)).ToString();
+            PrintHeight.Text = ((int)(mHeight / const_dScale)).ToString();
 
             nLeft = ((int)this.DockPanelOutSide.Width - nWidth)/2;
             nTop = ((int)this.DockPanelOutSide.Height - nHeight)/2;
@@ -781,8 +787,11 @@ namespace BacodePrint
         {
             var c = canvas1 as FrameworkElement;
 
-            c.Width = Convert.ToInt32(PrintWidth.Text);
-            c.Height = Convert.ToInt32(PrintHeight.Text);
+            mWidth = (int)( Convert.ToInt32(PrintWidth.Text) * const_dScale);
+            mHeight = (int)(Convert.ToInt32(PrintHeight.Text) * const_dScale);
+
+            c.Width = Convert.ToInt32(mWidth);
+            c.Height = Convert.ToInt32(mHeight);
 
             int nLeft = (int)(this.DockPanelOutSide.RenderSize.Width - c.Width) / 2;
             int nTop = (int)(this.DockPanelOutSide.RenderSize.Height - c.Height) / 2;

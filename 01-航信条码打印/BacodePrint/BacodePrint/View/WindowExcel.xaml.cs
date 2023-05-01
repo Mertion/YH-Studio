@@ -238,19 +238,18 @@ namespace BacodePrint.View
             }
 
             //起飞航站楼-免费行李
-            for(int i = 6; i < 18; i++)
+            for(int i = 5; i < 17; i++)
             {
                 SplitStringtolist(pExcelList[i], ref pTemplateList, const_nStep);
             }
 
-            for (int i = 18; i < 32; i++)
+            for (int i = 17; i < 31; i++)
             {
                 pTemplateList.Add(pExcelList[i]);
             }
-            SplitStringtolist(pExcelList[32], ref pTemplateList, const_nStep);
-            SplitStringtolist(pExcelList[33], ref pTemplateList, const_nStep);
-            pTemplateList.Add(pExcelList[34]);
-            pTemplateList.Add(pExcelList[35]);
+            SplitStringtolist(pExcelList[31], ref pTemplateList, 2);
+            pTemplateList.Add(pExcelList[32]);
+            pTemplateList.Add(pExcelList[33]);
         }
 
         private void SplitStringtolist(String pStr,ref List<string> pTemplateList,int nStep)
