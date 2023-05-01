@@ -1,0 +1,2 @@
+下面为LDK8.5下载链接，你可以按照你们的安装环境下载相应的版本，然后上面是安装和使用说明，供你们参考：
+https://supportportal.thalesgroup.com/csm?id=kb_article_view&sys_kb_id=c2241c1d1bb41890f12064606e4bcb3e&sysparm_article=KB0021845
