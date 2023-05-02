@@ -886,40 +886,59 @@ namespace BacodePrint
 
         private void FontSizeOrderNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            mTemplateFundation.SetNumberFontSize(ref mTemplate, Convert.ToInt32(FontSizeOrderNumber.Text), Convert.ToInt32(FontSizeOrderNumber.Text));
+            //mTemplateFundation.SetNumberFontSize(ref mTemplate, Convert.ToInt32(FontSizeOrderNumber.Text), Convert.ToInt32(FontSizeOrderNumber.Text));
+            if (FontSizeOrderNumber.SelectedItem != null)
+            {
+                mTemplateFundation.SetNumberFontSize(ref mTemplate, Convert.ToInt32(FontSizeOrderNumber.SelectedItem.ToString()), Convert.ToInt32(FontSizeOrderNumber.SelectedItem.ToString()));
+            }
         }
 
         private void FontWordSpacingOrderNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            mTemplateFundation.SetNumberFontWordSpacing(ref mTemplate, Convert.ToInt32(FontWordSpacingOrderNumber.Text));
+            if (FontWordSpacingOrderNumber.SelectedItem != null)
+            {
+                mTemplateFundation.SetNumberFontWordSpacing(ref mTemplate, Convert.ToInt32(FontWordSpacingOrderNumber.SelectedItem.ToString())); 
+            }
         }
 
         private void FontSizeCH_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int nFontSizeCH = FontSizeCH.Text == "" ? 0 : Convert.ToInt32(FontSizeCH.Text);
-            int nFontSizeNumber = FontSizeNumber.Text == "" ? 0 : Convert.ToInt32(FontSizeNumber.Text);
-            mTemplateFundation.SetGeneralFontSize(ref mTemplate, nFontSizeCH, nFontSizeNumber);
+            if ((FontSizeCH.SelectedItem != null) && (FontSizeNumber.SelectedItem != null))
+            {
+                int nFontSizeCH = FontSizeCH.SelectedItem.ToString() == "" ? 0 : Convert.ToInt32(FontSizeCH.SelectedItem.ToString());
+                int nFontSizeNumber = FontSizeNumber.SelectedItem.ToString() == "" ? 0 : Convert.ToInt32(FontSizeNumber.SelectedItem.ToString());
+                mTemplateFundation.SetGeneralFontSize(ref mTemplate, nFontSizeCH, nFontSizeNumber);
+            }
         }
 
         private void FontSizeNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //int nFontSizeCH = 1;
-            //int nFontSizeNumber = 1;
-            //mTemplateFundation.SetGeneralFontSize(ref mTemplate, nFontSizeCH, nFontSizeNumber);
+            if ((FontSizeCH.SelectedItem != null) && (FontSizeNumber.SelectedItem != null))
+            {
+                //int nFontSizeCH = 1;
+                //int nFontSizeNumber = 1;
+                //mTemplateFundation.SetGeneralFontSize(ref mTemplate, nFontSizeCH, nFontSizeNumber);
 
-            int nFontSizeCH = FontSizeCH.Text == "" ? 1 : Convert.ToInt32(FontSizeCH.Text);
-            int nFontSizeNumber = FontSizeNumber.Text == "" ? 1 : Convert.ToInt32(FontSizeNumber.Text);
-            mTemplateFundation.SetGeneralFontSize(ref mTemplate, nFontSizeCH, nFontSizeNumber);
+                int nFontSizeCH = FontSizeCH.SelectedItem.ToString() == "" ? 1 : Convert.ToInt32(FontSizeCH.SelectedItem.ToString());
+                int nFontSizeNumber = FontSizeNumber.SelectedItem.ToString() == "" ? 1 : Convert.ToInt32(FontSizeNumber.SelectedItem.ToString());
+                mTemplateFundation.SetGeneralFontSize(ref mTemplate, nFontSizeCH, nFontSizeNumber);
+            }
         }
 
         private void FontWordSpacing_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            mTemplateFundation.SetGeneralFontWordSpacing(ref mTemplate, Convert.ToInt32(FontWordSpacing.Text));
+            if(FontWordSpacing.SelectedItem != null)
+            {
+                mTemplateFundation.SetGeneralFontWordSpacing(ref mTemplate, Convert.ToInt32(FontWordSpacing.SelectedItem.ToString()));
+            }
         }
 
         private void RowWordSpacing_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            mTemplateFundation.SetRowWordSpacing(ref mTemplate, Convert.ToInt32(RowWordSpacing.Text));
+            if (RowWordSpacing.SelectedItem != null)
+            {
+                mTemplateFundation.SetRowWordSpacing(ref mTemplate, Convert.ToInt32(RowWordSpacing.SelectedItem.ToString()));
+            }
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)

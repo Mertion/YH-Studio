@@ -68,7 +68,7 @@ namespace BacodePrint
 
         public void SetFontWeight(int p_nFontWeight)
         {
-            mnIsFontWeight=p_nFontWeight;
+            mnIsFontWeight = p_nFontWeight;
 
             for (int i = 0; i < itemCtrl.Items.Count; i++)
             {
@@ -100,6 +100,7 @@ namespace BacodePrint
 
         public void SetFontFamily()
         {
+            itemCtrl.FontFamily = this.FontFamily;
             for (int i = 0; i < itemCtrl.Items.Count; i++)
             {
                 TextBlock block1 = (TextBlock)itemCtrl.Items[i];
@@ -110,6 +111,8 @@ namespace BacodePrint
         public void SetString()
         {
             itemCtrl.Items.Clear();
+            itemCtrl.FontSize = mnCHFontSize > mnENFontSize ? mnCHFontSize : mnENFontSize;
+            this.FontSize = itemCtrl.FontSize;
 
             for (int i = 0; i < mString.Length; i++)
             {
