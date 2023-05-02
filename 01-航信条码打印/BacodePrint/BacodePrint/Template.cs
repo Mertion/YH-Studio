@@ -130,6 +130,7 @@ namespace BacodePrint
                 //对齐方式
                 str = tFilesINI.INIRead(strSetion, "Alignment", p_strConfigFilePath);
                 UserControlTextBoxItems.mnAlignment = Convert.ToInt32(str);
+                UserControlTextBoxItems.SetAlignment();
 
                 str = tFilesINI.INIRead(strSetion, "Left", p_strConfigFilePath);
                 Canvas.SetLeft(c, Convert.ToInt32(str));
