@@ -82,6 +82,10 @@ namespace BacodePrint
                     FontSizeOrderNumber.Items.Add(i.ToString());
                     FontWordSpacingOrderNumber.Items.Add((i+1).ToString());
                 }
+
+                FontAlignment.Items.Add("左对齐");
+                FontAlignment.Items.Add("右对齐");
+                FontAlignment.SelectedIndex = 0;
                 ReadConfig();
             }
             int nWidth = 0;
@@ -343,6 +347,11 @@ namespace BacodePrint
             {
                 mTemplate.mImageBarcode.Visibility = Visibility.Hidden;
             }
+
+            str = tFilesINI.INIRead("Config", "Alignment", mSystemInfo.mstrConfigFilePath);
+            FontAlignment.SelectedIndex = Convert.ToInt32(str);
+
+            SetFontAlignment(FontAlignment.SelectedIndex);
         }
 
         void SaveConfig()
@@ -390,6 +399,15 @@ namespace BacodePrint
             else
             {
                 tFilesINI.INIWrite("Config", "PrintBarcode", "0", mSystemInfo.mstrConfigFilePath);
+            }
+
+            if(FontAlignment.SelectedIndex==0)
+            {
+                tFilesINI.INIWrite("Config", "Alignment", "0", mSystemInfo.mstrConfigFilePath);
+            }
+            else
+            {
+                tFilesINI.INIWrite("Config", "Alignment", "1", mSystemInfo.mstrConfigFilePath);
             }
         }
 
@@ -944,6 +962,32 @@ namespace BacodePrint
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void SetTextBoxAlignment(UserControlTextBoxItems UserControlTextBoxItems)
+        {
+            UserControlTextBoxItems.mnAlignment = FontAlignment.SelectedIndex;
+            UserControlTextBoxItems.SetAlignment();
+        }
+
+        private void SetFontAlignment(Object SelectedIndex)
+        {
+            //票价数字
+            SetTextBoxAlignment(mTemplate.listText[66]);
+            //基建数字
+            SetTextBoxAlignment(mTemplate.listText[68]);
+            //燃油数字
+            SetTextBoxAlignment(mTemplate.listText[70]);
+            //税费数字
+            SetTextBoxAlignment(mTemplate.listText[72]);
+            //合计数字
+            SetTextBoxAlignment(mTemplate.listText[74]);
+
+        }
+
+        private void FontAlignment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetFontAlignment(FontAlignment.SelectedIndex);
         }
     }
 

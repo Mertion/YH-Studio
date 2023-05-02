@@ -6,26 +6,43 @@
              xmlns:local="clr-namespace:BacodePrint"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="100">
+
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="HorizontalAlignmentDefult" >
+            <WrapPanel/>
+        </ItemsPanelTemplate>
+
+        <ItemsPanelTemplate x:Key="HorizontalAlignmentCenter" >
+            <WrapPanel HorizontalAlignment="Center" />
+        </ItemsPanelTemplate>
+
+        <ItemsPanelTemplate x:Key="HorizontalAlignmentRight" >
+            <WrapPanel HorizontalAlignment="Right" />
+        </ItemsPanelTemplate>
+
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate">
+            <StackPanel VerticalAlignment="Top"  Orientation="Vertical">
+                <StackPanel.LayoutTransform>
+                    <ScaleTransform ScaleX="1" ScaleY="-1" />
+                </StackPanel.LayoutTransform>
+            </StackPanel>
+        </ItemsPanelTemplate>
+        
+    </UserControl.Resources>
+    
     <Grid>
         <Border x:Name="BorderOutSide">
-            <ItemsControl x:Name="itemCtrl" >
-
-                <!--<ItemsControl x:Name="itemCtrl"  FontSize="20" FontFamily="STSong" Foreground="Teal" FontWeight="Bold"/>-->
-
-                <!--<ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>-->
-
-                <!--自动换行-->
-                <ItemsControl.ItemsPanel>
+            <!--<ItemsControl x:Name="itemCtrl">
+                <ItemsControl.ItemsPanel >
                     <ItemsPanelTemplate>
-                        <WrapPanel />
+                        --><!--自由排列右对齐--><!--
+                        <WrapPanel HorizontalAlignment="Right" />
+                        --><!--水平排列右对齐-->
+                        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right"/>--><!--
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-
-            </ItemsControl>
+            </ItemsControl>-->
+            <ItemsControl x:Name="itemCtrl" />
         </Border>
         
     </Grid>

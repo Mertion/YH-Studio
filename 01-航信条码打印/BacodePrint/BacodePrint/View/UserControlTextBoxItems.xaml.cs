@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +32,9 @@ namespace BacodePrint
         //是否加粗：1-加粗、0-不加粗
         public int mnIsFontWeight { get;set; }
 
+        //对齐方式：0-两端、1-Center、2-Right
+        public int mnAlignment { get; set; } = 0;
+
         string mString = "";
 
         public UserControlTextBoxItems()
@@ -41,6 +46,8 @@ namespace BacodePrint
             mnCHFontSize = 12;
             mnENFontSize = 10;
             mnIsFontWeight = 0;
+
+            SetAlignment();
         }
 
         public ItemsControl GetItem()
@@ -164,6 +171,42 @@ namespace BacodePrint
                 return false;
             }
         }
-       
+
+        //设置文本齐方式
+        public void SetAlignment()
+        {
+            var fe = this as FrameworkElement;
+
+            switch (mnAlignment)
+            {
+
+                case 0:
+                    {
+                        var tResource = fe.FindResource("HorizontalAlignmentDefult");
+                        itemCtrl.ItemsPanel = (ItemsPanelTemplate)tResource;
+                    }
+                    break;
+                case 1:
+                    {
+                        var tResource = fe.FindResource("HorizontalAlignmentCenter");
+                        itemCtrl.ItemsPanel = (ItemsPanelTemplate)tResource;
+                    }
+                    break;
+                case 2:
+                    {
+                        var tResource = fe.FindResource("HorizontalAlignmentRight");
+                        itemCtrl.ItemsPanel = (ItemsPanelTemplate)tResource;
+                    }
+                    break;
+                default:
+                    {
+                        var tResource = fe.FindResource("HorizontalAlignmentDefult");
+                        itemCtrl.ItemsPanel = (ItemsPanelTemplate)tResource;
+                    }
+                    break;
+            }
+
+        }
+
     }
 }

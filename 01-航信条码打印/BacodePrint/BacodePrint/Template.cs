@@ -127,6 +127,10 @@ namespace BacodePrint
                 str = tFilesINI.INIRead(strSetion, "IsFontWeight", p_strConfigFilePath);
                 UserControlTextBoxItems.mnIsFontWeight = Convert.ToInt32(str);
 
+                //对齐方式
+                str = tFilesINI.INIRead(strSetion, "Alignment", p_strConfigFilePath);
+                UserControlTextBoxItems.mnAlignment = Convert.ToInt32(str);
+
                 str = tFilesINI.INIRead(strSetion, "Left", p_strConfigFilePath);
                 Canvas.SetLeft(c, Convert.ToInt32(str));
 
@@ -203,6 +207,9 @@ namespace BacodePrint
                 //字体加粗
                 str = UserControlTextBoxItems.mnIsFontWeight.ToString();
                 tFilesINI.INIWrite(strSetion, "IsFontWeight", str, p_strConfigFilePath);
+                //对齐方式
+                str = UserControlTextBoxItems.mnAlignment.ToString();
+                tFilesINI.INIWrite(strSetion, "Alignment", str, p_strConfigFilePath);
                 //Left
                 str = Canvas.GetLeft(c).ToString();
                 tFilesINI.INIWrite(strSetion, "Left", str, p_strConfigFilePath);
