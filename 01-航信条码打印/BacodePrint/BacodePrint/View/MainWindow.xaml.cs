@@ -1,4 +1,5 @@
-﻿using BarcodeLib;
+﻿using BacodePrint.Fundation;
+using BarcodeLib;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -39,9 +40,25 @@ namespace BacodePrint
         public MainWindow()
         {
             InitializeComponent();
+
+            int nRet = Authentication.MachineCodeAuthenticationDLL();
+
+            if(nRet != 0)
+            {
+                MessageBox.Show("机器码验证不正确，请联系YH工作室！");
+
+                Close();
+            }
+
+            nRet = Authentication.CheckCount();
+            if (nRet != 0)
+            {
+                MessageBox.Show("超过试用次数，请联系YH工作室！");
+
+                Close();
+            }
         }
 
-       
     }
 
 
