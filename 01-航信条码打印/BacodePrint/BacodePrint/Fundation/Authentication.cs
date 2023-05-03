@@ -15,12 +15,29 @@ namespace BacodePrint.Fundation
         public static int CheckCount()
         {
             IniFile tFilesINI = new IniFile();
-            //string strPath = "D:\\Windows\\Authentication.ini";
-            string strPath = "D:\\Authentication.ini";
-            //string str = tFilesINI.INIRead("Config", "Count", strPath);
+            string strPath = "C:\\Windows\\Authentication.ini";
+            //string strPath = "D:\\Authentication.ini";
+            string str = tFilesINI.INIRead("Config", "Count", strPath);
 
-            int nCount = 10;
+            int nCount = 0;
+            if (str=="")
+            {
+                nCount = 0;
+            }
+            else
+            {
+                nCount = Convert.ToInt32(str);
+            }
+
+            nCount++;
             tFilesINI.INIWrite("Config", "Count", nCount.ToString(), strPath);
+
+            if (nCount > 50) 
+            {
+                return 1;
+            }
+            
+            
             return 0;
         }
     }
