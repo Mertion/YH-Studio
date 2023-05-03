@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
@@ -1006,6 +1007,56 @@ namespace BacodePrint
         private void FontAlignment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SetFontAlignment(FontAlignment.SelectedIndex);
+        }
+
+        private void UserControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Up)
+            {
+                Debug.Print("Key up keyDown");
+            }
+            
+        }
+
+        private void UserControl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if(movingElementCtrl != null)
+            {
+                double left = Canvas.GetLeft(movingElementCtrl);
+                double top = Canvas.GetTop(movingElementCtrl);
+                double width = movingElementCtrl.Width;
+                double height = movingElementCtrl.Height;
+
+                if (e.Key == Key.Up)
+                {
+                    top -= 1;
+                }
+                if (e.Key == Key.Down)
+                {
+                    top += 1;
+                }
+                if (e.Key == Key.Left)
+                {
+                    left -= 1;
+                }
+                if (e.Key == Key.Right)
+                {
+                    left += 1;
+                }
+
+                Canvas.SetLeft(movingElementCtrl, left);
+                Canvas.SetTop(movingElementCtrl, top);
+
+                RectangleGeometry rg = new RectangleGeometry
+                {
+                    Rect = new Rect(left, top, width, height)
+                };
+                originalElement.Data = rg;
+                m_CanvasAdorner.SetPosition((int)left, (int)top, (int)width, (int)height);
+
+
+            }
+            
         }
     }
 
