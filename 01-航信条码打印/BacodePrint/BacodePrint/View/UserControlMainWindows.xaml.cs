@@ -61,10 +61,17 @@ namespace BacodePrint
         FrameworkElement movingElementCtrl = null;
         private bool isDragging = false;
 
+        private SolidColorBrush selectFillColor = new SolidColorBrush();
+        private SolidColorBrush selectBorderColor = new SolidColorBrush();
+
         public UserControlMainWindows()
         {
             InitializeComponent();
-            
+
+            selectFillColor.Color = Colors.LightCoral;
+            selectFillColor.Opacity = 0.5;
+            selectBorderColor.Color = Colors.Red;
+
             //更新字体列表
             GetLocalItem();
             this.FontCombox.ItemsSource = fontItemList;
@@ -677,9 +684,20 @@ namespace BacodePrint
 
                 if (isDown)
                 {
+                    //if (!isDragging
+                    //    && (Math.Abs(currentPoint.X - startPoint.X) > SystemParameters.MinimumHorizontalDragDistance)
+                    //    && (Math.Abs(currentPoint.Y - startPoint.Y) > SystemParameters.MinimumVerticalDragDistance))
+                    //{
+                    //    DragStarting();
+                    //}
+                    //if (isDragging)
+                    //{
+                    //    DragMoving();
+                    //}
+
                     if (!isDragging
-                        && (Math.Abs(currentPoint.X - startPoint.X) > SystemParameters.MinimumHorizontalDragDistance)
-                        && (Math.Abs(currentPoint.Y - startPoint.Y) > SystemParameters.MinimumVerticalDragDistance))
+                        && (Math.Abs(currentPoint.X - startPoint.X) > 2)
+                        && (Math.Abs(currentPoint.Y - startPoint.Y) > 2))
                     {
                         DragStarting();
                     }
@@ -712,8 +730,8 @@ namespace BacodePrint
             isDragging = true;
             movingElement = new System.Windows.Shapes.Path();
             movingElement.Data = originalElement.Data;
-            //movingElement.Fill = selectFillColor;
-            //movingElement.Stroke = selectBorderColor;
+            movingElement.Fill = selectFillColor;
+            movingElement.Stroke = selectBorderColor;
             canvas1.Children.Add(movingElement);
         }
 
