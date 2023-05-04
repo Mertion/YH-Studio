@@ -35,19 +35,20 @@ namespace BacodePrint
 
         void initDilog()
         {
+            const double const_dScale = 4.285714285714286;
+
             IniFile tFilesINI = new IniFile();
             string str = "";
-            int nWidth = 0;
-            int nHeight = 0;
+            double nWidth = 0;
+            double nHeight = 0;
             mTemplateFundation.LoadTemplateToCanvas(mTemplate, ref this.canvasCtrl);
             mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvasCtrl, ref nWidth, ref nHeight);
-            //mTemplateFundation.SetTemplateData(p_strBarcode, p_ListText, ref mTemplate);
 
-            this.canvasCtrl.Width = nWidth;
-            this.canvasCtrl.Height = nHeight;
-            GridPrint.Margin = new Thickness(500, 300, 0, 0);
-            this.Width = nWidth + 100;
-            this.Height = nHeight + 100;
+            this.canvasCtrl.Width = Math.Round(nWidth, 2) * const_dScale;
+            this.canvasCtrl.Height = Math.Round(nHeight, 2) * const_dScale;
+            //GridPrint.Margin = new Thickness(500, 300, 0, 0);
+            this.Width = canvasCtrl.Width + 100;
+            this.Height = canvasCtrl.Height + 100;
 
             str = tFilesINI.INIRead("Config", "PrintNumber", mSystemInfo.mstrConfigFilePath);
 

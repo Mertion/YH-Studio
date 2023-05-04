@@ -68,7 +68,7 @@ namespace BacodePrint
             }
         }
         //加载ini文件中的配置信息
-        public void LoadTemplateFromIni(string p_strConfigFilePath, ref Template p_Template,ref Canvas p_Canvas, ref int p_nWidth, ref int p_nHeight)
+        public void LoadTemplateFromIni(string p_strConfigFilePath, ref Template p_Template,ref Canvas p_Canvas, ref double p_nWidth, ref double p_nHeight)
         {
             IniFile tFilesINI = new IniFile();
 
@@ -76,9 +76,9 @@ namespace BacodePrint
             {
                 string str;
                 str = tFilesINI.INIRead("Size", "Width", p_strConfigFilePath);
-                p_nWidth = Convert.ToInt32(str);
+                p_nWidth = Convert.ToDouble(str);
                 str = tFilesINI.INIRead("Size", "Height", p_strConfigFilePath);
-                p_nHeight = Convert.ToInt32(str);
+                p_nHeight = Convert.ToDouble(str);
             }
 
             System.Windows.Controls.Image tImage = p_Template.mImageBarcode;
@@ -146,7 +146,7 @@ namespace BacodePrint
             }
         }
 
-        public void SaveIni(string p_strConfigFilePath, Template p_Template, int p_nWidth, int p_nHeight)
+        public void SaveIni(string p_strConfigFilePath, Template p_Template, double p_nWidth, double p_nHeight)
         {
             IniFile tFilesINI = new IniFile();
 

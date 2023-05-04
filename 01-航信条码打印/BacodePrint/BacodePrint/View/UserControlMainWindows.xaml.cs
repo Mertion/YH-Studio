@@ -1,4 +1,5 @@
 ﻿using BacodePrint.View;
+using Gma.QrCodeNet.Encoding.Masking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,8 +40,8 @@ namespace BacodePrint
     {
         //页面尺寸
         const double const_dScale = 4.285714285714286;
-        int mWidth = 1800;
-        int mHeight = 900;
+        double m_dWidth = 1800;
+        double m_dHeight = 900;
 
         //字体列表
         private ObservableCollection<FontItem> fontItemList = new ObservableCollection<FontItem>();
@@ -96,8 +98,8 @@ namespace BacodePrint
                 FontAlignment.SelectedIndex = 0;
                 ReadConfig();
             }
-            int nWidth = 0;
-            int nHeight= 0;
+            double nWidth = 0;
+            double nHeight= 0;
 
             int nLeft = 0;
             int nTop = 0;
@@ -291,15 +293,16 @@ namespace BacodePrint
             mTemplateFundation.SetTemplateData("5381921979 0", mListText, ref mTemplate);
             mTemplateFundation.SetBorderThickness(ref mTemplate, 2);
 
-            mWidth = nWidth;
-            mHeight = nHeight;
-            this.canvas1.Width = mWidth;
-            this.canvas1.Height = mHeight;
-            PrintWidth.Text = ((int)(mWidth / const_dScale)).ToString();
-            PrintHeight.Text = ((int)(mHeight / const_dScale)).ToString();
+            m_dWidth = Math.Round(nWidth, 2) * const_dScale;
+            m_dHeight = Math.Round(nHeight, 2) * const_dScale;
+            this.canvas1.Width = m_dWidth;
+            this.canvas1.Height = m_dHeight;
 
-            nLeft = ((int)this.DockPanelOutSide.Width - nWidth)/2;
-            nTop = ((int)this.DockPanelOutSide.Height - nHeight)/2;
+            PrintWidth.Text = Math.Round(nWidth, 2).ToString();
+            PrintHeight.Text = Math.Round(nHeight, 2).ToString();
+
+            nLeft =(int)( (this.DockPanelOutSide.Width - m_dWidth) /2);
+            nTop = (int)((this.DockPanelOutSide.Height - m_dHeight) /2);
             Canvas.SetLeft(this.canvas1, nLeft);
             Canvas.SetTop(this.canvas1, nTop);
         }
@@ -840,13 +843,28 @@ namespace BacodePrint
 
         private void buttonSetSize_Click(object sender, RoutedEventArgs e)
         {
+            Regex re = new Regex("[^0-9.-]+");
+
+            if(re.IsMatch(PrintWidth.Text))
+            {
+                MessageBox.Show("宽度只能输入数字！");
+                PrintWidth.Focus();
+                return;
+            }
+            if (re.IsMatch(PrintHeight.Text))
+            {
+                MessageBox.Show("高度只能输入数字！");
+                PrintHeight.Focus();
+                return;
+            }
+
             var c = canvas1 as FrameworkElement;
 
-            mWidth = (int)( Convert.ToInt32(PrintWidth.Text) * const_dScale);
-            mHeight = (int)(Convert.ToInt32(PrintHeight.Text) * const_dScale);
+            m_dWidth = Math.Round(Convert.ToDouble(PrintWidth.Text),2) * const_dScale;
+            m_dHeight = Math.Round(Convert.ToDouble(PrintHeight.Text),2) * const_dScale;
 
-            c.Width = Convert.ToInt32(mWidth);
-            c.Height = Convert.ToInt32(mHeight);
+            c.Width = m_dWidth;
+            c.Height = m_dHeight;
 
             int nLeft = (int)(this.DockPanelOutSide.RenderSize.Width - c.Width) / 2;
             int nTop = (int)(this.DockPanelOutSide.RenderSize.Height - c.Height) / 2;
@@ -856,7 +874,8 @@ namespace BacodePrint
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            mTemplateFundation.SaveIni(mSystemInfo.mstrConfigFilePath, mTemplate, (int)canvas1.Width, (int)canvas1.Height);
+            mTemplateFundation.SaveIni(mSystemInfo.mstrConfigFilePath, mTemplate
+                , Math.Round(Convert.ToDouble(PrintWidth.Text), 2), Math.Round(Convert.ToDouble(PrintHeight.Text), 2));
             SaveFont();
             SaveConfig();
         }
