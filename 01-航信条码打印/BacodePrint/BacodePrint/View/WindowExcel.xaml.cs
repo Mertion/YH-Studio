@@ -207,22 +207,19 @@ namespace BacodePrint.View
         {
             //打印窗体
             PrintPage printPage = new PrintPage();
-
             if (printPage.ShowPrintDialog())
             {
                 foreach (Itinerary item in mItineraries)
                 {
                     if (item.bCheck)
                     {
-                        printPage.Show();
-
                         List<string> tListTextPrint = new List<string>();
                         ExcelListToTemplateList(item.CaptionList, ref tListTextPrint);
                         printPage.SetData(item.CaptionList[0], tListTextPrint);
+                        printPage.Show();
                         printPage.Print();
                         //printPage.Hide();
                     }
-
                 }
             }
 
