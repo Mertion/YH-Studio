@@ -9,17 +9,24 @@
 
     <UserControl.Resources>
         <ItemsPanelTemplate x:Key="HorizontalAlignmentDefult" >
-            <WrapPanel/>
+            <!--<WrapPanel/>-->
+            <StackPanel Orientation="Horizontal"/> 
         </ItemsPanelTemplate>
 
         <ItemsPanelTemplate x:Key="HorizontalAlignmentCenter" >
-            <WrapPanel HorizontalAlignment="Center" />
+            <!--<WrapPanel HorizontalAlignment="Center" />-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
         </ItemsPanelTemplate>
 
         <ItemsPanelTemplate x:Key="HorizontalAlignmentRight" >
-            <WrapPanel HorizontalAlignment="Right" />
+            <!--<WrapPanel HorizontalAlignment="Right" />-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"/>
         </ItemsPanelTemplate>
 
+        <ItemsPanelTemplate x:Key="HorizontalAlignmentWrapPanel" >
+            <WrapPanel/>
+        </ItemsPanelTemplate>
+        
         <ItemsPanelTemplate x:Key="ItemsPanelTemplate">
             <StackPanel VerticalAlignment="Top"  Orientation="Vertical">
                 <StackPanel.LayoutTransform>

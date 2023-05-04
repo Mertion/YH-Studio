@@ -198,6 +198,12 @@ namespace BacodePrint
                         itemCtrl.ItemsPanel = (ItemsPanelTemplate)tResource;
                     }
                     break;
+                case 3:
+                    {
+                        var tResource = fe.FindResource("HorizontalAlignmentWrapPanel");
+                        itemCtrl.ItemsPanel = (ItemsPanelTemplate)tResource;
+                    }
+                    break;
                 default:
                     {
                         var tResource = fe.FindResource("HorizontalAlignmentDefult");

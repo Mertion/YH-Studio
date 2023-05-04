@@ -144,6 +144,10 @@ namespace BacodePrint
                 str = tFilesINI.INIRead(strSetion, "Height", p_strConfigFilePath);
                 c.Height = Convert.ToInt32(str);
             }
+
+            UserControlTextBoxItems UserControlTextBoxItems81 = p_Template.listText[81];
+            UserControlTextBoxItems81.mnAlignment = 3;
+            UserControlTextBoxItems81.SetAlignment();
         }
 
         public void SaveIni(string p_strConfigFilePath, Template p_Template, double p_nWidth, double p_nHeight)
