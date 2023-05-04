@@ -94,6 +94,7 @@ namespace BacodePrint
                     RowWordSpacing.Items.Add(i.ToString());
                     FontSizeOrderNumber.Items.Add(i.ToString());
                     FontWordSpacingOrderNumber.Items.Add((i+1).ToString());
+                    GeneralRowWordSpacing.Items.Add((i + 1).ToString());
                 }
 
                 FontAlignment.Items.Add("左对齐");
@@ -295,6 +296,7 @@ namespace BacodePrint
             mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvas1, ref nWidth, ref nHeight);
             mTemplateFundation.SetTemplateData("5381921979 0", mListText, ref mTemplate);
             mTemplateFundation.SetBorderThickness(ref mTemplate, 2);
+            HiddenTextBoxItems();
 
             m_dWidth = Math.Round(nWidth, 2) * const_dScale;
             m_dHeight = Math.Round(nHeight, 2) * const_dScale;
@@ -325,6 +327,9 @@ namespace BacodePrint
 
             str = tFilesINI.INIRead("Config", "RowWordSpacing", mSystemInfo.mstrConfigFilePath);
             RowWordSpacing.Text = str;
+
+            str = tFilesINI.INIRead("Config", "GeneralRowWordSpacing", mSystemInfo.mstrConfigFilePath);
+            GeneralRowWordSpacing.Text= str;
 
             str = tFilesINI.INIRead("Config", "FontSizeOrderNumber", mSystemInfo.mstrConfigFilePath);
             FontSizeOrderNumber.Text = str;
@@ -376,6 +381,9 @@ namespace BacodePrint
             tFilesINI.INIWrite("Config", "FontSizeNumber", FontSizeNumber.Text, mSystemInfo.mstrConfigFilePath);
             tFilesINI.INIWrite("Config", "FontWordSpacing", FontWordSpacing.Text, mSystemInfo.mstrConfigFilePath);
             tFilesINI.INIWrite("Config", "RowWordSpacing", RowWordSpacing.Text, mSystemInfo.mstrConfigFilePath);
+
+            tFilesINI.INIWrite("Config", "GeneralRowWordSpacing", GeneralRowWordSpacing.Text, mSystemInfo.mstrConfigFilePath);
+            
             tFilesINI.INIWrite("Config", "FontSizeOrderNumber", FontSizeOrderNumber.Text, mSystemInfo.mstrConfigFilePath);
             tFilesINI.INIWrite("Config", "FontWordSpacingOrderNumber", FontWordSpacingOrderNumber.Text, mSystemInfo.mstrConfigFilePath);
 
@@ -877,6 +885,32 @@ namespace BacodePrint
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
+            //调整每5个一组的那些控件位置
+            UserControlTextBoxItems UserControlTextBoxItems = null;
+            UserControlTextBoxItems UserControlTextBoxItemsSub = null;
+            double dStartY = 0.0;
+            for (int i = 5; i < 65; i++)
+            {
+                if (i % 5 == 0)
+                {
+                    UserControlTextBoxItems = mTemplate.listText[i];
+
+                    dStartY = Canvas.GetTop(UserControlTextBoxItems);
+                }
+                else
+                {
+                    UserControlTextBoxItemsSub = mTemplate.listText[i];
+                    Canvas.SetLeft(UserControlTextBoxItemsSub, Canvas.GetLeft(UserControlTextBoxItems));
+                    Canvas.SetTop(UserControlTextBoxItemsSub, dStartY);
+                    UserControlTextBoxItemsSub.Width = UserControlTextBoxItems.Width;
+                    UserControlTextBoxItemsSub.Height = UserControlTextBoxItems.Height;
+                }
+                dStartY += Convert.ToDouble(GeneralRowWordSpacing.SelectedItem.ToString());
+            }
+
+            
+
+
             mTemplateFundation.SaveIni(mSystemInfo.mstrConfigFilePath, mTemplate
                 , Math.Round(Convert.ToDouble(PrintWidth.Text), 2), Math.Round(Convert.ToDouble(PrintHeight.Text), 2));
             SaveFont();
@@ -1079,6 +1113,30 @@ namespace BacodePrint
 
             }
             
+        }
+
+        private void GeneralRowWordSpacing_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
+
+        }
+
+        private void HiddenTextBoxItems()
+        {
+            UserControlTextBoxItems UserControlTextBoxItems;
+            for (int i = 5; i < 65; i++)
+            {
+                if (i % 5 != 0)
+                {
+                    UserControlTextBoxItems = mTemplate.listText[i];
+                    UserControlTextBoxItems.Visibility = Visibility.Hidden;
+                }
+            }
+
+            UserControlTextBoxItems = mTemplate.listText[11];
+            UserControlTextBoxItems.Visibility = Visibility.Visible;
+            UserControlTextBoxItems = mTemplate.listText[12];
+            UserControlTextBoxItems.Visibility = Visibility.Visible;
         }
     }
 
