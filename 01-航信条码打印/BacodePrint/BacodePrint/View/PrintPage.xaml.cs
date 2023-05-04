@@ -31,6 +31,13 @@ namespace BacodePrint
             InitializeComponent();
 
             initDilog();
+
+            //获取打印机分辨率
+            int x = (int)printDialog.PrintTicket.PageResolution.X;
+            int y = (int)printDialog.PrintTicket.PageResolution.Y;
+            double dx = printDialog.PrintableAreaWidth;
+            double dy = printDialog.PrintableAreaHeight;    
+            
         }
 
         void initDilog()
@@ -101,6 +108,13 @@ namespace BacodePrint
                 //printDialog.PrintTicket.PageOrientation = PageOrientation.Landscape;
                 
                 bIsPrinterReady = true;
+
+                this.canvasCtrl.Width = printDialog.PrintableAreaWidth;
+                this.canvasCtrl.Height = printDialog.PrintableAreaHeight;
+                GridPrint.Width = this.canvasCtrl.Width;
+                GridPrint.Height = this.canvasCtrl.Height;
+                this.Width = canvasCtrl.Width + 100;
+                this.Height = canvasCtrl.Height + 100;
             }
 
             return bIsPrinterReady;

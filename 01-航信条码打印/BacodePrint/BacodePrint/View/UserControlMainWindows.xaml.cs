@@ -39,9 +39,12 @@ namespace BacodePrint
     public partial class UserControlMainWindows : UserControl
     {
         //页面尺寸
-        const double const_dScale = 4.285714285714286;
-        double m_dWidth = 1800;
-        double m_dHeight = 900;
+        //mm转像素的比例系数：打印机分辨率600/英寸，mm到英寸25.4/英寸,k=600/25.4
+        //A4纸宽：793.70078740157476 210mm
+        //A4纸高：1122.5196850393702 297mm
+        const double const_dScale = 3.779527559055118;
+        double m_dWidth = 793.70078740157476;
+        double m_dHeight = 1122.5196850393702;
 
         //字体列表
         private ObservableCollection<FontItem> fontItemList = new ObservableCollection<FontItem>();
