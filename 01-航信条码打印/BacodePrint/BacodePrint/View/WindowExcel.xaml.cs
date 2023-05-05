@@ -22,6 +22,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Reflection.Emit;
 using System.Drawing.Printing;
+using NPOI.SS.Formula.Functions;
 
 namespace BacodePrint.View
 {
@@ -254,8 +255,32 @@ namespace BacodePrint.View
             SplitStringtolist(pExcelList[31], ref pTemplateList, 2);
             pTemplateList.Add(pExcelList[32]);
             pTemplateList.Add(pExcelList[33]);
+
+            pTemplateList[66] = FormatPrice(pTemplateList[66]);
+
+            pTemplateList[68] = FormatPrice(pTemplateList[68]);
+
+            pTemplateList[70] = FormatPrice(pTemplateList[70]);
+
+            pTemplateList[72] = FormatPrice(pTemplateList[72]);
+
+            pTemplateList[74] = FormatPrice(pTemplateList[74]);
         }
 
+        private string FormatPrice(string p_strSrc)
+        {
+            string str = "";
+            if(p_strSrc == "")
+            {
+                str = "0.00";
+            }
+            else
+            {
+                str = string.Format("{0:C2}", Convert.ToDouble( p_strSrc));
+            }
+            
+            return str;
+        }
         private void SumPrice()
         {
             double dSum = 0.0;
