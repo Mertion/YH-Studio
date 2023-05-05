@@ -33,5 +33,10 @@ namespace BacodePrint
 
         //行程单路径
         public string mstrItineraryFilePath = Convert.ToString(System.AppDomain.CurrentDomain.BaseDirectory) + "travel itinerary.jpg";
+
+        //mm转像素的比例系数：打印机分辨率600/英寸，mm到英寸25.4/英寸,k=600/25.4
+        //A4纸宽：793.70078740157476 210mm
+        //A4纸高：1122.5196850393702 297mm
+        public const double const_dScale = 3.779527559055118;
     }
 }

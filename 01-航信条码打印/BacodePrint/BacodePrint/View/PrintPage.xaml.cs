@@ -42,7 +42,7 @@ namespace BacodePrint
 
         void initDilog()
         {
-            const double const_dScale = 4.285714285714286;
+            //const double const_dScale = 4.285714285714286;
 
             IniFile tFilesINI = new IniFile();
             string str = "";
@@ -51,8 +51,8 @@ namespace BacodePrint
             mTemplateFundation.LoadTemplateToCanvas(mTemplate, ref this.canvasCtrl);
             mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvasCtrl, ref nWidth, ref nHeight);
 
-            this.canvasCtrl.Width = Math.Round(nWidth, 2) * const_dScale;
-            this.canvasCtrl.Height = Math.Round(nHeight, 2) * const_dScale;
+            this.canvasCtrl.Width = Math.Round(nWidth, 2) * SystemGlobalInfo.const_dScale;
+            this.canvasCtrl.Height = Math.Round(nHeight, 2) * SystemGlobalInfo.const_dScale;
             //GridPrint.Margin = new Thickness(500, 300, 0, 0);
             this.Width = canvasCtrl.Width + 100;
             this.Height = canvasCtrl.Height + 100;

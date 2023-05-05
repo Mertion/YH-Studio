@@ -39,10 +39,7 @@ namespace BacodePrint
     public partial class UserControlMainWindows : UserControl
     {
         //页面尺寸
-        //mm转像素的比例系数：打印机分辨率600/英寸，mm到英寸25.4/英寸,k=600/25.4
-        //A4纸宽：793.70078740157476 210mm
-        //A4纸高：1122.5196850393702 297mm
-        const double const_dScale = 3.779527559055118;
+        
         double m_dWidth = 793.70078740157476;
         double m_dHeight = 1122.5196850393702;
 
@@ -308,8 +305,8 @@ namespace BacodePrint
             mTemplateFundation.SetBorderThickness(ref mTemplate, 2);
             HiddenTextBoxItems();
 
-            m_dWidth = Math.Round(nWidth, 2) * const_dScale;
-            m_dHeight = Math.Round(nHeight, 2) * const_dScale;
+            m_dWidth = Math.Round(nWidth, 2) * SystemGlobalInfo.const_dScale;
+            m_dHeight = Math.Round(nHeight, 2) * SystemGlobalInfo.const_dScale;
             this.canvas1.Width = m_dWidth;
             this.canvas1.Height = m_dHeight;
 
@@ -637,7 +634,7 @@ namespace BacodePrint
 
                 FrameworkElement c = null;
 
-                if (e.Source is System.Windows.Controls.Image tImage)
+                if ((e.Source is System.Windows.Controls.Image tImage) && (e.Source != ShowImage))
                 {
                     c = tImage as FrameworkElement;
                 }
@@ -888,8 +885,8 @@ namespace BacodePrint
 
             var c = canvas1 as FrameworkElement;
 
-            m_dWidth = Math.Round(Convert.ToDouble(PrintWidth.Text),2) * const_dScale;
-            m_dHeight = Math.Round(Convert.ToDouble(PrintHeight.Text),2) * const_dScale;
+            m_dWidth = Math.Round(Convert.ToDouble(PrintWidth.Text),2) * SystemGlobalInfo.const_dScale;
+            m_dHeight = Math.Round(Convert.ToDouble(PrintHeight.Text),2) * SystemGlobalInfo.const_dScale;
 
             c.Width = m_dWidth;
             c.Height = m_dHeight;
