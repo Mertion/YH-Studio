@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="PrintPage" Height="477" Width="1130" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Grid Name="GridPrint" Margin="0,0,0,0">
-        <Canvas Name="canvasCtrl" >
+        <Canvas Name="canvasCtrl" Margin="100,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
             <Canvas.RenderTransform>
                 <TransformGroup/>
             </Canvas.RenderTransform>

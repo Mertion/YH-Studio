@@ -20,6 +20,11 @@ namespace BacodePrint
     /// </summary>
     public partial class PrintPage : Window
     {
+        double nWidth = 0;
+        double nHeight = 0;
+        double dOffsetX = 0.0;
+        double dOffsetY = 0.0;
+
         SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
         Template mTemplate = new Template();
         TemplateFundation mTemplateFundation = new TemplateFundation();
@@ -33,10 +38,10 @@ namespace BacodePrint
             initDilog();
 
             //获取打印机分辨率
-            int x = (int)printDialog.PrintTicket.PageResolution.X;
-            int y = (int)printDialog.PrintTicket.PageResolution.Y;
-            double dx = printDialog.PrintableAreaWidth;
-            double dy = printDialog.PrintableAreaHeight;    
+            //int x = (int)printDialog.PrintTicket.PageResolution.X;
+            //int y = (int)printDialog.PrintTicket.PageResolution.Y;
+            //double dx = printDialog.PrintableAreaWidth;
+            //double dy = printDialog.PrintableAreaHeight;    
             
         }
 
@@ -46,10 +51,11 @@ namespace BacodePrint
 
             IniFile tFilesINI = new IniFile();
             string str = "";
-            double nWidth = 0;
-            double nHeight = 0;
+            
+            
             mTemplateFundation.LoadTemplateToCanvas(mTemplate, ref this.canvasCtrl);
-            mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvasCtrl, ref nWidth, ref nHeight);
+            mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvasCtrl
+                , ref nWidth, ref nHeight, ref dOffsetX, ref dOffsetY);
 
             this.canvasCtrl.Width = Math.Round(nWidth, 2) * SystemGlobalInfo.const_dScale;
             this.canvasCtrl.Height = Math.Round(nHeight, 2) * SystemGlobalInfo.const_dScale;
@@ -84,7 +90,9 @@ namespace BacodePrint
         {
             if (bIsPrinterReady)
             {
-                printDialog.PrintVisual(canvasCtrl, "Print");
+                //printDialog.PrintVisual(canvasCtrl, "Print");
+
+                printDialog.PrintVisual(GridPrint, "Print");
             }
             else
             {
@@ -109,12 +117,24 @@ namespace BacodePrint
                 
                 bIsPrinterReady = true;
 
-                this.canvasCtrl.Width = printDialog.PrintableAreaWidth;
-                this.canvasCtrl.Height = printDialog.PrintableAreaHeight;
-                GridPrint.Width = this.canvasCtrl.Width;
-                GridPrint.Height = this.canvasCtrl.Height;
-                this.Width = canvasCtrl.Width + 100;
-                this.Height = canvasCtrl.Height + 100;
+                //this.canvasCtrl.Width = printDialog.PrintableAreaWidth;
+                //this.canvasCtrl.Height = printDialog.PrintableAreaHeight;
+                //GridPrint.Width = this.canvasCtrl.Width;
+                //GridPrint.Height = this.canvasCtrl.Height;
+                //this.Width = canvasCtrl.Width + 100;
+                //this.Height = canvasCtrl.Height + 100;
+
+                this.canvasCtrl.Width = Math.Round(nWidth, 2) * SystemGlobalInfo.const_dScale;
+                this.canvasCtrl.Height = Math.Round(nHeight, 2) * SystemGlobalInfo.const_dScale;
+                this.canvasCtrl.Margin 
+                    = new Thickness(Math.Round(dOffsetX, 2) * SystemGlobalInfo.const_dScale
+                    , Math.Round(dOffsetY, 2) * SystemGlobalInfo.const_dScale
+                    , 0, 0);
+
+                GridPrint.Width = printDialog.PrintableAreaWidth;
+                GridPrint.Height = printDialog.PrintableAreaHeight;
+                this.Width = GridPrint.Width + 100;
+                this.Height = GridPrint.Height + 100;
             }
 
             return bIsPrinterReady;

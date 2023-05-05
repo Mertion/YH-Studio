@@ -38,8 +38,11 @@ namespace BacodePrint
     /// </summary>
     public partial class UserControlMainWindows : UserControl
     {
+        double m_dOffsetX = 0.0;
+        double m_dOffsetY = 0.0;
+
         //页面尺寸
-        
+
         double m_dWidth = 793.70078740157476;
         double m_dHeight = 1122.5196850393702;
 
@@ -300,7 +303,8 @@ namespace BacodePrint
             mListText.Add(str);
 
             mTemplateFundation.LoadTemplateToCanvas(mTemplate, ref this.canvas1);
-            mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvas1, ref nWidth, ref nHeight);
+            mTemplateFundation.LoadTemplateFromIni(mSystemInfo.mstrConfigFilePath, ref mTemplate, ref this.canvas1
+                , ref nWidth, ref nHeight, ref m_dOffsetX, ref m_dOffsetY);
             mTemplateFundation.SetTemplateData("5381921979 0", mListText, ref mTemplate);
             mTemplateFundation.SetBorderThickness(ref mTemplate, 2);
             HiddenTextBoxItems();
@@ -319,6 +323,8 @@ namespace BacodePrint
 
             PrintWidth.Text = Math.Round(nWidth, 2).ToString();
             PrintHeight.Text = Math.Round(nHeight, 2).ToString();
+            PrintX.Text = Math.Round(m_dOffsetX, 2).ToString();
+            PrintY.Text = Math.Round(m_dOffsetY, 2).ToString();
 
             nLeft =(int)( (this.DockPanelOutSide.Width - m_dWidth) /2);
             nTop = (int)((this.DockPanelOutSide.Height - m_dHeight) /2);
@@ -933,7 +939,8 @@ namespace BacodePrint
 
 
             mTemplateFundation.SaveIni(mSystemInfo.mstrConfigFilePath, mTemplate
-                , Math.Round(Convert.ToDouble(PrintWidth.Text), 2), Math.Round(Convert.ToDouble(PrintHeight.Text), 2));
+                , Math.Round(Convert.ToDouble(PrintWidth.Text), 2), Math.Round(Convert.ToDouble(PrintHeight.Text), 2)
+                , Math.Round(Convert.ToDouble(PrintX.Text), 2), Math.Round(Convert.ToDouble(PrintY.Text), 2));
             SaveFont();
             SaveConfig();
         }

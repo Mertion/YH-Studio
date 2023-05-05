@@ -68,7 +68,8 @@ namespace BacodePrint
             }
         }
         //加载ini文件中的配置信息
-        public void LoadTemplateFromIni(string p_strConfigFilePath, ref Template p_Template,ref Canvas p_Canvas, ref double p_nWidth, ref double p_nHeight)
+        public void LoadTemplateFromIni(string p_strConfigFilePath, ref Template p_Template,ref Canvas p_Canvas
+            , ref double p_nWidth, ref double p_nHeight,ref double p_dX,ref double p_dY)
         {
             IniFile tFilesINI = new IniFile();
 
@@ -79,6 +80,12 @@ namespace BacodePrint
                 p_nWidth = Convert.ToDouble(str);
                 str = tFilesINI.INIRead("Size", "Height", p_strConfigFilePath);
                 p_nHeight = Convert.ToDouble(str);
+
+                str = tFilesINI.INIRead("Size", "OffsetX", p_strConfigFilePath);
+                p_dX = Convert.ToDouble(str);
+
+                str = tFilesINI.INIRead("Size", "OffsetY", p_strConfigFilePath);
+                p_dY = Convert.ToDouble(str);
             }
 
             System.Windows.Controls.Image tImage = p_Template.mImageBarcode;
@@ -150,7 +157,7 @@ namespace BacodePrint
             UserControlTextBoxItems81.SetAlignment();
         }
 
-        public void SaveIni(string p_strConfigFilePath, Template p_Template, double p_nWidth, double p_nHeight)
+        public void SaveIni(string p_strConfigFilePath, Template p_Template, double p_nWidth, double p_nHeight, double p_dX, double p_dY)
         {
             IniFile tFilesINI = new IniFile();
 
@@ -162,6 +169,12 @@ namespace BacodePrint
                 //Height;
                 str = p_nHeight.ToString();
                 tFilesINI.INIWrite("Size", "Height", str, p_strConfigFilePath);
+
+                str = p_dX.ToString();
+                tFilesINI.INIWrite("Size", "OffsetX", str, p_strConfigFilePath);
+
+                str = p_dY.ToString();
+                tFilesINI.INIWrite("Size", "OffsetY", str, p_strConfigFilePath);
             }
 
             System.Windows.Controls.Image tImage = p_Template.mImageBarcode;

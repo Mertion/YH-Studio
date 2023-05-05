@@ -27,6 +27,14 @@
                     <TextBlock HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="高：" VerticalAlignment="Center"/>
                     <TextBox x:Name="PrintHeight" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="756" VerticalAlignment="Center" Width="100" TextAlignment="Right"/>
                     <Separator/>
+
+                    <TextBlock HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="X：" VerticalAlignment="Center"/>
+                    <TextBox x:Name="PrintX"  HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="0.0" VerticalAlignment="Center" Width="100" TextAlignment="Right"/>
+                    <Separator/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="Y：" VerticalAlignment="Center"/>
+                    <TextBox x:Name="PrintY" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="0.0" VerticalAlignment="Center" Width="100" TextAlignment="Right"/>
+                    <Separator/>
+                    
                     <Button x:Name="buttonSetSize" Margin="0,0,0,0" Content="设置" Click="buttonSetSize_Click" />
                     <Separator/>
                     <Button x:Name="buttonAbout" Margin="0,0,0,0" Content="关于" Click="buttonAbout_Click"/>
