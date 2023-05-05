@@ -47,6 +47,9 @@
                             <TransformGroup/>
                         </Canvas.RenderTransform>
 
+                        <Image x:Name="ShowImage"  Canvas.Left="0" 
+                                            HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.5"/>
+
                         <Border  x:Name="border" Width="0" Height="0" Margin="0" Canvas.Left="0" Canvas.Top="0"  >
                             <Border.Background>
                                 <SolidColorBrush Color="Gray" Opacity="0.5"/>

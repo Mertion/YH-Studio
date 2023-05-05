@@ -247,6 +247,8 @@
   <ItemGroup>
     <Resource Include="ICO\YH-Logo 512.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="View\travel itinerary.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

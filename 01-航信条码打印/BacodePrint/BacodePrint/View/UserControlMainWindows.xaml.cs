@@ -70,9 +70,19 @@ namespace BacodePrint
         private SolidColorBrush selectFillColor = new SolidColorBrush();
         private SolidColorBrush selectBorderColor = new SolidColorBrush();
 
+        BitmapImage bitmap = new BitmapImage();
+
+
+
         public UserControlMainWindows()
         {
             InitializeComponent();
+
+            bitmap.BeginInit();
+            //bitmap.UriSource = new Uri(@"C:\Users\WPF加载图片文件\WpfApp1\Images\VS2015.png");
+            bitmap.UriSource = new Uri(mSystemInfo.mstrItineraryFilePath);
+            bitmap.EndInit();
+
 
             selectFillColor.Color = Colors.LightCoral;
             selectFillColor.Opacity = 0.5;
@@ -302,6 +312,13 @@ namespace BacodePrint
             m_dHeight = Math.Round(nHeight, 2) * const_dScale;
             this.canvas1.Width = m_dWidth;
             this.canvas1.Height = m_dHeight;
+
+            Canvas.SetLeft(ShowImage, 0);
+            Canvas.SetTop(ShowImage, 0);
+            ShowImage.Width = m_dWidth;
+            ShowImage.Height = m_dHeight;
+
+            ShowImage.Source = bitmap;
 
             PrintWidth.Text = Math.Round(nWidth, 2).ToString();
             PrintHeight.Text = Math.Round(nHeight, 2).ToString();
@@ -881,6 +898,13 @@ namespace BacodePrint
             int nTop = (int)(this.DockPanelOutSide.RenderSize.Height - c.Height) / 2;
             Canvas.SetLeft(c, nLeft);
             Canvas.SetTop(c, nTop);
+
+            Canvas.SetLeft(ShowImage, 0);
+            Canvas.SetTop(ShowImage, 0);
+            ShowImage.Width = m_dWidth;
+            ShowImage.Height = m_dHeight;
+
+            ShowImage.Source = bitmap;
         }
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)

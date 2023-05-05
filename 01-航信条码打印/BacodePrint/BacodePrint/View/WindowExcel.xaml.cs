@@ -23,6 +23,7 @@ using System.Collections.ObjectModel;
 using System.Reflection.Emit;
 using System.Drawing.Printing;
 using NPOI.SS.Formula.Functions;
+using System.Text.RegularExpressions;
 
 namespace BacodePrint.View
 {
@@ -269,10 +270,11 @@ namespace BacodePrint.View
 
         private string FormatPrice(string p_strSrc)
         {
+            Regex re = new Regex("[^0-9.-]+");
             string str = "";
-            if(p_strSrc == "")
+            if(re.IsMatch(p_strSrc))
             {
-                str = "0.00";
+                str = p_strSrc;
             }
             else
             {

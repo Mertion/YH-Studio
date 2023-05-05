@@ -30,7 +30,8 @@ namespace BacodePrint
         //以下是相关全局信息
         //配置文件路径
         public string mstrConfigFilePath = Convert.ToString(System.AppDomain.CurrentDomain.BaseDirectory) + "Config.ini";
-        
 
+        //行程单路径
+        public string mstrItineraryFilePath = Convert.ToString(System.AppDomain.CurrentDomain.BaseDirectory) + "travel itinerary.jpg";
     }
 }
