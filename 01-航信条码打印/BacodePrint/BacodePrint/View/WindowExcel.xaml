@@ -88,6 +88,10 @@
 
             <Button x:Name="buttonSelectAll" Grid.Column="0" Content="全 选" FontSize="24" Width="100" Height="35" Click="buttonSelectAll_Click" />
             <Button x:Name="buttonSelectInvert" Grid.Column="1" Content="反 选" FontSize="24" Width="100" Height="35" Click="buttonSelectInvert_Click" />
+
+            <TextBlock Grid.Column="5" Text="总价：" FontSize="24" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBox Grid.Column="6" x:Name="TextBoxSum" Text="0.00" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" HorizontalContentAlignment="Right"/>
+
             <Button x:Name="buttonPrint" Grid.Column="7" Content="打 印" FontSize="24" Width="100" Height="35" Click="buttonPrint_Click" />
         </Grid>
     </Grid>

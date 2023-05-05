@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Reflection.Emit;
+using System.Drawing.Printing;
 
 namespace BacodePrint.View
 {
@@ -154,9 +155,11 @@ namespace BacodePrint.View
 
             //        //selectItem.bCheck = false; //这里是拿到MyList类中的isEnable属性 即上面 xmal中 Checkbox中绑定的变量
 
-                    
+
             //    }
             //}
+
+            SumPrice();
         }
 
         //全选
@@ -182,6 +185,8 @@ namespace BacodePrint.View
 
             gridItineraryList.ItemsSource = null;
             gridItineraryList.ItemsSource = mItineraries;
+
+            SumPrice();
         }
 
         //反选
@@ -201,6 +206,8 @@ namespace BacodePrint.View
 
             gridItineraryList.ItemsSource = null;
             gridItineraryList.ItemsSource = mItineraries;
+
+            SumPrice();
         }
 
         private void buttonPrint_Click(object sender, RoutedEventArgs e)
@@ -247,6 +254,21 @@ namespace BacodePrint.View
             SplitStringtolist(pExcelList[31], ref pTemplateList, 2);
             pTemplateList.Add(pExcelList[32]);
             pTemplateList.Add(pExcelList[33]);
+        }
+
+        private void SumPrice()
+        {
+            double dSum = 0.0;
+            foreach (Itinerary item in mItineraries)
+            {
+                if (item.bCheck)
+                {
+                    double dTval = item.CaptionList[26] == "" ? 0.0 : Convert.ToDouble(item.CaptionList[26]);
+                    dSum += dTval;
+                }
+            }
+            
+            TextBoxSum.Text = string.Format("{0:C2}", dSum);
         }
 
         private void SplitStringtolist(String pStr,ref List<string> pTemplateList,int nStep)
