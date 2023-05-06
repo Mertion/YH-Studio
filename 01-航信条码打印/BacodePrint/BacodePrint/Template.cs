@@ -140,16 +140,16 @@ namespace BacodePrint
                 UserControlTextBoxItems.SetAlignment();
 
                 str = tFilesINI.INIRead(strSetion, "Left", p_strConfigFilePath);
-                Canvas.SetLeft(c, Convert.ToInt32(str));
+                Canvas.SetLeft(c, Convert.ToDouble(str));
 
                 str = tFilesINI.INIRead(strSetion, "Top", p_strConfigFilePath);
-                Canvas.SetTop(c, Convert.ToInt32(str));
+                Canvas.SetTop(c, Convert.ToDouble(str));
 
                 str = tFilesINI.INIRead(strSetion, "Width", p_strConfigFilePath);
-                c.Width = Convert.ToInt32(str);
+                c.Width = Convert.ToDouble(str);
 
                 str = tFilesINI.INIRead(strSetion, "Height", p_strConfigFilePath);
-                c.Height = Convert.ToInt32(str);
+                c.Height = Convert.ToDouble(str);
             }
 
             UserControlTextBoxItems UserControlTextBoxItems81 = p_Template.listText[81];
