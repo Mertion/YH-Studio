@@ -38,5 +38,7 @@ namespace BacodePrint
         //A4纸宽：793.70078740157476 210mm
         //A4纸高：1122.5196850393702 297mm
         public const double const_dScale = 3.779527559055118;
+
+        public bool mbExit = false;
     }
 }

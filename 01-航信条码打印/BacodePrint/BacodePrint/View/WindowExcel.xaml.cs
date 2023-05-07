@@ -79,6 +79,7 @@ namespace BacodePrint.View
     /// </summary>
     public partial class WindowExcel : Window
     {
+        SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
         //行程单列表
         //List<Itinerary> mItineraries = new List<Itinerary>();
         ObservableCollection<Itinerary> mItineraries = new ObservableCollection<Itinerary>();
@@ -86,6 +87,7 @@ namespace BacodePrint.View
         {
             InitializeComponent();
 
+            
             //ReadDataFromExcel();
         }
 
@@ -315,6 +317,31 @@ namespace BacodePrint.View
             {
                 pTemplateList.Add("");
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!mSystemInfo.mbExit)
+            {
+                this.Visibility = Visibility.Collapsed;
+                e.Cancel = true;
+            }
+        }
+
+        private void buttonLoad_Click(object sender, RoutedEventArgs e)
+        {
+            if(!(bool)checkReserve.IsChecked)
+            {
+                mItineraries.Clear();
+            }
+
+            ReadDataFromExcel();
         }
     }
 

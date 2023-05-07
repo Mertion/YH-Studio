@@ -72,7 +72,7 @@ namespace BacodePrint
 
         BitmapImage bitmap = new BitmapImage();
 
-
+        WindowExcel windowExcel = new WindowExcel();
 
         public UserControlMainWindows()
         {
@@ -865,8 +865,8 @@ namespace BacodePrint
 
         private void buttonLoadFile_Click(object sender, RoutedEventArgs e)
         {
-            WindowExcel windowExcel = new WindowExcel();
-            windowExcel.ReadDataFromExcel();
+            
+            
             windowExcel.ShowDialog();
 
         }
@@ -1066,7 +1066,8 @@ namespace BacodePrint
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            
+            mSystemInfo.mbExit = true;
+            windowExcel.Close();
         }
 
         private void SetTextBoxAlignment(UserControlTextBoxItems UserControlTextBoxItems)
