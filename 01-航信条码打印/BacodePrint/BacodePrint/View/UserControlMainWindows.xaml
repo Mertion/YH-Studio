@@ -111,7 +111,44 @@
 
             <ToolBarTray Grid.Row="0">
                 <ToolBar>
-                    <Grid>
+
+                    <TextBlock Grid.Column="0" Text="常规字体" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <ComboBox Grid.Column="1" x:Name="FontCombox" Width="150" Margin="2,5,5,5" SelectionChanged="FontCombox_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}" FontFamily="{Binding Name}" FontSize="12"></Label>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Text="英文字体" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <ComboBox Grid.Column="1" x:Name="FontComboxEN" Width="150" Margin="2,5,5,5" SelectionChanged="FontCombox_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}" FontFamily="{Binding Name}" FontSize="12"></Label>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="2" Text="中文大小" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <ComboBox Grid.Column="3" x:Name="FontSizeCH" Width="80" Margin="2,5,5,5" SelectionChanged="FontSizeCH_SelectionChanged"/>
+                    <TextBlock Grid.Column="4" Text="数字大小" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <ComboBox Grid.Column="5" x:Name="FontSizeNumber" Width="80" Margin="2,5,5,5" SelectionChanged="FontSizeNumber_SelectionChanged"/>
+                    <TextBlock Grid.Column="6" Text="字距" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <ComboBox Grid.Column="7" x:Name="FontWordSpacing" Width="80" Margin="2,5,5,5" SelectionChanged="FontWordSpacing_SelectionChanged"/>
+                    <TextBlock Grid.Column="8" Text="填开行距" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <ComboBox Grid.Column="9" x:Name="RowWordSpacing" Width="80" Margin="2,5,5,5" SelectionChanged="RowWordSpacing_SelectionChanged"/>
+
+                    <TextBlock Grid.Column="10" Text="常规行距" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <ComboBox Grid.Column="11" x:Name="GeneralRowWordSpacing" Width="80" Margin="2,5,5,5" SelectionChanged="GeneralRowWordSpacing_SelectionChanged"/>
+
+                    <TextBlock Grid.Column="12" Text="一键加粗" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <CheckBox Grid.Column="13" x:Name="CheckBoldFont" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckBoldFont_Click"/>
+                    <TextBlock Grid.Column="14" Text="价格对齐" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <ComboBox Grid.Column="15" x:Name="FontAlignment" Width="80" Margin="2,5,5,5" SelectionChanged="FontAlignment_SelectionChanged"/>
+                    
+                    <!--<Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -131,41 +168,38 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="常规字体" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <ComboBox Grid.Column="1" x:Name="FontCombox" Width="150" Margin="2,5,5,5" DataContextChanged="FontCombox_DataContextChanged" SelectionChanged="FontCombox_SelectionChanged">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding Name}" FontFamily="{Binding Name}" FontSize="12"></Label>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-
-                        </ComboBox>
-
-                        <TextBlock Grid.Column="2" Text="中文大小" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <ComboBox Grid.Column="3" x:Name="FontSizeCH" Width="80" Margin="2,5,5,5" SelectionChanged="FontSizeCH_SelectionChanged"/>
-                        <TextBlock Grid.Column="4" Text="数字大小" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <ComboBox Grid.Column="5" x:Name="FontSizeNumber" Width="80" Margin="2,5,5,5" SelectionChanged="FontSizeNumber_SelectionChanged"/>
-                        <TextBlock Grid.Column="6" Text="字距" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <ComboBox Grid.Column="7" x:Name="FontWordSpacing" Width="80" Margin="2,5,5,5" SelectionChanged="FontWordSpacing_SelectionChanged"/>
-                        <TextBlock Grid.Column="8" Text="填开行距" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <ComboBox Grid.Column="9" x:Name="RowWordSpacing" Width="80" Margin="2,5,5,5" SelectionChanged="RowWordSpacing_SelectionChanged"/>
-
-                        <TextBlock Grid.Column="10" Text="常规行距" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <ComboBox Grid.Column="11" x:Name="GeneralRowWordSpacing" Width="80" Margin="2,5,5,5" SelectionChanged="GeneralRowWordSpacing_SelectionChanged"/>
-
-                        <TextBlock Grid.Column="12" Text="一键加粗" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <CheckBox Grid.Column="13" x:Name="CheckBoldFont" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckBoldFont_Click"/>
-                        <TextBlock Grid.Column="14" Text="价格对齐" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <ComboBox Grid.Column="15" x:Name="FontAlignment" Width="80" Margin="2,5,5,5" SelectionChanged="FontAlignment_SelectionChanged"/>
-                        <!--<Separator Grid.Column="14"/>-->
                         
-                    </Grid>
+                        --><!--<Separator Grid.Column="14"/>--><!--
+                        
+                    </Grid>-->
                 </ToolBar>
             </ToolBarTray>
 
             <ToolBarTray Grid.Row="1">
                 <ToolBar>
-                    <Grid>
+                    <TextBlock Grid.Column="0" Text="序号字体" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <ComboBox Grid.Column="1" x:Name="FontComboxOrderNumber" Width="150" Margin="2,5,5,5" SelectionChanged="FontComboxOrderNumber_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}" FontFamily="{Binding Name}" FontSize="12"></Label>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBlock Grid.Column="2" Text="序号字体大小" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <ComboBox Grid.Column="3" x:Name="FontSizeOrderNumber" Width="80" Margin="2,5,5,5" SelectionChanged="FontSizeOrderNumber_SelectionChanged"/>
+                    <TextBlock Grid.Column="4" Text="序号字距" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <ComboBox Grid.Column="5" x:Name="FontWordSpacingOrderNumber" Width="80" Margin="2,5,5,5" SelectionChanged="FontWordSpacingOrderNumber_SelectionChanged"/>
+                    <TextBlock Grid.Column="6" Text="序号加粗" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <CheckBox Grid.Column="7" x:Name="CheckBoldFontOrderNumber" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckBoldFontOrderNumber_Click"/>
+                    <TextBlock Grid.Column="8" Text="打印序号" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <CheckBox Grid.Column="9" x:Name="CheckPrintOrderNumber" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckPrintOrderNumber_Click"/>
+                    <TextBlock Grid.Column="10" Text="打印条码" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
+                    <CheckBox Grid.Column="11" x:Name="CheckPrintBarcode" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckPrintBarcode_Click"/>
+                    <!--<Separator Grid.Column="12"/>-->
+
+                    <Button Grid.Column="12" x:Name="buttonSave" Margin="5,5,5,5" Content=" 保 存 " Click="buttonSave_Click"  />
+                    <Button Grid.Column="14" x:Name="buttonPrintTest" Margin="5,5,5,5" Content=" 打印测试 " Click="buttonPrintTest_Click"/>
+                    <!--<Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -184,29 +218,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="序号字体" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <ComboBox Grid.Column="1" x:Name="FontComboxOrderNumber" Width="150" Margin="2,5,5,5" SelectionChanged="FontComboxOrderNumber_SelectionChanged">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding Name}" FontFamily="{Binding Name}" FontSize="12"></Label>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <TextBlock Grid.Column="2" Text="序号字体大小" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <ComboBox Grid.Column="3" x:Name="FontSizeOrderNumber" Width="80" Margin="2,5,5,5" SelectionChanged="FontSizeOrderNumber_SelectionChanged"/>
-                        <TextBlock Grid.Column="4" Text="序号字距" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <ComboBox Grid.Column="5" x:Name="FontWordSpacingOrderNumber" Width="80" Margin="2,5,5,5" SelectionChanged="FontWordSpacingOrderNumber_SelectionChanged"/>
-                        <TextBlock Grid.Column="6" Text="序号加粗" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <CheckBox Grid.Column="7" x:Name="CheckBoldFontOrderNumber" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckBoldFontOrderNumber_Click"/>
-                        <TextBlock Grid.Column="8" Text="打印序号" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <CheckBox Grid.Column="9" x:Name="CheckPrintOrderNumber" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckPrintOrderNumber_Click"/>
-                        <TextBlock Grid.Column="10" Text="打印条码" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                        <CheckBox Grid.Column="11" x:Name="CheckPrintBarcode" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckPrintBarcode_Click"/>
-                        <!--<Separator Grid.Column="12"/>-->
-
-                        <Button Grid.Column="12" x:Name="buttonSave" Margin="5,5,5,5" Content=" 保 存 " Click="buttonSave_Click"  />
-                        <Button Grid.Column="14" x:Name="buttonPrintTest" Margin="5,5,5,5" Content=" 打印测试 " Click="buttonPrintTest_Click"/>
-                    </Grid>
+                       
+                    </Grid>-->
                 </ToolBar>
             </ToolBarTray>
         </Grid>

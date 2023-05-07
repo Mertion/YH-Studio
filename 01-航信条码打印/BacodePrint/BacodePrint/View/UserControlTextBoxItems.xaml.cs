@@ -25,6 +25,12 @@ namespace BacodePrint
     {
         public int mnRowSpacing { get; set;}
         public int mnColumnSpacing { get; set; }
+
+        //中文字体
+        public FontFamily CHFontFamily { get; set; }
+        //英文字体
+        public FontFamily ENFontFamily { get; set; }
+
         //中文字体大小
         public int mnCHFontSize { get; set; }
         //英文字体大小
@@ -48,11 +54,6 @@ namespace BacodePrint
             mnIsFontWeight = 0;
 
             SetAlignment();
-        }
-
-        public ItemsControl GetItem()
-        {
-            return this.itemCtrl;
         }
 
         public void SetSpacing()
@@ -107,12 +108,13 @@ namespace BacodePrint
 
         public void SetFontFamily()
         {
-            itemCtrl.FontFamily = this.FontFamily;
-            for (int i = 0; i < itemCtrl.Items.Count; i++)
-            {
-                TextBlock block1 = (TextBlock)itemCtrl.Items[i];
-                block1.FontFamily = itemCtrl.FontFamily;
-            }
+            //itemCtrl.FontFamily = this.FontFamily;
+            //for (int i = 0; i < itemCtrl.Items.Count; i++)
+            //{
+            //    TextBlock block1 = (TextBlock)itemCtrl.Items[i];
+            //    block1.FontFamily = itemCtrl.FontFamily;
+            //}
+            SetString();
         }
 
         public void SetString()
@@ -129,13 +131,16 @@ namespace BacodePrint
                 if (IsChChar(mString[i]))
                 {
                     block1.FontSize = mnCHFontSize;
-                }
+
+                    block1.FontFamily = CHFontFamily;                }
                 else
                 {
                     block1.FontSize = mnENFontSize;
+
+                    block1.FontFamily = ENFontFamily;
                 }
 
-                block1.FontFamily = itemCtrl.FontFamily;
+                
                 //是否加粗
                 if (mnIsFontWeight == 1)
                 {

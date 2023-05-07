@@ -91,19 +91,21 @@ namespace BacodePrint
             //更新字体列表
             GetLocalItem();
             this.FontCombox.ItemsSource = fontItemList;
+            FontComboxEN.ItemsSource = fontItemList;
             FontComboxOrderNumber.ItemsSource = fontItemList;
+
             ReadFont();
 
             //初始化字号列表和其它配置信息
             {
-                for (int i = 0;i<30;i++)
+                for (int i = 0; i < 50; i++)
                 {
                     FontSizeCH.Items.Add(i.ToString());
                     FontSizeNumber.Items.Add(i.ToString());
                     FontWordSpacing.Items.Add(i.ToString());
                     RowWordSpacing.Items.Add(i.ToString());
                     FontSizeOrderNumber.Items.Add(i.ToString());
-                    FontWordSpacingOrderNumber.Items.Add((i+1).ToString());
+                    FontWordSpacingOrderNumber.Items.Add((i + 1).ToString());
                     GeneralRowWordSpacing.Items.Add((i + 1).ToString());
                 }
 
@@ -461,6 +463,10 @@ namespace BacodePrint
             FontCombox.SelectedIndex = FindFont(str);
             FontCombox.FontFamily = new System.Windows.Media.FontFamily(str);
 
+            str = tFilesINI.INIRead("Font", "FontFamilyEN", mSystemInfo.mstrConfigFilePath);
+            FontComboxEN.SelectedIndex = FindFont(str);
+            FontComboxEN.FontFamily = new System.Windows.Media.FontFamily(str);
+
             str = tFilesINI.INIRead("Font", "FontFamilyNumber", mSystemInfo.mstrConfigFilePath);
             FontComboxOrderNumber.SelectedIndex = FindFont(str);
             FontComboxOrderNumber.FontFamily = new System.Windows.Media.FontFamily(str);
@@ -488,6 +494,9 @@ namespace BacodePrint
             FontItem tempItem = this.FontCombox.SelectedItem as FontItem;
             tFilesINI.INIWrite("Font", "FontFamily", tempItem.Name, mSystemInfo.mstrConfigFilePath);
 
+            tempItem = this.FontComboxEN.SelectedItem as FontItem;
+            tFilesINI.INIWrite("Font", "FontFamilyEN", tempItem.Name, mSystemInfo.mstrConfigFilePath);
+            
             tempItem = this.FontComboxOrderNumber.SelectedItem as FontItem;
             tFilesINI.INIWrite("Font", "FontFamilyNumber", tempItem.Name, mSystemInfo.mstrConfigFilePath);
         }
@@ -945,17 +954,6 @@ namespace BacodePrint
             SaveConfig();
         }
 
-        //设置常规字体
-        private void FontCombox_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            mTemplateFundation.SetGeneralFont(ref mTemplate, FontCombox.Text);
-        }
-        //设置序号字体
-        private void FontComboxOrderNumber_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            mTemplateFundation.SetGeneralFont(ref mTemplate, FontComboxOrderNumber.Text);
-        }
-
         private void CheckPrintBarcode_Click(object sender, RoutedEventArgs e)
         {
             if ((bool)CheckPrintBarcode.IsChecked)
@@ -995,8 +993,12 @@ namespace BacodePrint
         //设置常规字体
         private void FontCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            FontItem tempItem = this.FontCombox.SelectedItem as FontItem;
-            mTemplateFundation.SetGeneralFont(ref mTemplate, tempItem.Name);
+            if ((FontCombox.SelectedItem != null) && (FontComboxEN.SelectedItem != null))
+            {
+                FontItem tempItem = this.FontCombox.SelectedItem as FontItem;
+                FontItem tempItemEN = this.FontComboxEN.SelectedItem as FontItem;
+                mTemplateFundation.SetGeneralFont(ref mTemplate, tempItem.Name, tempItemEN.Name);
+            }
         }
         //设置数字字体
         private void FontComboxOrderNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)

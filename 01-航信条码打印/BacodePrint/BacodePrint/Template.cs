@@ -113,8 +113,12 @@ namespace BacodePrint
                 UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
                 var c = UserControlTextBoxItems as FrameworkElement;
 
+                //str = tFilesINI.INIRead(strSetion, "FontFamily", p_strConfigFilePath);
+                //UserControlTextBoxItems.FontFamily = new System.Windows.Media.FontFamily(str);
                 str = tFilesINI.INIRead(strSetion, "FontFamily", p_strConfigFilePath);
-                UserControlTextBoxItems.FontFamily = new System.Windows.Media.FontFamily(str);
+                UserControlTextBoxItems.CHFontFamily = new System.Windows.Media.FontFamily(str);
+                str = tFilesINI.INIRead(strSetion, "FontFamilyEN", p_strConfigFilePath);
+                UserControlTextBoxItems.ENFontFamily = new System.Windows.Media.FontFamily(str);
 
                 str = tFilesINI.INIRead(strSetion, "FontSize", p_strConfigFilePath);
                 UserControlTextBoxItems.FontSize = Convert.ToInt32(str);
@@ -204,9 +208,14 @@ namespace BacodePrint
                 UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
 
                 var c = UserControlTextBoxItems as FrameworkElement;
-                //字体
-                str = UserControlTextBoxItems.FontFamily.ToString();
+                //中文字体
+                //str = UserControlTextBoxItems.FontFamily.ToString();
+                str = UserControlTextBoxItems.CHFontFamily.ToString();
                 tFilesINI.INIWrite(strSetion, "FontFamily", str, p_strConfigFilePath);
+                //英文字体
+                //str = UserControlTextBoxItems.FontFamily.ToString();
+                str = UserControlTextBoxItems.ENFontFamily.ToString();
+                tFilesINI.INIWrite(strSetion, "FontFamilyEN", str, p_strConfigFilePath);
                 //字号
                 str = UserControlTextBoxItems.FontSize.ToString();
                 tFilesINI.INIWrite(strSetion, "FontSize", str, p_strConfigFilePath);
@@ -253,12 +262,14 @@ namespace BacodePrint
             }
         }
 
-        public void SetGeneralFont(ref Template p_Template, string p_FontFamilyName)
+        public void SetGeneralFont(ref Template p_Template, string p_FontFamilyName, string p_FontFamilyNameEN)
         {
             for (int i = 1; i < p_Template.listText.Count; i++)
             {
                 UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[i];
-                UserControlTextBoxItems.FontFamily = new System.Windows.Media.FontFamily(p_FontFamilyName);
+                //UserControlTextBoxItems.FontFamily = new System.Windows.Media.FontFamily(p_FontFamilyName);
+                UserControlTextBoxItems.CHFontFamily = new System.Windows.Media.FontFamily(p_FontFamilyName);
+                UserControlTextBoxItems.ENFontFamily = new System.Windows.Media.FontFamily(p_FontFamilyNameEN);
                 UserControlTextBoxItems.SetFontFamily();
             }
         }
@@ -266,7 +277,9 @@ namespace BacodePrint
         public void SetNumberFont(ref Template p_Template, string p_FontFamilyName)
         {
             UserControlTextBoxItems UserControlTextBoxItems = p_Template.listText[0];
-            UserControlTextBoxItems.FontFamily = new System.Windows.Media.FontFamily(p_FontFamilyName);
+            //UserControlTextBoxItems.FontFamily = new System.Windows.Media.FontFamily(p_FontFamilyName);
+            UserControlTextBoxItems.CHFontFamily = new System.Windows.Media.FontFamily(p_FontFamilyName);
+            UserControlTextBoxItems.ENFontFamily = new System.Windows.Media.FontFamily(p_FontFamilyName);
             UserControlTextBoxItems.SetFontFamily();
         }
 
