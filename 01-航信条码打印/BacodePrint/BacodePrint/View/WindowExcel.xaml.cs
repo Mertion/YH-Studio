@@ -281,8 +281,10 @@ namespace BacodePrint.View
             else
             {
                 //str = string.Format("{0:C2}", Convert.ToDouble( p_strSrc));
-
-                str = Convert.ToDouble(p_strSrc).ToString("0.00"); 
+                if (str != "")
+                {
+                    str = Convert.ToDouble(p_strSrc).ToString("0.00"); 
+                }
             }
             
             return str;
