@@ -87,7 +87,7 @@ namespace BacodePrint.View
         {
             InitializeComponent();
 
-            
+            checkReserve.IsChecked = true;
             //ReadDataFromExcel();
         }
 

@@ -77,13 +77,14 @@ namespace BacodePrint.Fundation
                             startRow = sheet.FirstRowNum;
                         }
 
-                        for (int i = startRow; i <= rowCount; ++i)
+                        for (int i = startRow, nCount = p_Itineraries.Count(); i <= rowCount; ++i)
                         {
                             IRow row = sheet.GetRow(i);
                             if (row == null) continue; //没有数据的行默认是null　　　　　　　
 
                             Itinerary itinerary = new Itinerary();
                             itinerary.bCheck = false;
+                            bool bIsEmpty = false;
                             //itinerary.Caption_00 = i.ToString();
                             //itinerary.Caption_01 = row.GetCell(1) != null ? row.GetCell(1).ToString() : "";
                             //itinerary.Caption_02 = row.GetCell(2) != null ? row.GetCell(2).ToString() : "";
@@ -124,10 +125,19 @@ namespace BacodePrint.Fundation
                             {
                                 string str = row.GetCell(j) != null ? row.GetCell(j).ToString() : "";
                                 itinerary.CaptionList.Add(str);
+                                if (str != "")
+                                {
+                                    bIsEmpty = true;
+                                }
                             }
-                            itinerary.CaptionList.Add(i.ToString());
+                            itinerary.CaptionList.Add(nCount.ToString());
 
-                            p_Itineraries.Add(itinerary);
+                            if(bIsEmpty)
+                            {
+                                p_Itineraries.Add(itinerary);
+                                nCount++;
+                            }
+                           
                         }
                     }
                     
