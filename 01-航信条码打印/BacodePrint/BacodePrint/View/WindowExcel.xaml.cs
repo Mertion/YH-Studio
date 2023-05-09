@@ -108,8 +108,8 @@ namespace BacodePrint.View
                 //读取数据
                 excelHelper.GetExcelData("MySheet", true, ref mItineraries);
 
-
-                gridItineraryList.ItemsSource = mItineraries;
+                Findlist();
+                //gridItineraryList.ItemsSource = mItineraries;
             }
             else
             {
@@ -354,18 +354,79 @@ namespace BacodePrint.View
             //mItinerariesShow =;
             //mItineraries.CopyTo(mItinerariesShow.0);
 
-            foreach (var item in mItineraries)
-            {
-                //var clone = (Itinerary)item.Clone();
+            Findlist();
+        }
 
-                var clone = (Itinerary)item;
-                mItinerariesShow.Add(clone);
+        private void Findlist()
+        {
+            string str = textFind.Text;
+            mItinerariesShow.Clear();
+
+            str = str.Replace(" ", "");
+            str = str.ToUpper();
+
+            if (str == "")
+            {
+                for (int i = 0; i < mItineraries.Count; i++)
+                {
+                    mItinerariesShow.Add(mItineraries[i]);
+                }
+            }
+            else
+            {
+                ObservableCollection<Itinerary> tItineraries = new ObservableCollection<Itinerary>();
+
+                //生成临时数据列表
+                foreach (var item in mItineraries)
+                {
+                    //var clone = (Itinerary)item.Clone();
+                    var clone = (Itinerary)item;
+                    tItineraries.Add(clone);
+                }
+
+                //在临时列表中逐个查找str中的每个字符是否在表中存在
+                foreach (char c in str)
+                {
+                    //foreach (Itinerary item in tItineraries)
+                    for (int i = 0; i < tItineraries.Count; )
+                    {
+                        bool bIsFind = false;
+                        foreach(string strItem in tItineraries[i].CaptionList)
+                        {
+                            if(strItem.IndexOf(c)>=0)
+                            {
+                                bIsFind = true;
+                                break;
+                            }
+                        }
+
+                        if(bIsFind)
+                        {
+                            mItinerariesShow.Add(tItineraries[i]);
+                            tItineraries.Remove(tItineraries[i]);
+                            //因为剔除了一个item所以不-再++i;
+                        }
+                        else
+                        {
+                            i++;
+                        }
+                        //else
+                        //{
+
+                        //}
+                    }
+                }
             }
 
-            for (int i = 0; i < mItineraries.Count; i++)
-            {
-                mItinerariesShow.Add(mItineraries[i]);
-            }
+            //foreach (var item in mItineraries)
+            //{
+            //    //var clone = (Itinerary)item.Clone();
+
+            //    var clone = (Itinerary)item;
+            //    mItinerariesShow.Add(clone);
+            //}
+
+            gridItineraryList.ItemsSource = mItinerariesShow;
         }
     }
 

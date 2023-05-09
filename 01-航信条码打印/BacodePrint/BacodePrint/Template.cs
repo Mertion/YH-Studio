@@ -62,7 +62,7 @@ namespace BacodePrint
         {
             //str = "5381921979 0";
             string tStr = p_StrBarcode.Trim();
-            p_Template.listText[0].Content = tStr;
+            p_strText[0] = tStr;
             p_Template.mImageBarcode.Source = ClassBarCode.GenerateBarCodeBitmap(tStr, ref p_Template.mImageBarcode);
 
             int nCount = p_strText.Count < p_Template.listText.Count ? p_strText.Count : p_Template.listText.Count;
