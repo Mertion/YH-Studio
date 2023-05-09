@@ -100,7 +100,8 @@
                 <CheckBox Grid.Column="0" x:Name="checkReserve" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" />
                 <TextBlock Grid.Column="1" Text="保留数据" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Grid>
-            
+            <TextBox Grid.Column="4" x:Name="textSearch" Text="" FontSize="24" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            <Button Grid.Column="5" x:Name="buttonFind" Content="查 找" FontSize="24" Width="100" Height="35" Click="buttonFind_Click"/>
             <TextBlock Grid.Column="7" Text="总价：" FontSize="24" HorizontalAlignment="Right" VerticalAlignment="Center" />
             <TextBox Grid.Column="8" x:Name="TextBoxSum" Text="0.00" FontSize="24" VerticalAlignment="Center" HorizontalContentAlignment="Right" Margin="5,0,5,0"/>
 

@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Shell;
+using System.Windows.Threading;
 
 namespace BacodePrint
 {
@@ -74,6 +75,8 @@ namespace BacodePrint
 
         WindowExcel windowExcel = new WindowExcel();
 
+        //DispatcherTimer dispatcherTimer = new DispatcherTimer();
+
         public UserControlMainWindows()
         {
             InitializeComponent();
@@ -123,7 +126,7 @@ namespace BacodePrint
             string str = "";
             mListText.Clear();
 
-            str = "5381921979 0";
+            str = "5381921979 0  ";
             mListText.Add(str);
             str = "姓名";
             mListText.Add(str);
@@ -332,6 +335,16 @@ namespace BacodePrint
             nTop = (int)((this.DockPanelOutSide.Height - m_dHeight) /2);
             Canvas.SetLeft(this.canvas1, nLeft);
             Canvas.SetTop(this.canvas1, nTop);
+
+            //dispatcherTimer.Tick += new EventHandler(timer_Tick);
+            //dispatcherTimer.Interval = new TimeSpan(1000000);
+            //dispatcherTimer.Start();
+            //dispatcherTimer.Stop();
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            //mTemplateFundation.GenerateBarCode("5381921979 0", ref mTemplate);
         }
 
         void ReadConfig()
@@ -717,7 +730,10 @@ namespace BacodePrint
                 e.Handled = true;
             }
 
+            mTemplateFundation.GenerateBarCode("5381921979 0  ", ref mTemplate);
             canvas1.ReleaseMouseCapture();
+
+            Debug.Print("ms up!");
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
@@ -854,7 +870,7 @@ namespace BacodePrint
                         movingElementCtrl.Height = (int)originalElement.Data.Bounds.Height;
                     }
 
-                    mTemplateFundation.GenerateBarCode("5381921979 0", ref mTemplate);
+                    
                 }
                 canvas1.Children.Remove(movingElement);
                 movingElement = null;

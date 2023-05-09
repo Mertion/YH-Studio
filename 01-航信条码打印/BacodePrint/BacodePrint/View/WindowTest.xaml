@@ -37,7 +37,7 @@
             <Button Content="生成二维码" HorizontalAlignment="Left" Height="60" Margin="922,230,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click_1"/>
 
             <Border Name="outside"  ClipToBounds="True" Background="#FF3A3030" Margin="256,270,480,337">
-                <Image  x:Name="BarcodeImage" Margin="-0,0,0,0"  />
+                <Image  x:Name="BarcodeImage" Margin="-0,0,0,0" Stretch="Fill"  />
             </Border>
 
             <Button Content="打印" Margin="1098,117,100,588" Click="Button_Click_2"/>

@@ -83,6 +83,9 @@ namespace BacodePrint.View
         //行程单列表
         //List<Itinerary> mItineraries = new List<Itinerary>();
         ObservableCollection<Itinerary> mItineraries = new ObservableCollection<Itinerary>();
+
+        //行程单显示列表
+        ObservableCollection<Itinerary> mItinerariesShow = new ObservableCollection<Itinerary>();
         public WindowExcel()
         {
             InitializeComponent();
@@ -344,6 +347,25 @@ namespace BacodePrint.View
             }
 
             ReadDataFromExcel();
+        }
+
+        private void buttonFind_Click(object sender, RoutedEventArgs e)
+        {
+            //mItinerariesShow =;
+            //mItineraries.CopyTo(mItinerariesShow.0);
+
+            foreach (var item in mItineraries)
+            {
+                //var clone = (Itinerary)item.Clone();
+
+                var clone = (Itinerary)item;
+                mItinerariesShow.Add(clone);
+            }
+
+            for (int i = 0; i < mItineraries.Count; i++)
+            {
+                mItinerariesShow.Add(mItineraries[i]);
+            }
         }
     }
 

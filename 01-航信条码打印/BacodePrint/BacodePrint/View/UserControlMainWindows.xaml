@@ -144,7 +144,7 @@
                     <ComboBox Grid.Column="11" x:Name="GeneralRowWordSpacing" Width="80" Margin="2,5,5,5" SelectionChanged="GeneralRowWordSpacing_SelectionChanged"/>
 
                     <TextBlock Grid.Column="12" Text="一键加粗" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                    <CheckBox Grid.Column="13" x:Name="CheckBoldFont" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckBoldFont_Click"/>
+                    <CheckBox Grid.Column="13" x:Name="CheckBoldFont" Width="15" Height="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckBoldFont_Click"/>
                     <TextBlock Grid.Column="14" Text="价格对齐" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
                     <ComboBox Grid.Column="15" x:Name="FontAlignment" Width="80" Margin="2,5,5,5" SelectionChanged="FontAlignment_SelectionChanged"/>
                     
@@ -190,11 +190,11 @@
                     <TextBlock Grid.Column="4" Text="序号字距" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
                     <ComboBox Grid.Column="5" x:Name="FontWordSpacingOrderNumber" Width="80" Margin="2,5,5,5" SelectionChanged="FontWordSpacingOrderNumber_SelectionChanged"/>
                     <TextBlock Grid.Column="6" Text="序号加粗" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                    <CheckBox Grid.Column="7" x:Name="CheckBoldFontOrderNumber" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckBoldFontOrderNumber_Click"/>
+                    <CheckBox Grid.Column="7" x:Name="CheckBoldFontOrderNumber" Width="15" Height="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckBoldFontOrderNumber_Click"/>
                     <TextBlock Grid.Column="8" Text="打印序号" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                    <CheckBox Grid.Column="9" x:Name="CheckPrintOrderNumber" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckPrintOrderNumber_Click"/>
+                    <CheckBox Grid.Column="9" x:Name="CheckPrintOrderNumber" Width="15" Height="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckPrintOrderNumber_Click"/>
                     <TextBlock Grid.Column="10" Text="打印条码" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,2,0"/>
-                    <CheckBox Grid.Column="11" x:Name="CheckPrintBarcode" Width="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckPrintBarcode_Click"/>
+                    <CheckBox Grid.Column="11" x:Name="CheckPrintBarcode" Width="15" Height="15" Margin="2,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckPrintBarcode_Click"/>
                     <!--<Separator Grid.Column="12"/>-->
 
                     <Button Grid.Column="12" x:Name="buttonSave" Margin="5,5,5,5" Content=" 保 存 " Click="buttonSave_Click"  />

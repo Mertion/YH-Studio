@@ -32,6 +32,7 @@ namespace BacodePrint
             }
 
             mImageBarcode = new System.Windows.Controls.Image();
+            mImageBarcode.Stretch = Stretch.Fill;
         }
     }
 
@@ -53,12 +54,16 @@ namespace BacodePrint
 
         public void GenerateBarCode(string p_StrBarcode, ref Template p_Template)
         {
-            p_Template.mImageBarcode.Source = ClassBarCode.GenerateBarCodeBitmap(p_StrBarcode, ref p_Template.mImageBarcode);
+            string tStr = p_StrBarcode.Trim();
+            p_Template.mImageBarcode.Source = ClassBarCode.GenerateBarCodeBitmap(tStr, ref p_Template.mImageBarcode);
         }
 
         public void SetTemplateData(string p_StrBarcode, List<string> p_strText,ref Template p_Template)
         {
-            p_Template.mImageBarcode.Source = ClassBarCode.GenerateBarCodeBitmap(p_StrBarcode, ref p_Template.mImageBarcode);
+            //str = "5381921979 0";
+            string tStr = p_StrBarcode.Trim();
+            p_Template.listText[0].Content = tStr;
+            p_Template.mImageBarcode.Source = ClassBarCode.GenerateBarCodeBitmap(tStr, ref p_Template.mImageBarcode);
 
             int nCount = p_strText.Count < p_Template.listText.Count ? p_strText.Count : p_Template.listText.Count;
             for(int i = 0;i<nCount;i++)

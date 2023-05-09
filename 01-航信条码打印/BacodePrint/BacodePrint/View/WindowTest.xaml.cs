@@ -62,7 +62,7 @@ namespace BacodePrint
             //System.Drawing.Image img = b.Encode(BarcodeLib.TYPE.CODE39, content, System.Drawing.Color.Black, System.Drawing.Color.White, 290, 120);
 
 
-            b.IncludeLabel = true; //带文字标签
+            //b.IncludeLabel = true; //带文字标签
             b.Alignment = AlignmentPositions.CENTER;
             b.LabelPosition = LabelPositions.BOTTOMCENTER;          //code的显示位置
             b.ImageFormat = System.Drawing.Imaging.ImageFormat.Bmp; //图片格式
@@ -71,7 +71,9 @@ namespace BacodePrint
 
             System.Windows.Controls.Border Pa = (System.Windows.Controls.Border)p_Image.Parent;
             //b.BarWidth = (int)Pa.RenderSize.Width; //自动调整条形码宽度
-            System.Drawing.Image img = b.Encode(BarcodeLib.TYPE.CODE39, content, System.Drawing.Color.Black, System.Drawing.Color.White, (int)Pa.RenderSize.Width, (int)Pa.RenderSize.Height);
+            //System.Drawing.Image img = b.Encode(BarcodeLib.TYPE.CODE39, content, System.Drawing.Color.Black, System.Drawing.Color.White, (int)Pa.RenderSize.Width, (int)Pa.RenderSize.Height);
+            System.Drawing.Image img = b.Encode(BarcodeLib.TYPE.CODE39, content, System.Drawing.Color.Black, System.Drawing.Color.White, 300, 50);
+
             //img.Save("Barcode.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
             return img;
         }
