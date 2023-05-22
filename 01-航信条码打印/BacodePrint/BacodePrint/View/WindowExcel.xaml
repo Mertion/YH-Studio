@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BacodePrint.View"
         mc:Ignorable="d"
-        Title="行程单列表" Height="650" Width="1600" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" Closed="Window_Closed" Closing="Window_Closing">
+        Title="行程单列表" Height="650" Width="1600" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" Closed="Window_Closed" Closing="Window_Closing" GotFocus="Window_GotFocus" Activated="Window_Activated">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height ="100"/>
             <RowDefinition/>
+            <RowDefinition Height ="50"/>
             <RowDefinition Height ="50"/>
         </Grid.RowDefinitions>
 
@@ -90,8 +91,9 @@
 
             <Button x:Name="buttonSelectAll" Grid.Column="0" Content="全 选" FontSize="24" Width="100" Height="35" Click="buttonSelectAll_Click" />
             <Button x:Name="buttonSelectInvert" Grid.Column="1" Content="反 选" FontSize="24" Width="100" Height="35" Click="buttonSelectInvert_Click" />
-            <Button x:Name="buttonLoad" Grid.Column="2" Content="加  载" FontSize="24" Width="100" Height="35" Click="buttonLoad_Click"  />
-            <Grid Grid.Column="3" >
+            <Button x:Name="buttonSelectDel" Grid.Column="2" Content="删 除" FontSize="24" Width="100" Height="35" Click="buttonSelectDel_Click"  />
+            <Button x:Name="buttonLoad" Grid.Column="3" Content="加  载" FontSize="24" Width="100" Height="35" Click="buttonLoad_Click"  />
+            <Grid Grid.Column="4" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
                     <ColumnDefinition/>
@@ -100,12 +102,35 @@
                 <CheckBox Grid.Column="0" x:Name="checkReserve" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" />
                 <TextBlock Grid.Column="1" Text="保留数据" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Grid>
-            <TextBox Grid.Column="4" x:Name="textFind" Text="" FontSize="24" VerticalAlignment="Center" Margin="5,0,5,0"/>
-            <Button Grid.Column="5" x:Name="buttonFind" Content="查 找" FontSize="24" Width="100" Height="35" Click="buttonFind_Click"/>
+            <TextBox Grid.Column="5" x:Name="textFind" Text="" FontSize="24" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            <Button Grid.Column="6" x:Name="buttonFind" Content="查 找" FontSize="24" Width="100" Height="35" Click="buttonFind_Click"/>
             <TextBlock Grid.Column="7" Text="总价：" FontSize="24" HorizontalAlignment="Right" VerticalAlignment="Center" />
             <TextBox Grid.Column="8" x:Name="TextBoxSum" Text="0.00" FontSize="24" VerticalAlignment="Center" HorizontalContentAlignment="Right" Margin="5,0,5,0"/>
 
             <Button x:Name="buttonPrint" Grid.Column="9" Content="打 印" FontSize="24" Width="100" Height="35" Click="buttonPrint_Click" />
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" HorizontalAlignment="Right" FontSize="24" Margin="0,0,0,0" TextWrapping="Wrap" Text="X：" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" x:Name="PrintX"  Text="0.0" FontSize="24" VerticalAlignment="Center" HorizontalContentAlignment="Right" Margin="5,0,5,0"/>
+
+            <TextBlock Grid.Column="2" HorizontalAlignment="Right" FontSize="24" Margin="0,0,0,0" TextWrapping="Wrap" Text="Y：" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="3" x:Name="PrintY" Text="0.0" FontSize="24" VerticalAlignment="Center" HorizontalContentAlignment="Right" Margin="5,0,5,0"/>
+
+            <Button Grid.Column="4" x:Name="buttonSetSize" FontSize="24" Width="100" Height="35"  Content="设置" Click="buttonSetSize_Click" />
         </Grid>
     </Grid>
 </Window>

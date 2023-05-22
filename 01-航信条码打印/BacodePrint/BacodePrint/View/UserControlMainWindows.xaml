@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BacodePrint"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1200" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded" KeyDown="UserControl_KeyDown" PreviewKeyDown="UserControl_PreviewKeyDown">
+             d:DesignHeight="450" d:DesignWidth="1200" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded" KeyDown="UserControl_KeyDown" PreviewKeyDown="UserControl_PreviewKeyDown" GotFocus="UserControl_GotFocus">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>

@@ -59,6 +59,10 @@ namespace BacodePrint
             }
         }
 
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            UserControlMain.RefreshOffset();
+        }
     }
 
 

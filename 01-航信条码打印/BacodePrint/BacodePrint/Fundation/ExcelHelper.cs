@@ -40,7 +40,7 @@ namespace BacodePrint.Fundation
             try
             {
                 ISheet sheet = null;
-                fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 workbook = WorkbookFactory.Create(fs);
 
                 if (sheetName != null)

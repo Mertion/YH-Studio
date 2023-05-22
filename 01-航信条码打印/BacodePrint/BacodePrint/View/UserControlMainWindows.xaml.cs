@@ -905,12 +905,29 @@ namespace BacodePrint
             {
                 MessageBox.Show("宽度只能输入数字！");
                 PrintWidth.Focus();
+                PrintWidth.SelectAll();
                 return;
             }
             if (re.IsMatch(PrintHeight.Text))
             {
                 MessageBox.Show("高度只能输入数字！");
                 PrintHeight.Focus();
+                PrintHeight.SelectAll();
+                return;
+            }
+
+            if (re.IsMatch(PrintX.Text))
+            {
+                MessageBox.Show("X只能输入数字！");
+                PrintX.Focus();
+                PrintX.SelectAll();
+                return;
+            }
+            if (re.IsMatch(PrintY.Text))
+            {
+                MessageBox.Show("Y只能输入数字！");
+                PrintY.Focus();
+                PrintY.SelectAll();
                 return;
             }
 
@@ -1184,6 +1201,20 @@ namespace BacodePrint
             UserControlTextBoxItems.Visibility = Visibility.Visible;
             UserControlTextBoxItems = mTemplate.listText[12];
             UserControlTextBoxItems.Visibility = Visibility.Visible;
+        }
+
+        private void UserControl_GotFocus(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        public void RefreshOffset()
+        {
+            mTemplateFundation.LoadOffset(mSystemInfo.mstrConfigFilePath, ref m_dOffsetX, ref m_dOffsetY);
+            PrintX.Text = Math.Round(m_dOffsetX, 2).ToString();
+            PrintY.Text = Math.Round(m_dOffsetY, 2).ToString();
+
+            Debug.Print("Call RefreshOffset");
         }
     }
 

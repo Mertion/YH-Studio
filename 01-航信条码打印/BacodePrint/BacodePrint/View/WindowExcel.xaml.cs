@@ -79,6 +79,11 @@ namespace BacodePrint.View
     /// </summary>
     public partial class WindowExcel : Window
     {
+        double m_dOffsetX = 0.0;
+        double m_dOffsetY = 0.0;
+
+        TemplateFundation mTemplateFundation = new TemplateFundation();
+
         SystemGlobalInfo mSystemInfo = SystemGlobalInfo.Instance;
         //行程单列表
         //List<Itinerary> mItineraries = new List<Itinerary>();
@@ -175,7 +180,7 @@ namespace BacodePrint.View
         {
             if (!mbSellectAll)
             {
-                foreach (Itinerary item in mItineraries)
+                foreach (Itinerary item in mItinerariesShow)
                 {
                     item.bCheck = true;
                 }
@@ -183,7 +188,7 @@ namespace BacodePrint.View
             }
             else
             {
-                foreach (Itinerary item in mItineraries)
+                foreach (Itinerary item in mItinerariesShow)
                 {
                     item.bCheck = false;
                 }
@@ -191,7 +196,7 @@ namespace BacodePrint.View
             }
 
             gridItineraryList.ItemsSource = null;
-            gridItineraryList.ItemsSource = mItineraries;
+            gridItineraryList.ItemsSource = mItinerariesShow;
 
             SumPrice();
         }
@@ -199,7 +204,7 @@ namespace BacodePrint.View
         //反选
         private void buttonSelectInvert_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Itinerary item in mItineraries)
+            foreach (Itinerary item in mItinerariesShow)
             {
                 if (item.bCheck)
                 {
@@ -212,7 +217,7 @@ namespace BacodePrint.View
             }
 
             gridItineraryList.ItemsSource = null;
-            gridItineraryList.ItemsSource = mItineraries;
+            gridItineraryList.ItemsSource = mItinerariesShow;
 
             SumPrice();
         }
@@ -223,7 +228,7 @@ namespace BacodePrint.View
             PrintPage printPage = new PrintPage();
             if (printPage.ShowPrintDialog())
             {
-                foreach (Itinerary item in mItineraries)
+                foreach (Itinerary item in mItinerariesShow)
                 {
                     if (item.bCheck)
                     {
@@ -295,7 +300,7 @@ namespace BacodePrint.View
         private void SumPrice()
         {
             double dSum = 0.0;
-            foreach (Itinerary item in mItineraries)
+            foreach (Itinerary item in mItinerariesShow)
             {
                 if (item.bCheck)
                 {
@@ -307,6 +312,7 @@ namespace BacodePrint.View
             TextBoxSum.Text = string.Format("{0:C2}", dSum);
         }
 
+        //替换|线换行符
         private void SplitStringtolist(String pStr,ref List<string> pTemplateList,int nStep)
         {
             int nCount= 0;
@@ -427,6 +433,66 @@ namespace BacodePrint.View
             //}
 
             gridItineraryList.ItemsSource = mItinerariesShow;
+        }
+
+        private void buttonSetSize_Click(object sender, RoutedEventArgs e)
+        {
+            Regex re = new Regex("[^0-9.-]+");
+
+            if (re.IsMatch(PrintX.Text))
+            {
+                MessageBox.Show("X只能输入数字！");
+                PrintX.Focus();
+                PrintX.SelectAll();
+                return;
+            }
+            if (re.IsMatch(PrintY.Text))
+            {
+                MessageBox.Show("Y只能输入数字！");
+                PrintY.Focus();
+                PrintY.SelectAll();
+                return;
+            }
+
+
+            mTemplateFundation.SaveOffset(mSystemInfo.mstrConfigFilePath, Math.Round(Convert.ToDouble(PrintX.Text), 2), Math.Round(Convert.ToDouble(PrintY.Text), 2));
+            
+        }
+
+        private void Window_GotFocus(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            mTemplateFundation.LoadOffset(mSystemInfo.mstrConfigFilePath, ref m_dOffsetX, ref m_dOffsetY);
+            PrintX.Text = Math.Round(m_dOffsetX, 2).ToString();
+            PrintY.Text = Math.Round(m_dOffsetY, 2).ToString();
+        }
+
+        private void buttonSelectDel_Click(object sender, RoutedEventArgs e)
+        {
+            if(MessageBox.Show("是否删除选中行数据？", "提示!", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+            {
+                for (int i = 0; i < mItineraries.Count;)
+                {
+                    Itinerary item = mItineraries[i];
+                    if (item.bCheck)
+                    {
+                        mItineraries.RemoveAt(i);
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+
+                Findlist();
+
+                SumPrice();
+            }
+            
         }
     }
 
