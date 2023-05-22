@@ -32,7 +32,7 @@ namespace BacodePrint.Fundation
             nCount++;
             tFilesINI.INIWrite("Config", "Count", nCount.ToString(), strPath);
 
-            if (nCount > 50) 
+            if (nCount > 100) 
             {
                 return 1;
             }
