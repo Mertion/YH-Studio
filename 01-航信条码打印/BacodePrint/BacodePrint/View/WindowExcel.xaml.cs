@@ -267,15 +267,15 @@ namespace BacodePrint.View
             pTemplateList.Add(pExcelList[32]);
             pTemplateList.Add(pExcelList[33]);
 
-            pTemplateList[66] = FormatPrice(pTemplateList[66]);
+            pTemplateList[66] = FormatPrice(pExcelList[18]);
 
-            pTemplateList[68] = FormatPrice(pTemplateList[68]);
+            pTemplateList[68] = FormatPrice(pExcelList[20]);
 
-            pTemplateList[70] = FormatPrice(pTemplateList[70]);
+            pTemplateList[70] = FormatPrice(pExcelList[22]);
 
-            pTemplateList[72] = FormatPrice(pTemplateList[72]);
+            pTemplateList[72] = FormatPrice(pExcelList[24]);
 
-            pTemplateList[74] = FormatPrice(pTemplateList[74]);
+            pTemplateList[74] = FormatPrice(pExcelList[26]);
         }
 
         private string FormatPrice(string p_strSrc)
