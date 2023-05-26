@@ -36,41 +36,41 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="序号" Width="40" Binding="{Binding CaptionList[34]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="印刷序号" Width="100" Binding="{Binding CaptionList[0]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="姓名" Width="80" Binding="{Binding CaptionList[1]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="证件号" Width="100" Binding="{Binding CaptionList[2]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="签注" Width="100" Binding="{Binding CaptionList[3]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="PNR" Width="100" Binding="{Binding CaptionList[4]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="起飞航站楼" Width="100" Binding="{Binding CaptionList[5]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="起飞地" Width="100" Binding="{Binding CaptionList[6]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="到达航站楼" Width="100" Binding="{Binding CaptionList[7]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="承运人" Width="100" Binding="{Binding CaptionList[8]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="航班号" Width="100" Binding="{Binding CaptionList[9]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="座位等级" Width="100" Binding="{Binding CaptionList[10]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="日期" Width="100" Binding="{Binding CaptionList[11]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="时间" Width="100" Binding="{Binding CaptionList[12]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="客票级别" Width="100" Binding="{Binding CaptionList[13]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="客票生效日期" Width="100" Binding="{Binding CaptionList[14]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="客票截止日期" Width="100" Binding="{Binding CaptionList[15]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="免费行李" Width="100" Binding="{Binding CaptionList[16]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="票价字母" Width="100" Binding="{Binding CaptionList[17]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="票价数字" Width="100" Binding="{Binding CaptionList[18]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="基建字母" Width="100" Binding="{Binding CaptionList[19]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="基建数字" Width="100" Binding="{Binding CaptionList[20]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="燃油字母" Width="100" Binding="{Binding CaptionList[21]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="燃油数字" Width="100" Binding="{Binding CaptionList[22]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="税费字母" Width="100" Binding="{Binding CaptionList[23]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="税费数字" Width="100" Binding="{Binding CaptionList[24]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="合计字母" Width="100" Binding="{Binding CaptionList[25]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="合计数字" Width="100" Binding="{Binding CaptionList[26]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="票号" Width="100" Binding="{Binding CaptionList[27]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="验证码" Width="100" Binding="{Binding CaptionList[28]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="提示信息" Width="100" Binding="{Binding CaptionList[29]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="保险费" Width="100" Binding="{Binding CaptionList[30]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="销售单位代码" Width="100" Binding="{Binding CaptionList[31]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="填开单位" Width="100" Binding="{Binding CaptionList[32]}"></DataGridTextColumn>
-                <DataGridTextColumn Header="填开日期" Width="100" Binding="{Binding CaptionList[33]}"></DataGridTextColumn>
+                <DataGridTextColumn Header="序号" Width="40" Binding="{Binding CaptionList[34]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="印刷序号" Width="100" Binding="{Binding CaptionList[0]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="姓名" Width="80" Binding="{Binding CaptionList[1]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="证件号" Width="100" Binding="{Binding CaptionList[2]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="签注" Width="100" Binding="{Binding CaptionList[3]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="PNR" Width="100" Binding="{Binding CaptionList[4]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="起飞航站楼" Width="100" Binding="{Binding CaptionList[5]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="起飞地" Width="100" Binding="{Binding CaptionList[6]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="到达航站楼" Width="100" Binding="{Binding CaptionList[7]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="承运人" Width="100" Binding="{Binding CaptionList[8]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="航班号" Width="100" Binding="{Binding CaptionList[9]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="座位等级" Width="100" Binding="{Binding CaptionList[10]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="日期" Width="100" Binding="{Binding CaptionList[11]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="时间" Width="100" Binding="{Binding CaptionList[12]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="客票级别" Width="100" Binding="{Binding CaptionList[13]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="客票生效日期" Width="100" Binding="{Binding CaptionList[14]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="客票截止日期" Width="100" Binding="{Binding CaptionList[15]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="免费行李" Width="100" Binding="{Binding CaptionList[16]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="票价字母" Width="100" Binding="{Binding CaptionList[17]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="票价数字" Width="100" Binding="{Binding CaptionList[18]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="基建字母" Width="100" Binding="{Binding CaptionList[19]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="基建数字" Width="100" Binding="{Binding CaptionList[20]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="燃油字母" Width="100" Binding="{Binding CaptionList[21]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="燃油数字" Width="100" Binding="{Binding CaptionList[22]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="税费字母" Width="100" Binding="{Binding CaptionList[23]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="税费数字" Width="100" Binding="{Binding CaptionList[24]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="合计字母" Width="100" Binding="{Binding CaptionList[25]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="合计数字" Width="100" Binding="{Binding CaptionList[26]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="票号" Width="100" Binding="{Binding CaptionList[27]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="验证码" Width="100" Binding="{Binding CaptionList[28]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="提示信息" Width="100" Binding="{Binding CaptionList[29]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="保险费" Width="100" Binding="{Binding CaptionList[30]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="销售单位代码" Width="100" Binding="{Binding CaptionList[31]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="填开单位" Width="100" Binding="{Binding CaptionList[32]}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="填开日期" Width="100" Binding="{Binding CaptionList[33]}" IsReadOnly="True"></DataGridTextColumn>
 
             </DataGrid.Columns>
         </DataGrid>
