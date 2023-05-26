@@ -224,25 +224,80 @@ namespace BacodePrint.View
 
         private void buttonPrint_Click(object sender, RoutedEventArgs e)
         {
+            ////打印窗体,此段代码在客户PC上只有第一张能打印出数据，后面全是空白页。
+            //PrintPage printPage = new PrintPage();
+            //if (printPage.ShowPrintDialog())
+            //{
+            //    foreach (Itinerary item in mItinerariesShow)
+            //    {
+            //        if (item.bCheck)
+            //        {
+            //            List<string> tListTextPrint = new List<string>();
+            //            ExcelListToTemplateList(item.CaptionList, ref tListTextPrint);
+            //            printPage.SetData(item.CaptionList[0], tListTextPrint);
+            //            printPage.Show();
+            //            printPage.Print();
+            //            printPage.Hide();
+            //        }
+            //    }
+            //}
+
+            //printPage.Close();
+
             //打印窗体
-            PrintPage printPage = new PrintPage();
-            if (printPage.ShowPrintDialog())
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
             {
-                foreach (Itinerary item in mItinerariesShow)
+                //Itinerary itemLast = null;
+                //bool bPrint = false;
+                int nLastIndex = -1;
+
+                //foreach (Itinerary item in mItinerariesShow)
+                for (int i = 0; i < mItinerariesShow.Count; i++)
                 {
+                    Itinerary item = mItinerariesShow[i];
                     if (item.bCheck)
                     {
+                        PrintPage printPage = new PrintPage();
+                        
+                        printPage.SetPrintDialog(printDialog);
                         List<string> tListTextPrint = new List<string>();
                         ExcelListToTemplateList(item.CaptionList, ref tListTextPrint);
                         printPage.SetData(item.CaptionList[0], tListTextPrint);
                         printPage.Show();
                         printPage.Print();
-                        //printPage.Hide();
-                    }
-                }
-            }
+                        printPage.Hide();
 
-            printPage.Close();
+                        printPage.Close();
+
+                        //bPrint = true;
+                        //itemLast = null;
+
+                        item.bCheck = false;
+
+                        nLastIndex = i;
+                    }
+
+                    //if ((!item.bCheck)&&(bPrint))
+                    //{
+
+                    //    bPrint = false;
+                    //    itemLast = item;
+                    //}
+                }
+
+                //if(itemLast!=null)
+                //{
+                //    itemLast.bCheck = true;
+                //}
+
+                if ((nLastIndex >= 0) && (nLastIndex < mItinerariesShow.Count - 1))
+                {
+                    mItinerariesShow[nLastIndex + 1].bCheck = true;
+                }
+                gridItineraryList.ItemsSource = null;
+                gridItineraryList.ItemsSource = mItinerariesShow;
+            }
         }
 
         private void ExcelListToTemplateList(List<string> pExcelList, ref List<string> pTemplateList)
@@ -289,7 +344,7 @@ namespace BacodePrint.View
             else
             {
                 //str = string.Format("{0:C2}", Convert.ToDouble( p_strSrc));
-                if (str != "")
+                if (p_strSrc != "")
                 {
                     str = Convert.ToDouble(p_strSrc).ToString("0.00"); 
                 }

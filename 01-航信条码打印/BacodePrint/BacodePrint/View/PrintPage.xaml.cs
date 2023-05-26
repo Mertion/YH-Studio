@@ -29,7 +29,9 @@ namespace BacodePrint
         Template mTemplate = new Template();
         TemplateFundation mTemplateFundation = new TemplateFundation();
 
-        PrintDialog printDialog = new PrintDialog();
+        //PrintDialog printDialog = new PrintDialog();
+        PrintDialog printDialog = null;
+
         bool bIsPrinterReady = false;
         public PrintPage()
         {
@@ -108,6 +110,31 @@ namespace BacodePrint
             }
         }
 
+        public void SetPageSize()
+        {
+            if(printDialog!=null)
+            {
+                this.canvasCtrl.Width = Math.Round(nWidth, 2) * SystemGlobalInfo.const_dScale;
+                this.canvasCtrl.Height = Math.Round(nHeight, 2) * SystemGlobalInfo.const_dScale;
+                this.canvasCtrl.Margin
+                    = new Thickness(Math.Round(dOffsetX, 2) * SystemGlobalInfo.const_dScale
+                    , Math.Round(dOffsetY, 2) * SystemGlobalInfo.const_dScale
+                    , 0, 0);
+
+                GridPrint.Width = printDialog.PrintableAreaWidth;
+                GridPrint.Height = printDialog.PrintableAreaHeight;
+                this.Width = GridPrint.Width + 100;
+                this.Height = GridPrint.Height + 100;
+            }
+        }
+        public void SetPrintDialog(PrintDialog p_printDialog)
+        {
+            bIsPrinterReady = true;
+
+            printDialog = p_printDialog;
+
+            SetPageSize();
+        }
         public bool ShowPrintDialog()
         {
             if (printDialog.ShowDialog() == true)
@@ -124,17 +151,7 @@ namespace BacodePrint
                 //this.Width = canvasCtrl.Width + 100;
                 //this.Height = canvasCtrl.Height + 100;
 
-                this.canvasCtrl.Width = Math.Round(nWidth, 2) * SystemGlobalInfo.const_dScale;
-                this.canvasCtrl.Height = Math.Round(nHeight, 2) * SystemGlobalInfo.const_dScale;
-                this.canvasCtrl.Margin 
-                    = new Thickness(Math.Round(dOffsetX, 2) * SystemGlobalInfo.const_dScale
-                    , Math.Round(dOffsetY, 2) * SystemGlobalInfo.const_dScale
-                    , 0, 0);
-
-                GridPrint.Width = printDialog.PrintableAreaWidth;
-                GridPrint.Height = printDialog.PrintableAreaHeight;
-                this.Width = GridPrint.Width + 100;
-                this.Height = GridPrint.Height + 100;
+                SetPageSize();
             }
 
             return bIsPrinterReady;

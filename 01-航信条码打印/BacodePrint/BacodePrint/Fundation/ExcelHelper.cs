@@ -77,7 +77,7 @@ namespace BacodePrint.Fundation
                             startRow = sheet.FirstRowNum;
                         }
 
-                        for (int i = startRow, nCount = p_Itineraries.Count(); i <= rowCount; ++i)
+                        for (int i = startRow, nCount = p_Itineraries.Count() + 1; i <= rowCount; ++i)
                         {
                             IRow row = sheet.GetRow(i);
                             if (row == null) continue; //没有数据的行默认是null　　　　　　　
